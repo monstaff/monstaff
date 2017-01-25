@@ -1,0 +1,42 @@
+<ul class="pager">
+  <li><%= link_to @date.prev_day, graphic_index_path(:date => @date.prev_day), remote: true %></li>
+  График на : <%#= day_today(@date) %>
+  <li><%= link_to @date.next, graphic_index_path(:date => @date.next), remote: true %></li>
+</ul>
+
+
+
+
+
+<% @hash.each do |reg, a| %>
+
+
+    <h3 style="width: 100%; text-align: center;"><%= reg.name %>:</h3>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th style="width: 30%; text-align: center">Ф.И.О.</th>
+        <th style="width: 20%; text-align: center">Телефон</th>
+        <th style="width: 20%; text-align: center">Рабочие часы</th>
+        <th style="width: 30%; text-align: center">Комментарий</th>
+      </tr>
+      </thead>
+    </table>
+    <table class="table table-striped">
+      <tbody>
+      <% a.each do |res| %>
+
+          <tr>
+            <td style="width: 30%; text-align: center"><%= link_to res.fullname, user_path(res) %></td>
+            <td style="width: 20%; text-align: center"><%= res.phone.gsub(/-/, "") %></td>
+            <td style="width: 20%; text-align: center"><%= res.graphic[0].worktime %></td>
+            <td style="width: 30%; text-align: center"><%= res.graphic[0].comment %></td>
+
+          </tr>
+
+      <% end %>
+      </tbody>
+    </table>
+
+<% end %>

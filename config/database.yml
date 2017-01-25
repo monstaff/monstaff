@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: monstaff
+  pool: 5
+  username: <%= ENV['DB_User']%>
+  password: <%= ENV['DB_Password'] %>
+

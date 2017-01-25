@@ -1,0 +1,42 @@
+
+
+
+<%= form_for :switch, url: switches_path , :html => {:class=>"form-horizontal"},  remote: true do |s| %>
+          <fieldset>
+
+
+
+            <div class="form-group">
+      <%= s.label :ip, 'IP коммутатора' ,  :class=> "col-md-4 control-label" %>
+              <div class="col-md-4">
+      <%= s.text_field :ip , :class=>"form-control input-md"%>
+              </div>
+            </div>
+
+
+
+            <div class="form-group">
+      <%= s.label :stolen_date, 'Дата кражи' ,  :class=> "col-md-4 control-label" %>
+              <div class="col-md-4">
+      <%= s.text_field :stolen_date, :class=>"form-control input-md" %>
+              </div>
+            </div>
+
+
+
+            <div class="form-group">
+              <%= s.label :region_id, 'ЦОА',  :class=> "col-md-4 control-label"%>
+              <div class="col-md-4">
+    <%= s.select :region_id, (@total_sw.collect{|hack| [hack["name"], hack["id"]]}),{ :prompt => "ЦОА"}, :class=>"form-control"%>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="addsw"></label>
+              <div class="col-md-4">
+                <%= s.submit "Добавить", :id=>"addsw", :class=>"btn btn-info"%>
+              </div>
+            </div>
+            </fieldset>
+<% end %>

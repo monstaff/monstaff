@@ -1,0 +1,22 @@
+
+
+
+<%
+@errors = []
+@user.errors.errors.map {|k,v|
+
+v.each do |arr|
+
+arr.each_slice(2) do |x,a|
+@errors << k.to_s + '_' + x.to_s
+@errors << a[0]
+end
+end
+}
+%>
+
+
+<% @errors.each_slice(2) do |error, val| %>
+
+$( "#<%= error %>" ).wrap( "<div class='field_with_errors'></div>" );
+<% end %>

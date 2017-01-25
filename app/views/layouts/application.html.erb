@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Monstaff</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'bootstrap'%>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Monstaff</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active">
+        <li><%= link_to "График", graphic_index_path  %> </li>
+        <li><%= link_to "Календарь" %></li>
+        <li><%= link_to "Отпуска" %> </li>
+        <li><%= link_to "Добавитьграфик", new_graphic_path  %></li>
+        <li><%= link_to "Список сотрудников" %></li>
+        <li><%= link_to "Регистрация", new_user_path %></li>
+
+        <li>
+          <a class=" dropdown-toggle " data-toggle="dropdown" href="#">
+
+            <span >Мониторниг</span><span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Добавить тех. работы" %><span class="icon-wrench"></span></li>
+
+
+            <li> <%= link_to "Разделение колец" %>
+              <span class="icon-wrench"></span></li>
+
+            <li><%= link_to "Топология(beta)"   %><span class="icon-wrench"></span></li>
+            <li><%= link_to "Отчет по коммутаторам", switches_path%><span class="icon-trash"></span> </li>
+          </ul>
+        </li>
+
+
+
+      </ul>
+      <% if current_user %>
+          <ul class="nav navbar-nav navbar-right" style="padding-right: 1%;">
+            <div class="span2" style="padding-top: 3%; ">
+              <div class="btn-group">
+                <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
+
+                  <span class="icon-cog icon-white" style="padding-right: 5%;"><%= current_user.fullname %> </span><span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Профиль" %><span class="icon-wrench"></span></li>
+
+
+                  <li> <%= %>
+                    <span class="icon-wrench"></span></li>
+                  <li> <%= %>
+                    <span class="icon-wrench"></span></li>
+
+                  <li><%= link_to "Выход"  %><span class="icon-wrench"></span></li>
+                  <li><span class="icon-trash"></span> </li>
+                </ul>
+              </div>
+            </div>
+
+
+          </ul>
+
+
+      <% else %>
+
+
+
+
+
+      <% end %>
+    </div>
+    </div>
+  </nav>
+
+  <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<%= javascript_include_tag "adminpanel.js"%>
+<div class="container">
+  <div class="span5 fill">
+    <button id="1">Регионы</button>
+
+    <div id="region" style="display: none">
+      <div class="tasks" id="incomplete_tasks">
+        <%=  render @region %>
+      </div>
+      <div id="new_task">
+        <%= form_for :region, url: region_index_path, remote: true do |u| %>
+            <p>
+              <%= u.label :name, 'Имя Региона' %><br>
+            </p>
+            <p>
+              <%= u.text_field :name %>
+            </p>
+            <%= u.submit "Добавить"%>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

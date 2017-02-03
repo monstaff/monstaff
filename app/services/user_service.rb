@@ -15,7 +15,8 @@ class UserService < AplicationService
   private
 
   def create_user
-    @user = User.create(new_user_params)
+    #@user = User.create(new_user_params)
+    @user = Group.find_by_name("default").user.create(new_user_params)
       @errors[:users] = @user.errors.messages
     @user.persisted?
   end
@@ -25,6 +26,6 @@ class UserService < AplicationService
   end
 
   def new_user_params
-    @params.require(:user).permit(:name, :secondname, :phone, :email, :region_id, :password, :password_conformation)
+    @params.require(:user).permit(:name, :secondname, :phone, :email, :region_id)
   end
 end

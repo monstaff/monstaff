@@ -60,7 +60,7 @@
                   <li> <%= %>
                     <span class="icon-wrench"></span></li>
 
-                  <li><%= link_to "Выход"  %><span class="icon-wrench"></span></li>
+                  <li><%= link_to "Выход", logout_path %><span class="icon-wrench"></span></li>
                   <li><span class="icon-trash"></span> </li>
                 </ul>
               </div>
@@ -81,6 +81,26 @@
     </div>
   </nav>
 
+
+  <!--Group permission content-->
+<% if current_user.group.group_type == "1" %>
+      <div class="dropdown" style="float: right; padding-right: 20px;" >
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Права на страницу
+          <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+
+          <%= form_for :group_perm, url: group_perm_path(:url_path => params[:controller].capitalize + "Controller" + params[:action]), remote: true  do |perm| %>
+              <% Group.all.each do |g| %>
+                  <li><%= g.name %>:
+
+                    <%= check_box_tag 'group_ids[]', g.id, g.GroupPermission.where(url_path: params[:controller].capitalize + "Controller" + params[:action]).map(&:group_id).include?(g.id)  %></li>
+              <% end %>
+              <%= perm.submit "изменить", :class=>"btn btn-primary btn-xs" %>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+  <!--end group perm-->
   <%= yield %>
   </body>
 </html>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170125120113) do
+ActiveRecord::Schema.define(version: 20170202134338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,29 @@ ActiveRecord::Schema.define(version: 20170125120113) do
     t.index ["user_id"], name: "index_graphics_on_user_id", using: :btree
   end
 
+  create_table "group_permissions", force: :cascade do |t|
+    t.string   "url_path"
+    t.string   "permite"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_permissions_on_group_id", using: :btree
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.string   "group_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "region_permissions", force: :cascade do |t|
     t.string   "status"
     t.integer  "region_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "group_id"
+    t.index ["group_id"], name: "index_region_permissions_on_group_id", using: :btree
     t.index ["region_id"], name: "index_region_permissions_on_region_id", using: :btree
   end
 
@@ -74,6 +92,10 @@ ActiveRecord::Schema.define(version: 20170125120113) do
     t.string   "passactive"
     t.string   "vacstart"
     t.string   "vacend"
+    t.integer  "groups_id"
+    t.integer  "group_id"
+    t.index ["group_id"], name: "index_users_on_group_id", using: :btree
+    t.index ["groups_id"], name: "index_users_on_groups_id", using: :btree
     t.index ["region_id"], name: "index_users_on_region_id", using: :btree
   end
 

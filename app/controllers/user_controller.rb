@@ -13,15 +13,22 @@ class UserController < ApplicationController
     #@user = User.new
   end
 
+
   def show
-  @user =  User.find(params[:id])
+      @user = userfind
   end
 
+
+  def edit
+
+  end
 
 
   def index
-    @user =  params
+    ids = current_user.group.RegionPermission.map(&:region_id) + [current_user.region_id]
+    @user =  User.search(params[:search], ids)
   end
+
 
 
   def create
@@ -59,19 +66,12 @@ class UserController < ApplicationController
 
 
   def shortupdate
-    @user = userfind
-    @user_list = @user
-    if @user.update(user_params)
-    else
-      case user_params[:pass_valid]
-        when "1"
-        else
-      end
+
       respond_to do |format|
         format.html
         format.js
       end
-    end
+
   end
 
 
@@ -84,6 +84,15 @@ class UserController < ApplicationController
     end
   end
 private
+
+  def userfind
+    User.find(params[:id])
+  end
+
+
+  def short_update_params
+    params.require(:user_short).permit(:fullname, :phone, :email)
+  end
 
 
   def new_user

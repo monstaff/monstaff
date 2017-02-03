@@ -42,9 +42,7 @@ end
 
   private
 
-  def count_stolen_switch(hash)
 
-  end
 
   def unix_time(date)
     #Date.new(date.to_i).to_time.to_i

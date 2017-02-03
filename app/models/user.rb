@@ -1,11 +1,11 @@
 class User < ApplicationRecord
   include Authentication
   #has_secure_password
-
+  belongs_to :group
   belongs_to :region
   has_many :UserPermission
   has_many :graphic, :dependent => :destroy
-  attr_accessor :password, :password_confirmation, :password_digest
+  attr_accessor :password, :password_confirmation, :fullname
   before_update :encrypt_password
   before_create :user_default_option
   #after_initialize :set_default_values
@@ -24,6 +24,22 @@ class User < ApplicationRecord
     name + " " + secondname
   end
 
+
+
+  def self.search(search, ids)
+
+    if search
+
+      User.where(:region => (ids)).includes(:region).where('users.secondname LIKE :search OR users.name LIKE :search OR regions.name LIKE :search OR users.email LIKE :search',search: "%#{search}%").references(:region)
+    else
+      where(region: ids)
+    end
+  #all
+  end
+
+
+
+
   private
 
   def user_default_option
@@ -37,6 +53,8 @@ class User < ApplicationRecord
     self.salt = BCrypt::Engine.generate_salt
     self.encrypted_password = BCrypt::Engine.hash_secret(password, self.salt)
   end
+
+
 
 
 end

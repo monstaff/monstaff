@@ -61,4 +61,13 @@ $(document).ready(function() {
     });
 
 
+
+$('td').mouseenter(function() {
+    $(this).addClass('day')
+}).mouseleave(function() {
+
+    $(this).removeClass('day')
+});
+
+
 });

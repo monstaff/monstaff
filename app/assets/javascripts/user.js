@@ -180,7 +180,27 @@ function validate_name(obj) {
 
 
 
+//live search user#index
 
+           $("#my_search").keyup(function(){
+            var inputtext = $(this).val();
+
+
+
+            $.ajax({
+
+                dataType: "script",
+                type:"get",
+                url:"/user",
+
+                data: {search: inputtext},
+                success:function(result){
+
+                }
+            });
+
+
+        });
 
 
 

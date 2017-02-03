@@ -19,6 +19,24 @@
         <% end %>
 
       </div>
+
+
+      <div id="new_group">
+        <%= form_for :group, url: group_index_path, remote: true do |g| %>
+            <p>
+              <%= g.label :name, 'Имя Группы' %><br>
+            </p>
+            <p>
+              <%= g.text_field :name %>
+            </p>
+            <%= g.check_box :group_type %>
+
+            <%= g.submit "Добавить"%>
+        <% end %>
+
+        <%= render 'group_permission' %>
+
+      </div>
     </div>
   </div>
 </div>

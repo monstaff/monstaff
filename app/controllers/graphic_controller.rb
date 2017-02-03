@@ -1,6 +1,9 @@
 class GraphicController < ApplicationController
 
   def index
+    if url_validate(self.class.to_s + action_name )
+    @r = self.class.to_s
+    @a = action_name
     respond_to do |format|
       if params[:date] == nil
         @date = DateTime.now.to_date
@@ -14,7 +17,24 @@ class GraphicController < ApplicationController
       format.js
 
     end
+
+    else
+      redirect_to sessions_new_path
+    end
+    end
+
+
+
+  def month
+
+    id = User.select(id).where(region_id: (params[:region])).map(&:id)
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    graphic = Graphic.where(user_id: id)
+    @graphics_by_date = graphic.group_by(&:date)
   end
+
+
+
   def show
 
   end

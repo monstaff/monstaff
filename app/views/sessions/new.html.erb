@@ -1,6 +1,6 @@
 
 
-
+<%= debug(current_user) %>
 <div class="container">
   <div class="span5 fill">
 
@@ -57,7 +57,7 @@
                 <strong style="text-align: center;"> Войдите что бы продолжить</strong>
               </div>
               <div class="panel-body">
-                <%= form_for :user, url: sessions_path  do |f| %>
+                <%= form_for :user, url: sessions_login_path  do |f| %>
 
                     <fieldset>
                       <div class="row">

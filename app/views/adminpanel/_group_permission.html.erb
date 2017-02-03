@@ -1,0 +1,17 @@
+<% @group_all.each do |group| %>
+    <div class="panel panel-primary">
+      <div class="panel-heading"><%= group.name%></div>
+
+      <div class="panel-body">
+
+        <%= form_for :group_perm, :url => group_region_perm_path({id: group.id}), remote: true do |reg| %>
+
+            <% @region.each do |region| %>
+                <%= check_box_tag 'region_ids[]', region.id, group.RegionPermission.map(&:region_id).include?(region.id)  %>
+                <%= region.name %> <br>
+            <% end %>
+            <%= reg.submit "go" %>
+    <% end %>
+      </div>
+    </div>
+<% end %>

@@ -11,7 +11,7 @@ class GraphicController < ApplicationController
       else
         @date = Date.parse(params[:date])
       end
-      #@transport_event = TransportEvent.where(:event_start => [@date.prev_day, @date, @date.next])
+      @transport_event = TransportEvent.where(:event_start => [@date.prev_day, @date, @date.next])
       @hash = User.all.includes(:graphic).where(:graphics => {:date =>  @date.to_s}).group_by(&:region)
       format.html
       format.js

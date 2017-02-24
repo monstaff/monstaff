@@ -1,0 +1,27 @@
+<table class="result_sw" style="width: 100%">
+  <th class="result_sw_th" style="width: 20%">ЦОА/Город</th>
+  <th class="result_sw_th">Установлено ядер:</th>
+  <th class="result_sw_th">Общее количество ядер:</th>
+  <th class="result_sw_th">Установлено агрегаций:</th>
+  <th class="result_sw_th">Общее количество агрегаций:</th>
+
+
+  <% @aggr_report_list.each do |report| %>
+      <tr>
+        <td class="result_sw_td"><%= report[:name] %></td>
+        <td class="result_sw_td"><%= report[:new_core] %></td>
+        <td class="result_sw_td"><%= report[:all_core] %></td>
+        <td class="result_sw_td"><%= report[:new_aggr] %></td>
+        <td class="result_sw_td"><%= report[:all_aggr] %></td>
+      </tr>
+  <% end %>
+  <tr>
+
+    <td class="result_sw_td" style="font-weight: bold;">Всего:</td>
+    <td class="result_sw_td"><%= @aggr_report_list.collect{|el| el[:new_core].to_i}.sum %></td>
+    <td class="result_sw_td"><%= @aggr_report_list.collect{|el| el[:all_core].to_i}.sum %></td>
+    <td class="result_sw_td"><%= @aggr_report_list.collect{|el| el[:new_aggr].to_i}.sum %></td>
+    <td class="result_sw_td"><%= @aggr_report_list.collect{|el| el[:all_aggr].to_i}.sum %></td>
+
+  </tr>
+</table>

@@ -1,0 +1,35 @@
+<style>
+
+
+
+  </style>
+<div class="container">
+  <div class="span5 fill">
+    <div class="col-md-4">
+      <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Синхронизировать</button>
+    </div>
+  <%= form_tag aggr_report_path, :method => 'get', :html => {:class=>"form-inline"}, remote: true do %>
+    <fieldset>
+      <legend>Отчет по агрегациям и ядрам</legend>
+      <div class="col-xs-2">
+
+        <%= text_field_tag :from_date, "", class: 'xlssclass form-control', :placeholder=>"от" %>
+      </div>
+      <div class="col-xs-2">
+
+        <%= text_field_tag :to_date, "", class: 'xlssclass form-control', :placeholder=>"до" %>
+      </div>
+
+
+<%= submit_tag "Выбрать", :name => nil, :class=>"btn btn-default" %>
+    </fieldset>
+<% end %>
+
+<br>
+<div id="table_result">
+
+  <%= render "aggr_result" %>
+</div>
+
+  </div>
+</div>

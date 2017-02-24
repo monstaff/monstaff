@@ -1,0 +1,47 @@
+<%#= form_for :transport, :url => transport_index_path , :html => {:class=>"form-horizontal"} do |newtr| %>
+<%= form_for :transport, url: transport_index_path , :html => {:class=>"form-horizontal"} do |newtr| %>
+
+    <div class="form-group">
+
+      <%= newtr.label :transportname, "Кто проводит работы", :class=> "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= newtr.text_field :transportname, :class=>"form-control input-md" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= newtr.label :event_start, "Дата начала работ",  :class=> "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= newtr.text_field :event_start,  :class=>"vacs form-control input-md xlssclass"%>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= newtr.label :start_time	, "время начала",  :class=> "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= newtr.text_field :start_time, :class=>"form-control input-md"%>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= newtr.label :end_time  , "время окончания",  :class=> "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= newtr.text_field :end_time, :class=>"form-control input-md"%>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <%= newtr.label :text, "Описание", :class=> "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= newtr.text_area :text, :class=>"form-control input-md" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="signup"></label>
+      <div class="col-md-4">
+        <%= newtr.submit "Добавить", :id=>"signup", :class=>"btn btn-info"%>
+      </div>
+    </div>
+
+<% end %>

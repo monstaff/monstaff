@@ -1,0 +1,16 @@
+<% @transport_result.all.each do |event| %>
+    <div class='alert alert-info' id="tr<%= event.id %>">
+
+
+      <p data-placement="top" data-toggle="tooltip" title="Delete" style="float: right;">
+        <%= link_to transport_path(event), method: :delete, data: {confirm: 'Вы уверены?'}, :class => "btn btn-danger btn-xs", :remote => true do %>
+            <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+      </p>
+
+
+      Работы <%= event.transportname %><br> Время проведения: <%= event.event_start %>
+      c <%= event.start_time %> до <%= event.end_time %>. <br>
+      <%= event.text %>
+    </div>
+<% end %>

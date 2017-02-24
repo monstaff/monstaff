@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170202134338) do
+ActiveRecord::Schema.define(version: 20170223131647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 20170202134338) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "loggs", force: :cascade do |t|
+    t.string   "username"
+    t.text     "text_event"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "region_permissions", force: :cascade do |t|
     t.string   "status"
     t.integer  "region_id"
@@ -57,6 +64,15 @@ ActiveRecord::Schema.define(version: 20170202134338) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rings", force: :cascade do |t|
+    t.string   "pool"
+    t.string   "vlan"
+    t.string   "aggraddress"
+    t.string   "build"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "switches", force: :cascade do |t|
     t.string   "ip"
     t.integer  "region_id"
@@ -65,6 +81,17 @@ ActiveRecord::Schema.define(version: 20170202134338) do
     t.datetime "updated_at",  null: false
     t.date     "stolen_date"
     t.index ["region_id"], name: "index_switches_on_region_id", using: :btree
+  end
+
+  create_table "transport_events", force: :cascade do |t|
+    t.string   "transportname"
+    t.date     "event_start"
+    t.date     "event_end"
+    t.text     "text"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "start_time"
+    t.string   "end_time"
   end
 
   create_table "user_permissions", force: :cascade do |t|
@@ -92,10 +119,10 @@ ActiveRecord::Schema.define(version: 20170202134338) do
     t.string   "passactive"
     t.string   "vacstart"
     t.string   "vacend"
-    t.integer  "groups_id"
     t.integer  "group_id"
+    t.string   "recover_url"
+    t.datetime "token_date"
     t.index ["group_id"], name: "index_users_on_group_id", using: :btree
-    t.index ["groups_id"], name: "index_users_on_groups_id", using: :btree
     t.index ["region_id"], name: "index_users_on_region_id", using: :btree
   end
 

@@ -13,7 +13,7 @@
         <% if current_user.passactive == nil%>
 
             <br>Введите новый пароль<br>
-            <%= form_for current_user, method: :patch do
+            <%= form_for :user, :url => change_password_path(:id => current_user),  method: :patch do
             |f| %>
 
 
@@ -36,7 +36,7 @@
                 <%= f.label :password_confirmation, 'Повторите пароль' %>
                 <%= f.password_field :password_confirmation %>
 
-                <%= f.hidden_field :pass_valid, :value => nil %>
+                <%#= f.hidden_field :pass_valid, :value => nil %>
 
 
                 <%= f.submit "Добавить"%>
@@ -88,6 +88,7 @@
                           <div class="form-group">
                             <%= f.submit :Войти , :class=> "btn btn-lg btn-primary btn-block"%><br>
                           </div>
+                          <%= link_to "Забыли пароль?", forgot_password_path %>
                         </div>
                       </div>
                     </fieldset>

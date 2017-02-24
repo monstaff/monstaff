@@ -10,7 +10,7 @@
                 <%= check_box_tag 'region_ids[]', region.id, group.RegionPermission.map(&:region_id).include?(region.id)  %>
                 <%= region.name %> <br>
             <% end %>
-            <%= reg.submit "go" %>
+            <%= reg.submit "Применить", :class=>"btn btn-default"%>
     <% end %>
       </div>
     </div>

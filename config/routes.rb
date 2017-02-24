@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   get 'sessions/new'
-
+  root 'graphis#index'
+  post 'rebuild' => 'topology#rebuild'
+  get 'rebuild' => 'topology#rebuild'
 get 'check_email', to: 'user#check_email'
 get 'adminpanel' , to: 'adminpanel#index'
 post '/region', to: 'adminpanel#region_create', as: 'region_index'
@@ -19,10 +21,19 @@ get '/region', to: 'adminpanel#region_create'
   post 'graphic/month' => 'graphic#month'
   get 'group_region_perm' => 'adminpanel#group_region_perm'
   post 'group_region_perm' => 'adminpanel#group_region_perm'
-
+  get 'aggr_report' => 'switches#aggr_report'
+  post 'aggr_report' => 'switches#aggr_report'
+  patch 'change_password' => 'user#change_password'
+  post 'forgot_password' => 'user#forgot_password'
+  get 'forgot_password' => 'user#forgot_password'
+  get 'reset_password' => 'user#reset_password'
+  post 'reset_password' => 'user#reset_password'
 patch '/region/:id(.:format)', to: 'adminpanel#region_update', as: 'region_update'
 delete '/region/:id(.:format)', to: 'adminpanel#region_destroy', as: 'region_destroy'
-
+  post 'managerings' => 'managerings#index'
+  get 'managerings' => 'managerings#index'
+  post 'ring' => 'topology#ring_update'
+  get 'ring' => 'topology#ring_update'
 
 resources :user
 resources :switches

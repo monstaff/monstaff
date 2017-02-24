@@ -1,0 +1,29 @@
+<% flash.each do |key, value| %>
+    <%= value %>
+<% end %>
+<%= form_for :topology, url: topology_index_path do |f| %>
+    <p>
+      <%= f.label :pool %><br>
+      <%= f.text_field :pool %>
+    </p>
+
+
+    <p>
+      <%= f.label :vlan %><br>
+      <%= f.text_field :vlan %>
+    </p>
+    <p>
+      <%= f.label :build %><br>
+      <%= f.text_field :build %>
+    </p>
+
+    <p>
+      <%= f.label :aggraddress %><br>
+      <%= f.text_field :aggraddress %>
+    </p>
+
+    <p>
+      <%= f.submit %>
+    </p>
+<% end %>
+

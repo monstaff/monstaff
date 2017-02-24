@@ -28,13 +28,14 @@ class ApiclientService
     connect =  Mechanize.new{|a| a.ssl_version, a.verify_mode = 'SSLv3', OpenSSL::SSL::VERIFY_NONE}
     result = connect.get(ENV['API_GET_TOTAL_SWITCH'] + "?token=#{token}")
     h1 = JSON.parse(result.body)
-
     mappings = {"amount" => "total", "id" => "id", "name" => "name"}
-
     return h1.map {|el| el.map {|k, v| [mappings[k], v] }.to_h}
+  end
 
-
-
+  def install_aggr(token)
+    connect =  Mechanize.new{|a| a.ssl_version, a.verify_mode = 'SSLv3', OpenSSL::SSL::VERIFY_NONE}
+    result = connect.get(ENV['API_GET_INSTALL_AGGR'] + "?token=#{token}")
+    JSON.parse(result.body)
   end
 
 end

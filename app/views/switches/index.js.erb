@@ -1,7 +1,6 @@
 $("#table_result").empty();
 $("#table_result").append('<div class="result_sw_th well well-sm" style="width: 100%; text-align: center; font-weight: bold;">Отчет по коммутаторам за: <%= params[:from_date] %> - <%= params[:to_date]%></div>');
 $("#table_result").append('<%= j render('result') %>');
-$("#table_result").append('<div class="result_sw_th well well-sm" style="margin-top: 10px; width: 100%; text-align: center; font-weight: bold;">Всего установлено:' +
-    '<%= @result.collect{|el| el["total"].to_i}.sum %></div>');
+
 
 

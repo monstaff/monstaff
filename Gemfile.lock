@@ -114,6 +114,7 @@ GEM
     multi_json (1.12.1)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
+    net-telnet (0.1.1)
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
@@ -207,6 +208,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   mechanize
+  net-telnet
   pg
   puma (~> 3.0)
   rails (~> 5.0.1)

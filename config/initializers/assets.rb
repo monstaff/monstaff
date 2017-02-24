@@ -8,6 +8,9 @@ Rails.application.config.assets.precompile += %w( rails.validations.js )
 Rails.application.config.assets.precompile += %w( user.js )
 Rails.application.config.assets.precompile += %w( jquery.validate.js )
 Rails.application.config.assets.precompile += %w( graphic.js )
+Rails.application.config.assets.precompile += %w( managerings.js )
+Rails.application.config.assets.precompile += %w( topology.js )
+Rails.application.config.assets.precompile += %w( topology.css )
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 

@@ -1,0 +1,55 @@
+<%#= javascript_include_tag "graphics.js" %>
+<style>
+
+  .modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+  }
+
+</style>
+<div class="container">
+  <div class="span5 fill">
+    <%= render "new" %>
+
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+      Список работ.
+    </button>
+
+    <div id="myModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Список всех работ.</h4>
+            <br>
+
+            <%= form_tag transport_index_path, :method => 'get', remote: true, :class =>'search-form' do %>
+                <div class="form-group has-feedback">
+                  <label for="search" class="sr-only">Search</label>
+                  <%= text_field_tag :search, params[:search], :class => 'form-control'%>
+                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  <%#= submit_tag "Search", :name => nil %>
+                </div>
+            <% end %>
+
+            <br>
+          </div>
+          <div class="modal-body">
+            <div id="result">
+              <%= render "result" %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+
+  </div>
+</div>

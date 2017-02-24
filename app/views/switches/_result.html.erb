@@ -14,5 +14,15 @@
         <td class="result_sw_td"><%= report["total_stolen"] %></td>
       </tr>
   <% end %>
+
+  <tr>
+
+    <td class="result_sw_td" style="font-weight: bold;">Всего:</td>
+    <td class="result_sw_td"><%= @result.collect{|el| el["total"].to_i}.sum %></td>
+    <td class="result_sw_td"><%= @result.collect{|el| el["amount"].to_i}.sum %></td>
+    <td class="result_sw_td"><%= @result.collect{|el| el["count"].to_i}.sum %></td>
+    <td class="result_sw_td"><%= @result.collect{|el| el["total_stolen"].to_i}.sum %></td>
+
+  </tr>
 </table>
 

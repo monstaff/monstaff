@@ -1,0 +1,130 @@
+<%= javascript_include_tag "topology.js" %>
+<%= stylesheet_link_tag 'topology' %>
+<img src="http://localhost:9292/assets/loader.gif">
+<div class="container">
+
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewring">
+        Новое кольцо
+      </button>
+
+      <div class="modal fade" id="mynewring" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Новое Кольцо</h4>
+            </div>
+            <div class="modal-body">
+              <%= render 'newform'%>
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- end modal-->
+
+
+
+
+    </div>
+  </div>
+
+  <br>
+  <table class="table user-list">
+    <thead>
+    <tr>
+      <th style="width: 5%;"><span>Кольцо</span></th>
+      <th style="width: 5%;"><span>Vlan</span></th>
+      <th style="width: 10%;" ><span>Действие</span></th>
+      <th style="width: 15%;"><span>Статус</span></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <% @ring_list.each do |pool| %>
+
+
+        <!-- Modal - update posts -->
+        <%= form_for(pool, :method => :put, remote: true) do |f| %>
+            <div class="modal fade" id="myupdatepost_<%= pool.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit</h4>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="field">
+                      <%= f.label :pool %><br>
+                      <%= f.text_field :pool, class: "form-control" %>
+                    </div>
+                    <div class="field">
+                      <%= f.label :vlan %><br>
+                      <%= f.text_field :vlan, class: "form-control" %>
+                    </div>
+
+                    <div class="field">
+                      <%= f.label :aggraddress %><br>
+                      <%= f.text_field :aggraddress, class: "form-control" %>
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="myupdatebutton_<%= pool.id %>" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <%= submit_tag "Update", class: "btn btn-primary" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+        <!-- Modal -->
+
+        <% if pool.aggraddress.nil? %>
+
+            <tr id='my<%= pool.id %>' style='background-color: red'>
+        <% else %>
+            <tr id="my<%= pool.id%>">
+        <% end %>
+        <td >
+
+          <%= pool.pool %>
+
+        </td>
+
+        <td ><%= pool.vlan%></td>
+        <td><%= link_to "rebuild", rebuild_path(:pool => pool.pool, :vlan => pool.vlan), :class => "rebuild btn btn-info", remote: true %> |
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myupdatepost_<%= pool.id %>">
+            Edit
+          </button> |
+          <%= link_to "Удалить", topology_path(pool.id) , method: :delete, data: { confirm: 'Вы уверены?' },:class => "btn btn-danger", remote: true %>
+
+
+        </td>
+        <td class="status">
+          <%= image_tag('loader.gif', :size => "30x30", :class => 'loading loader')  %>
+          <%= image_tag('Check.png', :size => "30x30", :class => 'loading succes') %>
+        </td>
+        </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+</div>
+
+
+<% @rings.flatten.each_slice(2) do |ip, val| %>
+<% val.each do |ring| %>
+        <%= ring.vlan %>
+        <% end %>
+<% end %>

@@ -1,42 +1,133 @@
 <%= javascript_include_tag "adminpanel.js"%>
 <div class="container">
+
   <div class="span5 fill">
-    <button id="1">Регионы</button>
+    <button id="regions">Регионы</button>
+    <button id="groups">Группы</button>
 
-    <div id="region" style="display: none">
-      <div class="tasks" id="incomplete_tasks">
-        <%=  render @region %>
-      </div>
-      <div id="new_task">
-        <%= form_for :region, url: region_index_path, remote: true do |u| %>
-            <p>
-              <%= u.label :name, 'Имя Региона' %><br>
-            </p>
-            <p>
-              <%= u.text_field :name %>
-            </p>
-            <%= u.submit "Добавить"%>
+
+
+
+
+
+
+    <div id="region" style="display: none; padding-top: 5%;">
+
+
+      <table class="table" style="width: 40%;">
+        <thead>
+        <tr>
+          <th>Имя ЦОА/Региона/Отдела</th>
+          <th> </th>
+
+
+        </tr>
+
+        </thead>
+        <tbody>
+        <div class="tasks" id="incomplete_tasks">
+          <%=  render @region %>
+        </div>
+        </tbody>
+      </table>
+
+
+
+      <div id="new_task" style="padding-top: 2%;">
+        <%= form_for :region, url: region_index_path, :html => {:class=>"form-inline"}, remote: true do |u| %>
+
+            <div class="form-group">
+              <%= u.label :name, 'название отдела/региона' %>
+              <%= u.text_field :name, :class=>"form-control input-sm" %>
+            </div>
+
+            <%= u.submit "Добавить", :class=>"btn btn-default"%>
+
+
+
+
         <% end %>
-
       </div>
+    </div>
 
 
-      <div id="new_group">
-        <%= form_for :group, url: group_index_path, remote: true do |g| %>
-            <p>
-              <%= g.label :name, 'Имя Группы' %><br>
-            </p>
-            <p>
-              <%= g.text_field :name %>
-            </p>
-            <%= g.check_box :group_type %>
 
-            <%= g.submit "Добавить"%>
-        <% end %>
+    <div id="group" style="display: none; padding-top: 5%;">
 
-        <%= render 'group_permission' %>
+      <table class="table" style="width: 40%;">
+        <thead>
+        <tr>
+          <th>Имя группы</th>
+          <th> Тип группы</th>
+          <th> </th>
+          <th> <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">права групп</button></th>
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr>
+          <td>John</td>
+          <td>Doe</td>
+          <td>Doe</td>
+           </tr>
+        <tr>
+          <td>Mary</td>
+          <td>Moe</td>
+          <td>Doe</td>
+        </tr>
+        <tr>
+          <td>July</td>
+          <td>Dooley</td>
+          <td>Doe</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <%= form_for :group, url: group_index_path, :html => {:class=>"form-inline"}, remote: true do |g| %>
+          <div class="form-group">
+            <%= g.label :name, 'Имя Группы' %>
+            <%= g.text_field :name, :class=>"form-control input-sm" %>
+          </div>
+          <div class="form-group">
+          <%= g.label :group_type, 'супер группа' %>
+          <%= g.check_box :group_type %>
+          </div>
+          <%= g.submit "Добавить", :class=>"btn btn-default"%>
+      <% end %>
+
+          </div>
+
+
+    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal2">...</button>
+
+
+
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Редактировать права Группы</h4> <span class="glyphicon glyphicon-alert"></span> Для каждой группы можно установить разрешение на просмотр региона/ЦОА
+          </div>
+          <div class="modal-body">
+            <%= render 'group_permission' %>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
 
       </div>
     </div>
+
+
   </div>
 </div>
+
+
+
+

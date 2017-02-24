@@ -1,6 +1,21 @@
+<% if transport_show_time(@transport_event[0], @date) %>
+
+    <div id='hide_event' data-toggle="collapse" data-target="#event"></div>
+
+    <div id='event' class="collapse">
+      <% @transport_event.each do |event| %>
+          <%= transport_show_time(event, @date) %>
+      <% end %>
+    </div>
+
+<% else %>
+<div style="padding-bottom: 2.2%;"></div>
+<% end %>
+
+
 <ul class="pager">
   <li><%= link_to @date.prev_day, graphic_index_path(:date => @date.prev_day), remote: true %></li>
-  График на : <%#= day_today(@date) %>
+  График на : <%= day_today(@date) %>
   <li><%= link_to @date.next, graphic_index_path(:date => @date.next), remote: true %></li>
 </ul>
 

@@ -34,6 +34,9 @@ delete '/region/:id(.:format)', to: 'adminpanel#region_destroy', as: 'region_des
   get 'managerings' => 'managerings#index'
   post 'ring' => 'topology#ring_update'
   get 'ring' => 'topology#ring_update'
+  post 'show_topology' => 'topology#index'
+  get 'show_topology' => 'topology#index'
+
 
 resources :user
 resources :switches

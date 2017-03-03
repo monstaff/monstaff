@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223131647) do
+ActiveRecord::Schema.define(version: 20170227131658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "arp_infos", force: :cascade do |t|
+    t.string   "ip"
+    t.string   "mac"
+    t.string   "tpport"
+    t.integer  "ring_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ring_id"], name: "index_arp_infos_on_ring_id", using: :btree
+  end
 
   create_table "graphics", force: :cascade do |t|
     t.integer  "user_id"
@@ -81,6 +91,19 @@ ActiveRecord::Schema.define(version: 20170223131647) do
     t.datetime "updated_at",  null: false
     t.date     "stolen_date"
     t.index ["region_id"], name: "index_switches_on_region_id", using: :btree
+  end
+
+  create_table "topologies", force: :cascade do |t|
+    t.string   "ip"
+    t.string   "port25"
+    t.string   "port26"
+    t.string   "port27"
+    t.string   "port28"
+    t.string   "max_value"
+    t.integer  "ring_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ring_id"], name: "index_topologies_on_ring_id", using: :btree
   end
 
   create_table "transport_events", force: :cascade do |t|

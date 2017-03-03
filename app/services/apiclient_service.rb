@@ -38,4 +38,10 @@ class ApiclientService
     JSON.parse(result.body)
   end
 
+  def switch_get_loc(token, ring)
+    connect =  Mechanize.new{|a| a.ssl_version, a.verify_mode = 'SSLv3', OpenSSL::SSL::VERIFY_NONE}
+    result = connect.get(ENV['API_SW_GET_LOC'] + ring + "?token=#{token}")
+    JSON.parse(result.body)
+  end
+
 end

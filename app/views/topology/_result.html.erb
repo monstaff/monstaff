@@ -1,0 +1,27 @@
+
+
+    <tr id="my<%= @ring.id%>">
+
+<td>
+  <%= @ring.pool %>
+</td>
+  <td ><%= @ring.vlan %></td>
+  <td>
+
+    <%= link_to "rebuild", rebuild_path(:pool => @ring.pool, :vlan => @ring.vlan), :class => "rebuild btn btn-info", remote: true %> |
+    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myupdatepost_<%= @ring.id %>">
+      Edit
+    </button> |
+    <%= link_to "Удалить", topology_path(@ring.id) , method: :delete, data: { confirm: 'Вы уверены?' },:class => "btn btn-danger", remote: true %>
+
+
+  </td>
+  <td class="status">
+
+    <%= image_tag('loader.gif', :size => "30x30", :class => 'loading loader')  %>
+    <%= image_tag('Check.png', :size => "30x30", :class => 'loading succes') %>
+
+  </td>
+</tr>
+
+

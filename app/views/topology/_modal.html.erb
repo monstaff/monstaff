@@ -1,0 +1,35 @@
+<!-- Modal - update posts -->
+<%= form_for(@ring, :method => :put, remote: true) do |f| %>
+    <div class="modal fade" id="myupdatepost_<%= @ring.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Edit</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="field">
+              <%= f.label :pool %><br>
+              <%= f.text_field :pool, class: "form-control" %>
+            </div>
+            <div class="field">
+              <%= f.label :vlan %><br>
+              <%= f.text_field :vlan, class: "form-control" %>
+            </div>
+
+            <div class="field">
+              <%= f.label :aggraddress %><br>
+              <%= f.text_field :aggraddress, class: "form-control" %>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="myupdatebutton_<%= @ring.id %>" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= submit_tag "Update", class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
+<!-- Modal -->

@@ -1,5 +1,5 @@
 <%= javascript_include_tag "topology.js" %>
-<%= stylesheet_link_tag 'topology' %>
+<%#= stylesheet_link_tag 'topology' %>
 <img src="http://localhost:9292/assets/loader.gif">
 <div class="container">
 
@@ -51,6 +51,7 @@
     </tr>
     </thead>
     <tbody>
+
     <% @ring_list.each do |pool| %>
 
 
@@ -122,9 +123,3 @@
   </table>
 </div>
 
-
-<% @rings.flatten.each_slice(2) do |ip, val| %>
-<% val.each do |ring| %>
-        <%= ring.vlan %>
-        <% end %>
-<% end %>

@@ -1,6 +1,8 @@
+<%= javascript_include_tag "switches"%>
 <table class="result_sw">
   <th class="result_sw_th" style="width: 20%">ЦОА/Город</th>
   <th class="result_sw_th">Кол. коммутаторов на мониторинге:</th>
+  <th class="result_sw_th">Кол. замененных коммутаторов:</th>
   <th class="result_sw_th">Кол. установленых коммутаторов:</th>
   <th class="result_sw_th">Кол. украденых коммутаторов:</th>
   <th class="result_sw_th">Общее кол. украденых коммутаторов:</th>
@@ -9,6 +11,7 @@
       <tr>
         <td class="result_sw_td"><%= report["name"] %></td>
         <td class="result_sw_td"><%= report["total"] %></td>
+        <td class="result_sw_td report_kostyl">0</td>
         <td class="result_sw_td"><%= report["amount"] %></td>
         <td class="result_sw_td"><%= report["count"] %></td>
         <td class="result_sw_td"><%= report["total_stolen"] %></td>
@@ -19,6 +22,7 @@
 
     <td class="result_sw_td" style="font-weight: bold;">Всего:</td>
     <td class="result_sw_td"><%= @result.collect{|el| el["total"].to_i}.sum %></td>
+    <td class="result_sw_td report_kostyl_total">0</td>
     <td class="result_sw_td"><%= @result.collect{|el| el["amount"].to_i}.sum %></td>
     <td class="result_sw_td"><%= @result.collect{|el| el["count"].to_i}.sum %></td>
     <td class="result_sw_td"><%= @result.collect{|el| el["total_stolen"].to_i}.sum %></td>

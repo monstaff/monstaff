@@ -1,5 +1,5 @@
 $("#table_result").empty();
-$("#table_result").append('<div class="result_sw_th well well-sm" style="width: 100%; text-align: center; font-weight: bold;">Отчет по агрегациям и ядрам за: <%= params[:from_date] %> - <%= params[:to_date]%></div>');
+$("#table_result").append('<div class="result_sw_th well well-sm" style="width: 100%; text-align: center; font-weight: bold;">Отчет по агрегациям и ядрам за: <span id="za_fevral_ololo"><%= params[:from_date] %> - <%= params[:to_date]%></span></div>');
 $("#table_result").append('<%= j render('aggr_result') %>');
 
 

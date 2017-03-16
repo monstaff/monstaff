@@ -1,13 +1,24 @@
 <%= javascript_include_tag "topology.js"%>
+<%= stylesheet_link_tag 'topology' %>
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 <div class="panel-group" style="width: 90%; padding-left: 10%;">
   <div class="panel panel-primary" >
     <div class="panel-heading">
+      <div id="ring_option" style="float: right;">
+
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></button>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Меню топологии", topology_menu_path%></li>
+                   </ul>
+        </div>
+              </div>
+      <div class="ring_heading" >
 <% @ring.each do |pool| %>
           <button id="<%= pool[0].gsub(".", "") %>" class="rings btn btn-default"><%= pool[0].gsub(".", "")%></button>
 
 <% end %>
-
+      </div>
 
     </div>
     <br>
@@ -15,10 +26,13 @@
       <div id='ring_list'>
         <%@ring.each do |pool|%>
             <div id="r<%= pool[0].gsub(".", "") %>"style ="display: none;" class='tr'>
+              <div class="btn-group" style="float: left;">
               <% pool[1].sort_by { |a| a.split('.')[-1].to_i}.each do |ring| %>
                   <!--<button type="button" class="rings btn btn-default "><%#= link_to ring.split('.')[-1], topology_index_path(:ring => pool), remote: true%></button>-->
-                  <%= button_to ring.split('.')[-1], show_topology_path(:ring => ring) , :class=>"rings btn btn-default", remote: true%>
+                  <%= button_to ring.split('.')[-1], show_topology_path(:ring => ring), :class=>"rings btn btn-default", remote: true%>
+
               <% end %>
+            </div>
             </div>
         <% end %>
       </div>
@@ -26,16 +40,6 @@
   </div>
 
 </div>
-
-<!-- Trigger/Open The Modal -->
-
-<!-- The Modal -->
-<div id="myModalload" class="modalload">
-  <!--<img class="modalload-content" id="img01" src="http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_512.gif"> -->
-  <img width='90%;' height='80%;' class="modalload-content" id="img01" src="https://67.media.tumblr.com/tumblr_m8m87cu94j1rvwq31o1_500.gif">
-  <div id="caption"></div>
-</div>
-
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -49,8 +53,8 @@
 
 </div>
 
-<div class="well" style="width: 90%; height: 70%; margin-left: 5%; border-color: #337ab7; background-image: url(https://www.zhaw.ch/storage/_processed_/csm_ias-netzwerk_7f8f54fc32.jpg);  background-size: 100% 100%;
-    background-repeat: no-repeat;">
-  <div id="map2" style="width: 100%; height: 100%;"></div>
+
+<div class="well topology_well">
+  <div id="map2" style="width: 100%; height: 100%; z-index : -1;"></div>
 </div>
 <div id="result"></div>

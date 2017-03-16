@@ -1,3 +1,4 @@
+<%= javascript_include_tag "transport.js"%>
 <%#= form_for :transport, :url => transport_index_path , :html => {:class=>"form-horizontal"} do |newtr| %>
 <%= form_for :transport, url: transport_index_path , :html => {:class=>"form-horizontal"} do |newtr| %>
 
@@ -40,7 +41,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="signup"></label>
       <div class="col-md-4">
-        <%= newtr.submit "Добавить", :id=>"signup", :class=>"btn btn-info"%>
+        <%= newtr.submit "Добавить", :id=>"add", :class=>"btn btn-info"%>
       </div>
     </div>
 

@@ -3,11 +3,13 @@ class User < ApplicationRecord
   #has_secure_password
   belongs_to :group
   belongs_to :region
+  has_one :MailDeliver
   has_many :UserPermission
   has_many :graphic, :dependent => :destroy
-  attr_accessor :password, :password_confirmation, :fullname, :reset_pass
-  before_update :check_what_need_to_reset
+  attr_accessor :password, :password_confirmation, :reset_pass, :name, :secondname,:mail_recive
+  before_update :check_what_need_to_reset, :mail_recent
   before_create :user_default_option
+  before_save :createfullname
   #after_initialize :set_default_values
   validates :name, :presence => { :message => "Поле имя не может быть пустым"}, :on => :create
   validates :secondname, :presence => { :message => "Поле имя не может быть пустым"}, :on => :create
@@ -17,7 +19,17 @@ class User < ApplicationRecord
 
 
 
-
+  def mail_recent
+    if mail_recive == '1'
+      if self.MailDeliver.nil?
+        self.create_MailDeliver(:name => self.fullname, :email => self.email)
+      else
+        self.MailDeliver.update_attributes(:name => self.fullname, :email => self.email)
+      end
+    else
+      self.MailDeliver.destroy unless  self.MailDeliver.nil?
+    end
+  end
 
   def pass_upd(password, password_confirmation)
     reg = /\A\w+([A-Za-z])\w{6,}([A-Za-z])\w+\z/
@@ -37,9 +49,9 @@ class User < ApplicationRecord
   end
 
 
-  def fullname
-    self.name + " " + self.secondname
-  end
+  # def fullname
+  #   self.name + " " + self.secondname
+  # end
 
 
 
@@ -63,21 +75,23 @@ class User < ApplicationRecord
     #
     # self.encrypted_password = nil
     user_default_option
-    encrypt_password
+    #encrypt_password
     self.save
   end
 
 
   private
 
-  def check_what_need_to_reset
-    self.passactive = nil
-    # self.salt = nil
-    #
-    # self.encrypted_password = nil
-    user_default_option
-    encrypt_password
-  end
+   def check_what_need_to_reset
+     if reset_pass == "1"
+     self.passactive = nil
+  #   # self.salt = nil
+  #   #
+  #   # self.encrypted_password = nil
+  user_default_option
+     encrypt_password
+       end
+   end
 
   def should_validate_password?
     pass_valid != '1'
@@ -97,5 +111,10 @@ class User < ApplicationRecord
 
 
 
-
+  def createfullname
+    if name.present? and secondname.present?
+      self.fullname = secondname + " " + name
+      self.save
+    end
+  end
 end

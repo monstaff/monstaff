@@ -55,7 +55,7 @@
                 </a>
                 <ul class="dropdown-menu">
 
-                  <% if current_user.group.group_type = 1 %>
+                  <% if current_user.group.group_type == "admin" %>
                       <li><%= link_to "Админка", adminpanel_path %><span class="icon-wrench"></span></li>
                       <% end%>
 
@@ -89,9 +89,10 @@
 
 
   <!--Group permission content-->
-<% if current_user.present? and current_user.group.group_type == "1" %>
+<% if current_user.present? and  current_user.group.group_type == "admin" %>
+
       <div class="dropdown" style="float: right; padding-right: 20px;" >
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Права на страницу
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Доступ к странице
           <span class="caret"></span></button>
         <ul class="dropdown-menu">
 
@@ -105,6 +106,8 @@
           <% end %>
         </ul>
       </div>
+  <% else %>
+<%= current_user.group.group_type %>
   <% end %>
   <!--end group perm-->
   <%= yield %>

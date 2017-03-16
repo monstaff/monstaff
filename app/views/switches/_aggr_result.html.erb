@@ -26,3 +26,7 @@
 
   </tr>
 </table>
+<% if @all_mounts.nil? %>
+<% else %>
+    <%#= @all_mounts.select {|s| s["city_name"] == "Киев" and s["level"] == "core"}.collect { |ip| ip["ip"] }%>
+<% end %>

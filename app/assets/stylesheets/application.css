@@ -13,10 +13,14 @@
  *= require_tree .
  *= require_self
  */
-
+.profile-img {
+    padding-left: 30%;
+    padding-bottom: 5%;
+}
 .loading {
     display: none;
 }
+
 
 
 .field_with_errors  input[type=text] {
@@ -34,3 +38,4 @@
     width: 25px;
     height: 25px;
     background-image: url('warn1.gif'); }
+

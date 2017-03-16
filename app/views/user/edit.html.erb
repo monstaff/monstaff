@@ -19,20 +19,14 @@
 
           <div class="form-group">
 
-            <%= f.label :name, "Имя", :class=> "col-md-4 control-label" %>
+            <%= f.label :fullname, "Имя и фамилия:", :class=> "col-md-4 control-label" %>
             <div class="col-md-4">
-              <%= f.text_field :name, :class=>"form-control input-md" %>
+              <%= f.text_field :fullname, :class=>"form-control input-md" %>
             </div>
           </div>
 
 
-          <div class="form-group">
 
-            <%= f.label :secondname, "Фамилия", :class=> "col-md-4 control-label" %>
-            <div class="col-md-4">
-              <%= f.text_field :secondname, :class=>"form-control input-md" %>
-            </div>
-          </div>
 
 
 
@@ -65,7 +59,7 @@
               <div class="form-group">
                 <%= f.label :mail_recive, "Уведомлять если не составлен график на завтра",  :class=> "col-md-4 control-label"%>
                 <div class="col-md-4">
-                  <%#= f.check_box :mail_recive, {:checked=> @user.MailDeliver.present?} %>
+                  <%= f.check_box :mail_recive, {:checked=> @user.MailDeliver.present?} %>
                 </div>
               </div>
 <%# end %>

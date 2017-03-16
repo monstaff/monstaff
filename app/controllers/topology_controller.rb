@@ -26,7 +26,7 @@ def topologymake
   end
 
   def index
-
+    if url_validate(self.class.to_s + action_name )
     @ring = Ring.all.map(&:pool).group_by { |word| word[4..6] }
 
     if params[:ring] == nil
@@ -64,7 +64,7 @@ def topologymake
         short_ips = val[1].map{|hash| hash["ip"].split('.')[3]}.join(',')
         nest_ips = val[1].map{|hash| hash["ip"]}
         ips = val[1].map{|hash| hash["ip"]}
-        main = val[1].max_by{|x| x["max_value"].to_i}.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+
           main_lat = val[1][0]["lat"]
           main_lng = val[1][0]["lng"]
 
@@ -77,16 +77,30 @@ def topologymake
 
              else
                sw = @all_ip.find {|ip| ip["ip"] == nest}
-                lat = sw["lat"] unless sw["lat"] == nil
-                lng = sw["lng"] unless sw["lng"] == nil
-               @nest << [lat, lng] unless lat == nil #or lat == main_lat or lng == main_lng
+               begin
+                lat = sw["lat"]
+                lng = sw["lng"]
+
+               @nest << [lat, lng] unless lat == nil or lat == main_lat or lng == main_lng
                @hash << [sw.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}]
                 @next << sw["ip"]
+               rescue
+
+               end
              end
            end
          end
+        ##find prev main section
+
+        main = val[1].max_by{|x| x["max_value"].to_i}.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+        prewsw = @all_ip.find { |ip| [ip["port25"], ip["port26"], ip["port27"], ip["port28"]].include? (main[:ip]) }
+
+        if prewsw.nil?
+          prewsw = {:ip => "tp"}
+        end
+        #####
           main_status = @status.find{|ip|ip[:ip] == main[:ip]}[:status]
-          @rings << {ip: short_ips, lat: main_lat, lng: main_lng, nest: @nest, hash: @hash, ips: ips, main: main, next: @next - nest_ips, status: main_status ,all_status: @status}
+          @rings << {ip: short_ips, lat: main_lat, lng: main_lng, nest: @nest, hash: @hash, ips: ips, main: prewsw.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}, next: @next - nest_ips, status: main_status ,all_status: @status, test: prewsw}
          end
 
       @gontop = {:tp => @ring_loc["tp_loc"], :tp_link => tp_port, :ring => @rings}
@@ -100,13 +114,19 @@ def topologymake
        end
 
 
+    end
+
+    else
+      redirect_to root_path
       end
   end
 
 
+def show
+@ring = Ring.find(params[:id])
+end
 
-
-  def show
+  def menu
     @rings = Ring.all.group_by(&:aggraddress)
     @ring_list = Ring.all
 
@@ -116,12 +136,19 @@ def topologymake
   end
 
   def ring_update
-
+  top = Topology.find(params[:id])
+    @top = top.update(top_params)
   end
+
+  def ring_add
+ring = Ring.find(params[:id])
+    ring.topology.create(top_params)
+  end
+
 
   def update
     @ring = Ring.find(params[:id])
-    if @ring.update(top_params)
+    if @ring.update(ring_params)
       #redirect_to @user
     else
     end
@@ -169,6 +196,11 @@ def topologymake
 
 
   private
+
+  def top_params
+    params.require(:topology).permit(:ip, :port25, :port26, :port27, :port28, :max_value)
+  end
+
 
   def ring_params
     params.require(:topology).permit(:pool, :vlan, :aggraddress, :build)

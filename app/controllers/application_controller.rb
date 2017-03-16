@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
   private
 
   def url_validate(path)
-
-  if current_user.group.GroupPermission.where(url_path: path).empty?
+  chek_perm = GroupPermission.where(url_path: path)
+  if current_user.group.GroupPermission.where(url_path: path).empty? and chek_perm.any?
   return false
   else
     return true

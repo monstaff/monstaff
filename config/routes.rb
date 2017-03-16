@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get 'sessions/new'
-  root 'graphis#index'
+  root 'graphic#index'
   post 'rebuild' => 'topology#rebuild'
   get 'rebuild' => 'topology#rebuild'
 get 'check_email', to: 'user#check_email'
@@ -32,10 +32,12 @@ patch '/region/:id(.:format)', to: 'adminpanel#region_update', as: 'region_updat
 delete '/region/:id(.:format)', to: 'adminpanel#region_destroy', as: 'region_destroy'
   post 'managerings' => 'managerings#index'
   get 'managerings' => 'managerings#index'
-  post 'ring' => 'topology#ring_update'
-  get 'ring' => 'topology#ring_update'
+  patch 'ring' => 'topology#ring_update'
+  post 'ring_add' => 'topology#ring_add'
+  #get 'ring' => 'topology#ring_update'
   post 'show_topology' => 'topology#index'
-  get 'show_topology' => 'topology#index'
+  get 'topology_menu' => 'topology#menu'
+  post 'synchronize' => 'switches#synchronize'
 
 
 resources :user

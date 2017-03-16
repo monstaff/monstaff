@@ -61,7 +61,11 @@ class UserController < ApplicationController
 
 
   def edit
+    if user_can_see
     @user = userfind
+    else
+      render 'error/user_error'
+      end
   end
 
 
@@ -128,6 +132,15 @@ class UserController < ApplicationController
   end
 private
 
+  def user_can_see
+  perm = [current_user.region_id] + current_user.group.RegionPermission.map(&:region_id)
+    if perm.include? (userfind.region_id)
+      true
+    else
+      false
+    end
+  end
+
 
 
   def userfind
@@ -140,7 +153,7 @@ private
   end
 
 def upd_user
-  params.require(:user).permit(:name, :secondname,:phone, :email, :region_id, :fullname, :reset_pass, :group_id)
+  params.require(:user).permit(:name, :secondname,:phone, :email, :region_id, :fullname, :reset_pass, :group_id, :mail_recive )
 end
   def new_user
     params.require(:user).permit(:name, :secondname, :phone, :email, :region_id)

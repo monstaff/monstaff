@@ -81,21 +81,29 @@ arr = group.RegionPermission.map(&:region_id)
   def group_permission
     arr =[]
     path = self.class.to_s + action_name.to_s
+    if params[:group_ids].nil?
+
+    else
     params[:group_ids].each do |id|
       if GroupPermission.where(group_id: id, url_path: path).nil?
 
         else
           arr << {url_path: params[:url_path], group_id: id, permite: 1}
       end
-      end
+    end
+    end
     return arr
   end
 
 
 
   def group_perm_to_delete
-    arr = Group.all.map(&:id) - params[:group_ids].map{|i| i.to_i}
-    res = GroupPermission.where(group_id: arr, url_path: params[:url_path]).map(&:id)
+    if params[:group_ids].nil?
+      arr = Group.all.map(&:id)
+    else
+      arr = Group.all.map(&:id) - params[:group_ids].map{|i| i.to_i}
+    end
+       res = GroupPermission.where(group_id: arr, url_path: params[:url_path]).map(&:id)
     return res
   end
 

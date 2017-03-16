@@ -14,8 +14,8 @@
     <schema id="4" parent="1" name="public">
       <object-id>2200</object-id>
       <visible>1</visible>
-      <introspection-state-number>656</introspection-state-number>
-      <introspection-timestamp>2017-01-10.09:51:34.576</introspection-timestamp>
+      <introspection-state-number>2126</introspection-state-number>
+      <introspection-timestamp>2017-03-13.13:09:41.252</introspection-timestamp>
     </schema>
     <schema id="5" parent="1" name="pg_catalog">
       <object-id>11</object-id>
@@ -32,284 +32,921 @@
     <schema id="9" parent="1" name="information_schema">
       <object-id>12092</object-id>
     </schema>
-    <sequence id="10" parent="4" name="region_permissions_id_seq">
+    <sequence id="10" parent="4" name="aggr_ignores_id_seq">
+      <object-id>16648</object-id>
+      <state-number>2126</state-number>
+    </sequence>
+    <sequence id="11" parent="4" name="arp_infos_id_seq">
+      <object-id>16611</object-id>
+      <state-number>1055</state-number>
+    </sequence>
+    <sequence id="12" parent="4" name="graphics_id_seq">
+      <object-id>16540</object-id>
+      <state-number>825</state-number>
+    </sequence>
+    <sequence id="13" parent="4" name="group_permissions_id_seq">
+      <object-id>16563</object-id>
+      <state-number>828</state-number>
+    </sequence>
+    <sequence id="14" parent="4" name="groups_id_seq">
+      <object-id>16552</object-id>
+      <state-number>827</state-number>
+    </sequence>
+    <sequence id="15" parent="4" name="loggs_id_seq">
+      <object-id>16589</object-id>
+      <state-number>1050</state-number>
+    </sequence>
+    <sequence id="16" parent="4" name="mail_delivers_id_seq">
+      <object-id>16636</object-id>
+      <state-number>1970</state-number>
+    </sequence>
+    <sequence id="17" parent="4" name="region_permissions_id_seq">
       <object-id>16474</object-id>
       <state-number>648</state-number>
     </sequence>
-    <sequence id="11" parent="4" name="regions_id_seq">
+    <sequence id="18" parent="4" name="regions_id_seq">
       <object-id>16463</object-id>
       <state-number>647</state-number>
     </sequence>
-    <sequence id="12" parent="4" name="switches_id_seq">
+    <sequence id="19" parent="4" name="rings_id_seq">
+      <object-id>16600</object-id>
+      <state-number>1053</state-number>
+    </sequence>
+    <sequence id="20" parent="4" name="switches_id_seq">
       <object-id>16486</object-id>
       <state-number>654</state-number>
     </sequence>
-    <sequence id="13" parent="4" name="users_id_seq">
+    <sequence id="21" parent="4" name="topologies_id_seq">
+      <object-id>16624</object-id>
+      <state-number>1667</state-number>
+    </sequence>
+    <sequence id="22" parent="4" name="transport_events_id_seq">
+      <object-id>16578</object-id>
+      <state-number>1010</state-number>
+    </sequence>
+    <sequence id="23" parent="4" name="user_permissions_id_seq">
+      <object-id>16512</object-id>
+      <state-number>669</state-number>
+    </sequence>
+    <sequence id="24" parent="4" name="users_id_seq">
       <object-id>16498</object-id>
       <state-number>655</state-number>
     </sequence>
-    <table id="14" parent="4" name="ar_internal_metadata">
+    <table id="25" parent="4" name="aggr_ignores">
+      <object-id>16650</object-id>
+      <state-number>2126</state-number>
+    </table>
+    <table id="26" parent="4" name="ar_internal_metadata">
       <object-id>16455</object-id>
       <state-number>646</state-number>
     </table>
-    <table id="15" parent="4" name="region_permissions">
-      <object-id>16476</object-id>
-      <state-number>648</state-number>
+    <table id="27" parent="4" name="arp_infos">
+      <object-id>16613</object-id>
+      <state-number>1055</state-number>
     </table>
-    <table id="16" parent="4" name="regions">
+    <table id="28" parent="4" name="graphics">
+      <object-id>16542</object-id>
+      <state-number>825</state-number>
+    </table>
+    <table id="29" parent="4" name="group_permissions">
+      <object-id>16565</object-id>
+      <state-number>828</state-number>
+    </table>
+    <table id="30" parent="4" name="groups">
+      <object-id>16554</object-id>
+      <state-number>2125</state-number>
+    </table>
+    <table id="31" parent="4" name="loggs">
+      <object-id>16591</object-id>
+      <state-number>1050</state-number>
+    </table>
+    <table id="32" parent="4" name="mail_delivers">
+      <object-id>16638</object-id>
+      <state-number>1970</state-number>
+    </table>
+    <table id="33" parent="4" name="region_permissions">
+      <object-id>16476</object-id>
+      <state-number>923</state-number>
+    </table>
+    <table id="34" parent="4" name="regions">
       <object-id>16465</object-id>
       <state-number>647</state-number>
     </table>
-    <table id="17" parent="4" name="schema_migrations">
+    <table id="35" parent="4" name="rings">
+      <object-id>16602</object-id>
+      <state-number>1053</state-number>
+    </table>
+    <table id="36" parent="4" name="schema_migrations">
       <object-id>16447</object-id>
       <state-number>645</state-number>
     </table>
-    <table id="18" parent="4" name="switches">
+    <table id="37" parent="4" name="switches">
       <object-id>16488</object-id>
-      <state-number>654</state-number>
+      <state-number>768</state-number>
     </table>
-    <table id="19" parent="4" name="users">
+    <table id="38" parent="4" name="topologies">
+      <object-id>16626</object-id>
+      <state-number>1667</state-number>
+    </table>
+    <table id="39" parent="4" name="transport_events">
+      <object-id>16580</object-id>
+      <state-number>1011</state-number>
+    </table>
+    <table id="40" parent="4" name="user_permissions">
+      <object-id>16514</object-id>
+      <state-number>672</state-number>
+    </table>
+    <table id="41" parent="4" name="users">
       <object-id>16500</object-id>
-      <state-number>656</state-number>
+      <state-number>1951</state-number>
     </table>
-    <column id="20" parent="14" name="key">
+    <column id="42" parent="25" name="id">
+      <state-number>2126</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;aggr_ignores_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="43" parent="25" name="aggr_ip">
+      <state-number>2126</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="44" parent="25" name="created_at">
+      <state-number>2126</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="45" parent="25" name="updated_at">
+      <state-number>2126</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <index id="46" parent="25" name="aggr_ignores_pkey">
+      <object-id>16657</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="47" parent="25" name="aggr_ignores_pkey">
+      <object-id>16658</object-id>
+      <columns>id</columns>
+      <underlying-index>aggr_ignores_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="48" parent="26" name="key">
       <state-number>646</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar|0</data-type>
     </column>
-    <column id="21" parent="14" name="value">
+    <column id="49" parent="26" name="value">
       <state-number>646</state-number>
       <data-type>varchar|0</data-type>
     </column>
-    <column id="22" parent="14" name="created_at">
+    <column id="50" parent="26" name="created_at">
       <state-number>646</state-number>
       <mandatory>1</mandatory>
       <data-type>timestamp|0</data-type>
     </column>
-    <column id="23" parent="14" name="updated_at">
+    <column id="51" parent="26" name="updated_at">
       <state-number>646</state-number>
       <mandatory>1</mandatory>
       <data-type>timestamp|0</data-type>
     </column>
-    <index id="24" parent="14" name="ar_internal_metadata_pkey">
+    <index id="52" parent="26" name="ar_internal_metadata_pkey">
       <object-id>16461</object-id>
       <columns>key</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="25" parent="14" name="ar_internal_metadata_pkey">
+    <key id="53" parent="26" name="ar_internal_metadata_pkey">
       <object-id>16462</object-id>
       <columns>key</columns>
       <underlying-index>ar_internal_metadata_pkey</underlying-index>
       <primary>1</primary>
     </key>
-    <column id="26" parent="15" name="id">
+    <column id="54" parent="27" name="id">
+      <state-number>1055</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;arp_infos_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="55" parent="27" name="ip">
+      <state-number>1055</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="56" parent="27" name="mac">
+      <state-number>1055</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="57" parent="27" name="tpport">
+      <state-number>1055</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="58" parent="27" name="ring_id">
+      <state-number>1055</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="59" parent="27" name="created_at">
+      <state-number>1055</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="60" parent="27" name="updated_at">
+      <state-number>1055</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <index id="61" parent="27" name="arp_infos_pkey">
+      <object-id>16620</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="62" parent="27" name="index_arp_infos_on_ring_id">
+      <object-id>16622</object-id>
+      <columns>ring_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="63" parent="27" name="arp_infos_pkey">
+      <object-id>16621</object-id>
+      <columns>id</columns>
+      <underlying-index>arp_infos_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="64" parent="28" name="id">
+      <state-number>825</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;graphics_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="65" parent="28" name="user_id">
+      <state-number>825</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="66" parent="28" name="worktime">
+      <state-number>825</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="67" parent="28" name="comment">
+      <state-number>825</state-number>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="68" parent="28" name="date">
+      <state-number>825</state-number>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="69" parent="28" name="created_at">
+      <state-number>825</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="70" parent="28" name="updated_at">
+      <state-number>825</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <index id="71" parent="28" name="graphics_pkey">
+      <object-id>16549</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="72" parent="28" name="index_graphics_on_user_id">
+      <object-id>16551</object-id>
+      <columns>user_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="73" parent="28" name="graphics_pkey">
+      <object-id>16550</object-id>
+      <columns>id</columns>
+      <underlying-index>graphics_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="74" parent="29" name="id">
+      <state-number>828</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;group_permissions_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="75" parent="29" name="url_path">
+      <state-number>828</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="76" parent="29" name="permite">
+      <state-number>828</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="77" parent="29" name="group_id">
+      <state-number>828</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="78" parent="29" name="created_at">
+      <state-number>828</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="79" parent="29" name="updated_at">
+      <state-number>828</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <index id="80" parent="29" name="group_permissions_pkey">
+      <object-id>16572</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="81" parent="29" name="index_group_permissions_on_group_id">
+      <object-id>16574</object-id>
+      <columns>group_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="82" parent="29" name="group_permissions_pkey">
+      <object-id>16573</object-id>
+      <columns>id</columns>
+      <underlying-index>group_permissions_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="83" parent="30" name="id">
+      <state-number>827</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;groups_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="84" parent="30" name="name">
+      <state-number>827</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="85" parent="30" name="created_at">
+      <state-number>827</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="86" parent="30" name="updated_at">
+      <state-number>827</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="87" parent="30" name="group_type">
+      <state-number>2121</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="88" parent="30" name="remove">
+      <state-number>2125</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="89" parent="30" name="create">
+      <state-number>2125</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <index id="90" parent="30" name="groups_pkey">
+      <object-id>16561</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="91" parent="30" name="groups_pkey">
+      <object-id>16562</object-id>
+      <columns>id</columns>
+      <underlying-index>groups_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="92" parent="31" name="id">
+      <state-number>1050</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;loggs_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="93" parent="31" name="username">
+      <state-number>1050</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="94" parent="31" name="text_event">
+      <state-number>1050</state-number>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="95" parent="31" name="created_at">
+      <state-number>1050</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="96" parent="31" name="updated_at">
+      <state-number>1050</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <index id="97" parent="31" name="loggs_pkey">
+      <object-id>16598</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="98" parent="31" name="loggs_pkey">
+      <object-id>16599</object-id>
+      <columns>id</columns>
+      <underlying-index>loggs_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="99" parent="32" name="id">
+      <state-number>1970</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;mail_delivers_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="100" parent="32" name="name">
+      <state-number>1970</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="101" parent="32" name="email">
+      <state-number>1970</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="102" parent="32" name="user_id">
+      <state-number>1970</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="103" parent="32" name="created_at">
+      <state-number>1970</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="104" parent="32" name="updated_at">
+      <state-number>1970</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <index id="105" parent="32" name="mail_delivers_pkey">
+      <object-id>16645</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="106" parent="32" name="index_mail_delivers_on_user_id">
+      <object-id>16647</object-id>
+      <columns>user_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="107" parent="32" name="mail_delivers_pkey">
+      <object-id>16646</object-id>
+      <columns>id</columns>
+      <underlying-index>mail_delivers_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="108" parent="33" name="id">
       <state-number>648</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
       <default-expression>nextval(&apos;region_permissions_id_seq&apos;::regclass)</default-expression>
     </column>
-    <column id="27" parent="15" name="status">
+    <column id="109" parent="33" name="status">
       <state-number>648</state-number>
       <data-type>varchar|0</data-type>
     </column>
-    <column id="28" parent="15" name="region_id">
+    <column id="110" parent="33" name="region_id">
       <state-number>648</state-number>
       <data-type>integer|0</data-type>
     </column>
-    <column id="29" parent="15" name="created_at">
+    <column id="111" parent="33" name="created_at">
       <state-number>648</state-number>
       <mandatory>1</mandatory>
       <data-type>timestamp|0</data-type>
     </column>
-    <column id="30" parent="15" name="updated_at">
+    <column id="112" parent="33" name="updated_at">
       <state-number>648</state-number>
       <mandatory>1</mandatory>
       <data-type>timestamp|0</data-type>
     </column>
-    <index id="31" parent="15" name="region_permissions_pkey">
+    <column id="113" parent="33" name="group_id">
+      <state-number>923</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <index id="114" parent="33" name="region_permissions_pkey">
       <object-id>16483</object-id>
       <columns>id</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <index id="32" parent="15" name="index_region_permissions_on_region_id">
+    <index id="115" parent="33" name="index_region_permissions_on_region_id">
       <object-id>16485</object-id>
       <columns>region_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="33" parent="15" name="region_permissions_pkey">
+    <index id="116" parent="33" name="index_region_permissions_on_group_id">
+      <object-id>16577</object-id>
+      <columns>group_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="117" parent="33" name="region_permissions_pkey">
       <object-id>16484</object-id>
       <columns>id</columns>
       <underlying-index>region_permissions_pkey</underlying-index>
       <primary>1</primary>
     </key>
-    <column id="34" parent="16" name="id">
+    <column id="118" parent="34" name="id">
       <state-number>647</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
       <default-expression>nextval(&apos;regions_id_seq&apos;::regclass)</default-expression>
     </column>
-    <column id="35" parent="16" name="name">
+    <column id="119" parent="34" name="name">
       <state-number>647</state-number>
       <data-type>varchar|0</data-type>
     </column>
-    <column id="36" parent="16" name="created_at">
+    <column id="120" parent="34" name="created_at">
       <state-number>647</state-number>
       <mandatory>1</mandatory>
       <data-type>timestamp|0</data-type>
     </column>
-    <column id="37" parent="16" name="updated_at">
+    <column id="121" parent="34" name="updated_at">
       <state-number>647</state-number>
       <mandatory>1</mandatory>
       <data-type>timestamp|0</data-type>
     </column>
-    <index id="38" parent="16" name="regions_pkey">
+    <index id="122" parent="34" name="regions_pkey">
       <object-id>16472</object-id>
       <columns>id</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="39" parent="16" name="regions_pkey">
+    <key id="123" parent="34" name="regions_pkey">
       <object-id>16473</object-id>
       <columns>id</columns>
       <underlying-index>regions_pkey</underlying-index>
       <primary>1</primary>
     </key>
-    <column id="40" parent="17" name="version">
+    <column id="124" parent="35" name="id">
+      <state-number>1053</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;rings_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="125" parent="35" name="pool">
+      <state-number>1053</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="126" parent="35" name="vlan">
+      <state-number>1053</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="127" parent="35" name="aggraddress">
+      <state-number>1053</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="128" parent="35" name="build">
+      <state-number>1053</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="129" parent="35" name="created_at">
+      <state-number>1053</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="130" parent="35" name="updated_at">
+      <state-number>1053</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <index id="131" parent="35" name="rings_pkey">
+      <object-id>16609</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="132" parent="35" name="rings_pkey">
+      <object-id>16610</object-id>
+      <columns>id</columns>
+      <underlying-index>rings_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="133" parent="36" name="version">
       <state-number>645</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar|0</data-type>
     </column>
-    <index id="41" parent="17" name="schema_migrations_pkey">
+    <index id="134" parent="36" name="schema_migrations_pkey">
       <object-id>16453</object-id>
       <columns>version</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="42" parent="17" name="schema_migrations_pkey">
+    <key id="135" parent="36" name="schema_migrations_pkey">
       <object-id>16454</object-id>
       <columns>version</columns>
       <underlying-index>schema_migrations_pkey</underlying-index>
       <primary>1</primary>
     </key>
-    <column id="43" parent="18" name="id">
+    <column id="136" parent="37" name="id">
       <state-number>654</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
       <default-expression>nextval(&apos;switches_id_seq&apos;::regclass)</default-expression>
     </column>
-    <column id="44" parent="18" name="ip">
+    <column id="137" parent="37" name="ip">
       <state-number>654</state-number>
       <data-type>varchar|0</data-type>
     </column>
-    <column id="45" parent="18" name="region_id">
+    <column id="138" parent="37" name="region_id">
       <state-number>654</state-number>
       <data-type>integer|0</data-type>
     </column>
-    <column id="46" parent="18" name="status">
+    <column id="139" parent="37" name="status">
       <state-number>654</state-number>
       <data-type>varchar|0</data-type>
     </column>
-    <column id="47" parent="18" name="created_at">
+    <column id="140" parent="37" name="created_at">
       <state-number>654</state-number>
       <mandatory>1</mandatory>
       <data-type>timestamp|0</data-type>
     </column>
-    <column id="48" parent="18" name="updated_at">
+    <column id="141" parent="37" name="updated_at">
       <state-number>654</state-number>
       <mandatory>1</mandatory>
       <data-type>timestamp|0</data-type>
     </column>
-    <index id="49" parent="18" name="switches_pkey">
+    <column id="142" parent="37" name="stolen_date">
+      <state-number>768</state-number>
+      <data-type>date|0</data-type>
+    </column>
+    <index id="143" parent="37" name="switches_pkey">
       <object-id>16495</object-id>
       <columns>id</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <index id="50" parent="18" name="index_switches_on_region_id">
+    <index id="144" parent="37" name="index_switches_on_region_id">
       <object-id>16497</object-id>
       <columns>region_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="51" parent="18" name="switches_pkey">
+    <key id="145" parent="37" name="switches_pkey">
       <object-id>16496</object-id>
       <columns>id</columns>
       <underlying-index>switches_pkey</underlying-index>
       <primary>1</primary>
     </key>
-    <column id="52" parent="19" name="id">
+    <column id="146" parent="38" name="id">
+      <state-number>1667</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;topologies_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="147" parent="38" name="ip">
+      <state-number>1667</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="148" parent="38" name="port25">
+      <state-number>1667</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="149" parent="38" name="port26">
+      <state-number>1667</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="150" parent="38" name="port27">
+      <state-number>1667</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="151" parent="38" name="port28">
+      <state-number>1667</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="152" parent="38" name="max_value">
+      <state-number>1667</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="153" parent="38" name="ring_id">
+      <state-number>1667</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="154" parent="38" name="created_at">
+      <state-number>1667</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="155" parent="38" name="updated_at">
+      <state-number>1667</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <index id="156" parent="38" name="topologies_pkey">
+      <object-id>16633</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="157" parent="38" name="index_topologies_on_ring_id">
+      <object-id>16635</object-id>
+      <columns>ring_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="158" parent="38" name="topologies_pkey">
+      <object-id>16634</object-id>
+      <columns>id</columns>
+      <underlying-index>topologies_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="159" parent="39" name="id">
+      <state-number>1010</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;transport_events_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="160" parent="39" name="transportname">
+      <state-number>1010</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="161" parent="39" name="event_start">
+      <state-number>1010</state-number>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="162" parent="39" name="event_end">
+      <state-number>1010</state-number>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="163" parent="39" name="text">
+      <state-number>1010</state-number>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="164" parent="39" name="created_at">
+      <state-number>1010</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="165" parent="39" name="updated_at">
+      <state-number>1010</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="166" parent="39" name="start_time">
+      <state-number>1011</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="167" parent="39" name="end_time">
+      <state-number>1011</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <index id="168" parent="39" name="transport_events_pkey">
+      <object-id>16587</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="169" parent="39" name="transport_events_pkey">
+      <object-id>16588</object-id>
+      <columns>id</columns>
+      <underlying-index>transport_events_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="170" parent="40" name="id">
+      <state-number>669</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;user_permissions_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="171" parent="40" name="read">
+      <state-number>669</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="172" parent="40" name="write">
+      <state-number>669</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="173" parent="40" name="remove">
+      <state-number>669</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="174" parent="40" name="created_at">
+      <state-number>669</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="175" parent="40" name="updated_at">
+      <state-number>669</state-number>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="176" parent="40" name="user_id">
+      <state-number>672</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="177" parent="40" name="region_id">
+      <state-number>672</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <index id="178" parent="40" name="user_permissions_pkey">
+      <object-id>16521</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="179" parent="40" name="index_user_permissions_on_user_id">
+      <object-id>16525</object-id>
+      <columns>user_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="180" parent="40" name="index_user_permissions_on_region_id">
+      <object-id>16526</object-id>
+      <columns>region_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="181" parent="40" name="user_permissions_pkey">
+      <object-id>16522</object-id>
+      <columns>id</columns>
+      <underlying-index>user_permissions_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="182" parent="41" name="id">
       <state-number>655</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
       <default-expression>nextval(&apos;users_id_seq&apos;::regclass)</default-expression>
     </column>
-    <column id="53" parent="19" name="name">
+    <column id="183" parent="41" name="name">
       <state-number>655</state-number>
       <data-type>varchar|0</data-type>
     </column>
-    <column id="54" parent="19" name="secondname">
+    <column id="184" parent="41" name="secondname">
       <state-number>655</state-number>
       <data-type>varchar|0</data-type>
     </column>
-    <column id="55" parent="19" name="phone">
+    <column id="185" parent="41" name="phone">
       <state-number>655</state-number>
       <data-type>varchar|0</data-type>
     </column>
-    <column id="56" parent="19" name="email">
-      <state-number>655</state-number>
-      <mandatory>1</mandatory>
-      <data-type>varchar|0</data-type>
-      <default-expression>&apos;&apos;::character varying</default-expression>
-    </column>
-    <column id="57" parent="19" name="encrypted_password">
+    <column id="186" parent="41" name="email">
       <state-number>655</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar|0</data-type>
       <default-expression>&apos;&apos;::character varying</default-expression>
     </column>
-    <column id="58" parent="19" name="region_id">
+    <column id="187" parent="41" name="encrypted_password">
+      <state-number>655</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar|0</data-type>
+      <default-expression>&apos;&apos;::character varying</default-expression>
+    </column>
+    <column id="188" parent="41" name="region_id">
       <state-number>655</state-number>
       <data-type>integer|0</data-type>
     </column>
-    <column id="59" parent="19" name="created_at">
+    <column id="189" parent="41" name="created_at">
       <state-number>655</state-number>
       <mandatory>1</mandatory>
       <data-type>timestamp|0</data-type>
     </column>
-    <column id="60" parent="19" name="updated_at">
+    <column id="190" parent="41" name="updated_at">
       <state-number>655</state-number>
       <mandatory>1</mandatory>
       <data-type>timestamp|0</data-type>
     </column>
-    <column id="61" parent="19" name="salt">
+    <column id="191" parent="41" name="salt">
       <state-number>656</state-number>
       <data-type>varchar|0</data-type>
     </column>
-    <column id="62" parent="19" name="passactive">
+    <column id="192" parent="41" name="passactive">
       <state-number>656</state-number>
       <data-type>varchar|0</data-type>
     </column>
-    <column id="63" parent="19" name="vacstart">
+    <column id="193" parent="41" name="vacstart">
       <state-number>656</state-number>
       <data-type>varchar|0</data-type>
     </column>
-    <column id="64" parent="19" name="vacend">
+    <column id="194" parent="41" name="vacend">
       <state-number>656</state-number>
       <data-type>varchar|0</data-type>
     </column>
-    <index id="65" parent="19" name="users_pkey">
+    <column id="195" parent="41" name="recover_url">
+      <state-number>1015</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <column id="196" parent="41" name="group_id">
+      <state-number>893</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="197" parent="41" name="token_date">
+      <state-number>1018</state-number>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="198" parent="41" name="fullname">
+      <state-number>1951</state-number>
+      <data-type>varchar|0</data-type>
+    </column>
+    <index id="199" parent="41" name="users_pkey">
       <object-id>16509</object-id>
       <columns>id</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <index id="66" parent="19" name="index_users_on_region_id">
+    <index id="200" parent="41" name="index_users_on_region_id">
       <object-id>16511</object-id>
       <columns>region_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="67" parent="19" name="users_pkey">
+    <index id="201" parent="41" name="index_users_on_group_id">
+      <object-id>16576</object-id>
+      <columns>group_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="202" parent="41" name="users_pkey">
       <object-id>16510</object-id>
       <columns>id</columns>
       <underlying-index>users_pkey</underlying-index>

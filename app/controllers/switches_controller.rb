@@ -41,12 +41,12 @@ class SwitchesController < ApplicationController
         token = api_connect.get_token
          arr = api_connect.install_aggr(token).reject {|fucking_city| fucking_city if fucking_city["city_name"] == "Севастополь" or fucking_city["city_name"] == "Симферополь"}
 
-               all_mounts = arr.reject {|not_add| not_add if not_add["needCheck"] == 0 and ping(not_add) == "0"}
-        new_inst = all_mounts.select {|el|  range === Date.parse(el["dCreate"]["date"])}.group_by { |k| k["city_name"] }
+               @all_mounts = arr.reject {|not_add| not_add if not_add["needCheck"] == 0 and AggrIgnore.all.map(&:aggr_ip).include? (not_add["ip"])}
+        new_inst = @all_mounts.select {|el|  range === Date.parse(el["dCreate"]["date"])}.group_by { |k| k["city_name"] }
         hash = new_inst.map {|k,v| {name: k, core: new_count(v, "core"), aggr: new_count(v, "aggregation")}}
 
-        all = all_mounts.group_by { |k| k["city_name"] }
-        total = all.map {|k,v| {name: k, new_core: 0, new_aggr: 0, all_core: total_count(all_mounts, k, "core"), all_aggr: total_count(all_mounts, k, "aggregation")}}
+        all = @all_mounts.group_by { |k| k["city_name"] }
+        total = all.map {|k,v| {name: k, new_core: 0, new_aggr: 0, all_core: total_count(@all_mounts, k, "core"), all_aggr: total_count(@all_mounts, k, "aggregation")}}
 
 
 
@@ -86,10 +86,22 @@ class SwitchesController < ApplicationController
 
   end
 
+  def synchronize
+    start_date = Date.parse("2014-01-01")
+    end_date = Date.parse("2017-03-11")
+    range = start_date..end_date
+    api_connect = ApiclientService.new
+    token = api_connect.get_token
+    arr = api_connect.install_aggr(token).reject {|fucking_city| fucking_city if fucking_city["city_name"] == "Севастополь" or fucking_city["city_name"] == "Симферополь"}
+    all_mounts = arr.reject {|not_add| not_add if ping(not_add)}
+  end
+
   private
   def ping(el)
-    #%x[ping #{el["ip"]} -c 1 | grep "received" | awk '{print ($4)}'].chomp
-    return "0"
+    result = %x[ping #{el["ip"]} -c 1 | grep "received" | awk '{print ($4)}'].chomp
+    if result == "0"
+      AggrIgnore.create(aggr_ip: el["ip"])
+    end
   end
 
   def new_count(obj, level)

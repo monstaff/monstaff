@@ -49,14 +49,14 @@
       <%= calendar do |date| %>
 
           <%= date.day %>
-          <% if @user.graphic.group_by(&:date)[date.to_s] %>
-              <% @user.graphic.group_by(&:date)[date.to_s].each do |mm, graph|%>
+          <% if @user.graphic.group_by(&:date)[date] %>
+              <% @user.graphic.group_by(&:date)[date].each do |mm, graph|%>
                   Рабочий день<br>
-<%# if current_user.group.name == "admin" %>
-                  <%= link_to_delete(graphic_path(mm.id), 'Удалить') %>
-<%#= link_to "Удалить", graphic_path(mm.id) , method: :delete, data: { confirm: 'Вы уверены?' } %>
+<% if current_user.group.remove == true %>
+                  <%#= link_to "удалить"(graphic_path(mm.id), 'Удалить') %>
+<%= link_to "Удалить", graphic_path(mm.id) , method: :delete, data: { confirm: 'Вы уверены?' } %>
 <%# else  %>
-<%# end %>
+<%   end %>
 
               <% end %>
           <% end %>

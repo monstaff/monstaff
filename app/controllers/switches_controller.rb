@@ -3,7 +3,7 @@ class SwitchesController < ApplicationController
 
 
   def index
-
+    if url_validate(self.class.to_s + action_name )
     @result = []
     api_connect = ApiclientService.new
     token = api_connect.get_token
@@ -26,10 +26,14 @@ class SwitchesController < ApplicationController
       end
 
     end
+    else
+      redirect_to root_path
+    end
   end
 
 
   def aggr_report
+    if url_validate(self.class.to_s + action_name )
     @aggr_report_list =[]
     if params[:from_date] == nil and params[:to_date] == nil
     else
@@ -52,15 +56,12 @@ class SwitchesController < ApplicationController
 
         @aggr_report_list = (total+hash).group_by{|h| h[:name]}.map{|k,v| v.reduce(:merge)}
 
-
-
-
-
-
-
         respond.js
       end
-      end
+    end
+  else
+    redirect_to root_path
+  end
   end
 
 

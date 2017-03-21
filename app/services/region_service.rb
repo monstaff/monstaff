@@ -9,7 +9,10 @@ attr_reader :region, :region_perm
 def perform
   @region = Region.create(region_params)
   if @region.persisted?
+     true
     #@region_perm = RegionPermission.
+  else
+    false
   end
 end
 

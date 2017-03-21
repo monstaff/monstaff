@@ -50,19 +50,31 @@ class UserController < ApplicationController
   end
 
   def new
+    if url_validate(self.class.to_s + action_name )
     @user = UserService.new(nil)
-    #@user = User.new
+    else
+      redirect_to root_path
+    end
   end
 
 
   def show
+
+    if user_can_see
       @user = userfind
+    else
+      render "error/user_error"
+      end
   end
 
 
   def edit
     if user_can_see
-    @user = userfind
+      if current_user.group.remove == true or  userfind.id == current_user.id or current_user.group.group_type == "admin"
+      @user = userfind
+      else
+        render 'error/user_error'
+        end
     else
       render 'error/user_error'
       end
@@ -70,8 +82,16 @@ class UserController < ApplicationController
 
 
   def index
+    if url_validate(self.class.to_s + action_name )
+    if current_user.group.group_type == "admin"
+      ids = Region.all.map(&:id)
+    else
     ids = current_user.group.RegionPermission.map(&:region_id) + [current_user.region_id]
+    end
     @user =  User.search(params[:search], ids)
+    else
+      redirect_to root_path
+    end
   end
 
 
@@ -123,11 +143,13 @@ class UserController < ApplicationController
 
 
   def destroy
+    if current_user.group.remove == true
     @user = userfind
     @user.destroy
     respond_to do |destr|
       destr.html
       destr.js
+    end
     end
   end
 private
@@ -135,6 +157,8 @@ private
   def user_can_see
   perm = [current_user.region_id] + current_user.group.RegionPermission.map(&:region_id)
     if perm.include? (userfind.region_id)
+      true
+    elsif current_user.group.group_type == "admin"
       true
     else
       false

@@ -13,7 +13,8 @@
               <div class="form-group">
                 <%= f.label :engname, 'Выберите инженера',  :class=> "col-md-4 control-label"%>
                 <div class="col-md-4">
-                  <%= f.select :engname, (User.all.collect{|u| [u.fullname, u.id]}),{ :prompt => "Выберите инженера"}, :class=>"form-control"%>
+                  <%#= f.select :engname, (User.all.collect{|u| [u.fullname, u.id]}),{ :prompt => "Выберите инженера"}, :class=>"form-control"%>
+                  <%= f.select :engname, (select_user_list),{ :prompt => "Выберите инженера"}, :class=>"form-control"%>
                 </div>
               </div>
 

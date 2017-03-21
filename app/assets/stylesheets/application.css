@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap-datepicker.min
  */
 .profile-img {
     padding-left: 30%;

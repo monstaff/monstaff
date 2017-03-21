@@ -5,29 +5,16 @@
     <button id="regions">Регионы</button>
     <button id="groups">Группы</button>
 
-
-
-
-
-
-
     <div id="region" style="display: none; padding-top: 5%;">
-
-
       <table class="table" style="width: 40%;">
         <thead>
         <tr>
           <th>Имя ЦОА/Региона/Отдела</th>
           <th> </th>
-
-
         </tr>
-
         </thead>
-        <tbody>
-        <div class="tasks" id="incomplete_tasks">
-          <%=  render @region %>
-        </div>
+          <tbody id="region_table">
+          <%=  render 'show_region' %>
         </tbody>
       </table>
 
@@ -42,10 +29,6 @@
             </div>
 
             <%= u.submit "Добавить", :class=>"btn btn-default"%>
-
-
-
-
         <% end %>
       </div>
     </div>
@@ -64,22 +47,8 @@
         </tr>
 
         </thead>
-        <tbody>
-        <tr>
-          <td>John</td>
-          <td>Doe</td>
-          <td>Doe</td>
-           </tr>
-        <tr>
-          <td>Mary</td>
-          <td>Moe</td>
-          <td>Doe</td>
-        </tr>
-        <tr>
-          <td>July</td>
-          <td>Dooley</td>
-          <td>Doe</td>
-        </tr>
+        <tbody id="group_table">
+        <%= render 'show_group'%>
         </tbody>
       </table>
 
@@ -91,16 +60,15 @@
           <div class="form-group">
           <%= g.label :group_type, 'супер группа' %>
           <%= g.check_box :group_type %>
+            <%= g.label :remove, 'удаление' %>
+            <%= g.check_box :remove %>
+            <%= g.label :create, 'создание ' %>
+            <%= g.check_box :create %>
           </div>
           <%= g.submit "Добавить", :class=>"btn btn-default"%>
       <% end %>
 
           </div>
-
-
-    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal2">...</button>
-
-
 
     <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">

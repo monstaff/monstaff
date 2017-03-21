@@ -2,13 +2,14 @@ class AdminpanelController < ApplicationController
 
   def index
    @group_all = Group.all
-    @region = Region.all
+   @region = Region.all
   end
 
 
   def group_create
  @group = Group.create(group_params)
  if @group.persisted?
+   @group_all = Group.all
    respond_to do |format|
      format.html
      format.js
@@ -18,9 +19,20 @@ class AdminpanelController < ApplicationController
 
 
   def group_update
+    group = Group.find(params[:id])
+    @group = group.update(group_params)
+    if @group
+      respond_to do |format|
+        format.js
+      end
+    end
   end
 
   def group_destroy
+    @group = Group.destroy(params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
 
 
@@ -48,8 +60,10 @@ arr = group.RegionPermission.map(&:region_id)
 
 
   def region_create
-  @service = RegionService.new(params)
-    if @service.perform
+    service = RegionService.new(params)
+
+    if service.perform
+      @region = Region.all
       respond_to do |format|
         format.html
         format.js
@@ -59,16 +73,19 @@ arr = group.RegionPermission.map(&:region_id)
 
 
   def region_update
-      array = []
-      params[:group_ids]
-      return array
+    region = Region.find(params[:id])
+    @region = region.update(region_params)
+    if @region
+      respond_to do |format|
+        format.js
+      end
+    end
   end
-
 
   def region_destroy
     @region = Region.destroy(params[:id])
     respond_to do |format|
-      format.html { redirect_to adminpanel_path }
+      #format.html
       format.js
     end
   end
@@ -109,8 +126,10 @@ arr = group.RegionPermission.map(&:region_id)
 
 
   def group_params
-    params.require(:group).permit(:name, :group_type)
+    params.require(:group).permit(:name, :group_type, :remove, :create)
   end
 
-
+  def region_params
+    params.require(:region).permit(:name)
+  end
 end

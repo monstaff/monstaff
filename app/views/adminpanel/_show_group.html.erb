@@ -1,0 +1,41 @@
+<% @group_all.each do |group| %>
+    <tr id="<%= group.id%>">
+      <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myupdatepost_<%= group.id %>">
+        <%= group.name %>
+      </button></td>
+      <td><%= link_to "(удалить)", group_destroy_path(group.id), method: :delete, data: { confirm: 'Вы уверены?' }, remote: true%></td>
+
+    </tr>
+
+    <!-- Modal - update posts -->
+    <%= form_for group, :url=> group_path(id: group.id), :method => :patch,remote: true do |f| %>
+        <div class="modal fade" id="myupdatepost_<%= group.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit</h4>
+              </div>
+              <div class="modal-body">
+                <%= f.text_field :name%>
+                <div class="form-group">
+                  <%= f.label :group_type, 'супер группа' %>
+                  <%= f.check_box :group_type, checked: group.group_type == 'admin' %>
+                  <%= f.label :remove, 'удаление' %>
+                  <%= f.check_box :remove %>
+                  <%= f.label :create, 'создание ' %>
+                  <%= f.check_box :create %>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="myupdatebutton_<%= group.id %>" class="btn btn-default" data-dismiss="modal">Close</button>
+                <%= submit_tag "Update", class: "btn btn-primary" %>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+    <!-- Modal -->
+
+<% end %>

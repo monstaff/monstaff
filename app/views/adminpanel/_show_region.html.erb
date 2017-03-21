@@ -1,0 +1,33 @@
+<% @region.each do |region| %>
+
+    <!-- Modal - update posts -->
+    <%= form_for region, :url=> region_path(id: region.id), :method => :patch,remote: true do |f| %>
+        <div class="modal fade" id="myupdatepost_<%= region.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit</h4>
+              </div>
+              <div class="modal-body">
+                <%= f.text_field :name%>
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="myupdatebutton_<%= region.id %>" class="btn btn-default" data-dismiss="modal">Close</button>
+                <%= submit_tag "Update", class: "btn btn-primary" %>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+    <!-- Modal -->
+
+
+    <tr id="<%= region.id%>">
+      <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myupdatepost_<%= region.id %>">
+        <%= region.name %>
+      </button></td>
+      <td><%= link_to "(удалить)", region_destroy_path(region.id), method: :delete, data: { confirm: 'Вы действительно хотите удалить регион? Учтите что все графики и пользователи так же будут удалены.' }, remote: true%></td>
+
+    </tr>
+<% end %>

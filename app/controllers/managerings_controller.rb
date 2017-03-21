@@ -102,7 +102,7 @@ class ManageringsController < ApplicationController
 
 
   def index
-
+    if url_validate(self.class.to_s + action_name )
       if params[:mngsw] != nil
         @some = params[:mngsw]
         ip = @some[:old_ip]
@@ -126,7 +126,9 @@ class ManageringsController < ApplicationController
         end
 
       end
-
+  else
+    redirect_to root_path
+  end
 
   end
 end

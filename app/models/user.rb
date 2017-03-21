@@ -60,7 +60,7 @@ class User < ApplicationRecord
     if search
       User.where(:region => (ids))
           .includes(:region)
-          .where('users.secondname LIKE :search OR users.name LIKE :search OR regions.name LIKE :search OR users.email LIKE :search',search: "%#{search}%").references(:region)
+          .where('users.fullname LIKE :search  OR regions.name LIKE :search OR users.email LIKE :search',search: "%#{search}%").references(:region)
     else
       where(region: ids)
     end

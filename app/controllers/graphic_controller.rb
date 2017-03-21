@@ -1,5 +1,26 @@
 class GraphicController < ApplicationController
 
+  def xlss
+
+      if params[:from_date] == nil and params[:to_date] == nil
+        #redirect_to user_index_path
+      else
+        @from = params[:from_date]
+        @to = params[:to_date]
+      end
+      weekend = User.all.includes(:graphic).where(:graphics => {:date => @from..@to})
+      @weekend = []
+      weekend.each do |col|
+
+        col.graphic.each do |col2|
+          @weekend << {:name => col.fullname, :phone => col.phone, :date => col2.date, :region => col.region.name}
+        end
+      end
+      @weekend = @weekend.sort_by {|date| date[:date]}.group_by {|date| date[:date]}
+
+  end
+
+
   def index
     if url_validate(self.class.to_s + action_name )
     @r = self.class.to_s
@@ -19,7 +40,7 @@ class GraphicController < ApplicationController
     end
 
     else
-      redirect_to sessions_new_path
+      redirect_to root_path
     end
     end
 
@@ -40,7 +61,11 @@ class GraphicController < ApplicationController
   end
 
   def new
+    if url_validate(self.class.to_s + action_name )
 @graphic = Graphic.new
+    else
+      redirect_to root_path
+    end
   end
 
 
@@ -52,7 +77,12 @@ class GraphicController < ApplicationController
       render 'new'
     end
     end
-
+  def destroy
+    @graph = Graphic.find(params[:id])
+    @graph.destroy
+#redirect_to user_index_path
+    redirect_to request.referrer
+  end
 
     private
 

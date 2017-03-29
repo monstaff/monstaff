@@ -133,6 +133,7 @@ class TopologyService
   def make_topology(rings_list, arp_info)
     @topology_info = []
     @status = ""
+    begin
     rings_list.each do |ring|
       @hosts = fping(ring.pool)
     @root_mac = arp_info.flatten.find {|sw| sw[:ip] == "#{ring.pool}.1"}[:mac]
@@ -431,6 +432,9 @@ class TopologyService
 
     end
     return @top
+    rescue
+      puts "empty enter params"
+    end
   end
 
 

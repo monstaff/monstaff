@@ -550,8 +550,81 @@ class TopologyService
     mac_table = []
     vers = %x[snmpwalk -c 74FRfR7ewJar -v 1  "#{ip}" iso.3.6.1.2.1.1.1 | awk '{print ($8)}'].gsub(/,\n/, "")
 
-    if model.match(/ZTE/)
 
+
+
+
+    if model == "FoxGate"
+    localhost = Net::Telnet::new("Host" => "#{ip}",
+
+                                 "Timeout" => 30,
+                                 "Telnetmode" => false,
+                                 "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|....press|admin#|Password:|PassWord:|password:|This|more|press)/)
+    localhost.cmd("fastman") { |c| print c }
+    localhost.cmd("liveforreal") { |c| print c }
+    mac_table << ip
+    mac_table << localhost.cmd("sh mac-address-table vlan #{vlan.chomp}") { |c| print c }
+    mac_table << localhost.cmd(" ") { |c| print c }
+    mac_table << localhost.cmd(" ") { |c| print c }
+    mac_table << localhost.cmd(" ") { |c| print c }
+    localhost.close
+
+    elsif /Layer2+|ECS3510-28T/.match (model)
+      localhost = Net::Telnet::new("Host" => "#{ip}",
+
+                                   "Timeout" => 30,
+                                   #{}"Telnetmode" => false,
+                                   "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|admin#|Password:|PassWord:|password:|This|more|press)/)
+      localhost.cmd("fastman") { |c| print c }
+      localhost.cmd("liveforreal") { |c| print c }
+      mac_table << ip
+      mac_table << localhost.cmd("sh mac-address-table vlan #{vlan.chomp}") { |c| print c }
+      4.times do
+#while localhost.waitfor(/More:/) do
+        mac_table << localhost.cmd(" ") { |c| print c }
+
+      end
+      localhost.close
+
+
+    elsif /BDCOM/.match(model)
+      localhost = Net::Telnet::new("Host" => "#{ip}",
+
+                                   "Timeout" => 30,
+                                   #                                       "Telnetmode" => false,
+                                   "Prompt" => /(" "|'Mac Address Table'|User Name:|Username:|UserName:|>|#|----|password:|admin#|Switch#|Password:|PassWord:|password:|This|more|press)/)
+
+
+      localhost.cmd("duty") { |c| print c }
+
+      localhost.cmd("support") { |c| print c }
+
+      localhost.cmd("ena") { |c| print c }
+      localhost.cmd("bdcom") { |c| print c }
+      mac_table << ip
+      mac_table << localhost.cmd("sh mac address-table dynamic vlan #{vlan.chomp}") { |c| print c }
+      localhost.close
+
+
+    elsif /ROS/.match(model)
+      localhost = Net::Telnet::new("Host" => "#{ip}",
+
+                                   "Timeout" => 30,
+                                   "Telnetmode" => false,
+                                   "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|admin#|Password:|PassWord:|password:|This|more|press)/)
+      localhost.cmd("fastman") { |c| print c }
+      sleep(1)
+      localhost.cmd("liveforreal") { |c| print c }
+      sleep(2)
+      mac_table << ip
+
+      localhost.cmd("en") { |c| print c }
+      localhost.cmd("zxr10") { |c| print c }
+      mac_table << localhost.cmd("sh mac-address-table l2-address vlan #{vlan.chomp}") { |c| print c }
+      mac_table << localhost.cmd(" ") { |c| print c }
+      localhost.close
+
+    elsif model.match(/ZTE/)
       localhost = Net::Telnet::new("Host" => "#{ip}",
 
                                    "Timeout" => 30,

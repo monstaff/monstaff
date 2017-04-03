@@ -133,12 +133,11 @@ class TopologyService
           ring.topology_info.update(notification: "error on telnet to TP")
         end
 
-<<<<<<< HEAD
-=======
+
     return @agrr_result
     rescue
       puts "error on telnet to TP"
->>>>>>> 5a290dd9c0217dff47bca057d99a0c6d144ec31d
+
       end
       puts "error on telnet to TP"
     end
@@ -160,14 +159,14 @@ class TopologyService
     @topology_info = []
     @status = ""
     begin
-<<<<<<< HEAD
+
       rings_list.each do |ring|
         @hosts = fping(ring.pool)
         @root_mac = arp_info.flatten.find {|sw| sw[:ip] == "#{ring.pool}.1"}[:mac]
         @error_msg = []
         @error_sw = []
         @mac_cache = []
-=======
+
     rings_list.each do |ring|
       @hosts = fping(ring.pool)
     @root_mac = arp_info.flatten.find {|sw| sw[:ip] == "#{ring.pool}.1"}[:mac]
@@ -484,13 +483,12 @@ class TopologyService
       end
       puts "empty enter params"
     end
-<<<<<<< HEAD
-=======
+
     return @top
     rescue
       puts "empty enter params"
     end
->>>>>>> 5a290dd9c0217dff47bca057d99a0c6d144ec31d
+
   end
 
 

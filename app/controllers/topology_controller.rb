@@ -127,12 +127,12 @@ def show
 end
 
   def menu
-    if url_validate(self.class.to_s + action_name )
+    #if url_validate(self.class.to_s + action_name )
     @rings = Ring.all.group_by(&:aggraddress)
     @ring_list = Ring.all
-    else
-      redirect_to root_path
-    end
+    #else
+     # redirect_to root_path
+    #end
   end
 
   def new

@@ -53,13 +53,19 @@ arr = group.RegionPermission.map(&:region_id)
     if val_add.empty?
 
     else
+<<<<<<< HEAD
       # region_permission = Hash[ *val_add.collect { |val| ["region_id", val] }.flatten]
+=======
+>>>>>>> 5a290dd9c0217dff47bca057d99a0c6d144ec31d
       region_permission = []
       val_add.each do |val|
         region_permission << {"region_id" => val}
       end
+<<<<<<< HEAD
 
       puts region_permission
+=======
+>>>>>>> 5a290dd9c0217dff47bca057d99a0c6d144ec31d
       group.RegionPermission.create(region_permission)
     end
   end

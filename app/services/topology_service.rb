@@ -7,12 +7,21 @@ class TopologyService
 
 
     begin
+
       model = %x[snmpwalk -c kmWAa3GGKz -v 1  "#{ip.chomp}" iso.3.6.1.2.1.1.1 | awk '{print ($4)}' | grep -E "Cisco|ZXR10|Huawei"]
       model = model.chomp
 
       case model
         when "Cisco"
           begin
+
+    model = %x[snmpwalk -c kmWAa3GGKz -v 1  "#{ip.chomp}" iso.3.6.1.2.1.1.1 | awk '{print ($4)}' | grep -E "Cisco|ZXR10|Huawei"]
+    model = model.chomp
+
+    case model
+      when "Cisco"
+        begin
+
 
             localhost = Net::Telnet::new("Host" => "#{ip.chomp}",
 
@@ -124,6 +133,12 @@ class TopologyService
           ring.topology_info.update(notification: "error on telnet to TP")
         end
 
+<<<<<<< HEAD
+=======
+    return @agrr_result
+    rescue
+      puts "error on telnet to TP"
+>>>>>>> 5a290dd9c0217dff47bca057d99a0c6d144ec31d
       end
       puts "error on telnet to TP"
     end
@@ -145,12 +160,21 @@ class TopologyService
     @topology_info = []
     @status = ""
     begin
+<<<<<<< HEAD
       rings_list.each do |ring|
         @hosts = fping(ring.pool)
         @root_mac = arp_info.flatten.find {|sw| sw[:ip] == "#{ring.pool}.1"}[:mac]
         @error_msg = []
         @error_sw = []
         @mac_cache = []
+=======
+    rings_list.each do |ring|
+      @hosts = fping(ring.pool)
+    @root_mac = arp_info.flatten.find {|sw| sw[:ip] == "#{ring.pool}.1"}[:mac]
+      @error_msg = []
+     @error_sw = []
+     @mac_cache = []
+
 # ###start switch telnet thread
         @telnet_result = []
 #     puts "alert #{@hosts}"
@@ -460,6 +484,13 @@ class TopologyService
       end
       puts "empty enter params"
     end
+<<<<<<< HEAD
+=======
+    return @top
+    rescue
+      puts "empty enter params"
+    end
+>>>>>>> 5a290dd9c0217dff47bca057d99a0c6d144ec31d
   end
 
 

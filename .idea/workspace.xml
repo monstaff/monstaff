@@ -2,54 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3163ebe1-71fd-4a75-bd35-ba7b5bcd295e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170105095210_create_regions.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170105135446_create_switches.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170106151300_create_users.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170107092521_add_to_users_column.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170110093321_create_user_permissions.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170110095759_change_userpermissiion.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170110100428_delete_column_userpermission.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170118132517_add_switches_column_stolendate.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170118132712_remove_stolen_from_users.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170125095644_add_user_id_to_graphic.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170125120113_create_graphics.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170131134358_add_group_id_to_users.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170131135826_add_group_id_to_userss.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170222121601_create_transport_events.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170222123457_add_column_transport.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170223082847_change_token_date_user.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170223121850_create_loggs.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170306095809_fullname_tousers.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170309083829_create_mail_delivers.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170310094857_mod_group.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20170310095421_shit_shit.rb" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.rakeTasks" afterPath="$PROJECT_DIR$/.idea/.rakeTasks" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/monstaff.iml" afterPath="$PROJECT_DIR$/.idea/monstaff.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/adminpanel_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/adminpanel_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/managerings_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/managerings_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/ring.rb" afterPath="$PROJECT_DIR$/app/models/ring.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/topology_service.rb" afterPath="$PROJECT_DIR$/app/services/topology_service.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/graphic/_index.html.erb" afterPath="$PROJECT_DIR$/app/views/graphic/_index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/graphic/month.html.erb" afterPath="$PROJECT_DIR$/app/views/graphic/month.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/topology/menu.html.erb" afterPath="$PROJECT_DIR$/app/views/topology/menu.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user/show.html.erb" afterPath="$PROJECT_DIR$/app/views/user/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.yml" afterPath="$PROJECT_DIR$/config/database.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170105102002_create_region_permissions.rb" afterPath="$PROJECT_DIR$/db/migrate/20170105102002_create_region_permissions.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170126102022_create_groups.rb" afterPath="$PROJECT_DIR$/db/migrate/20170126102022_create_groups.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170126102033_create_group_permissions.rb" afterPath="$PROJECT_DIR$/db/migrate/20170126102033_create_group_permissions.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170202134338_add_reference_user_to_region_perm.rb" afterPath="$PROJECT_DIR$/db/migrate/20170202134338_add_reference_user_to_region_perm.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170222135247_forgot_pass_add_to_users.rb" afterPath="$PROJECT_DIR$/db/migrate/20170222135247_forgot_pass_add_to_users.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170223083604_add_token_date_user.rb" afterPath="$PROJECT_DIR$/db/migrate/20170223083604_add_token_date_user.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170223131647_create_rings.rb" afterPath="$PROJECT_DIR$/db/migrate/20170223131647_create_rings.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170224095602_create_arp_infos.rb" afterPath="$PROJECT_DIR$/db/migrate/20170224095602_create_arp_infos.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170227131658_create_topologies.rb" afterPath="$PROJECT_DIR$/db/migrate/20170227131658_create_topologies.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170310113454_group_add_remove.rb" afterPath="$PROJECT_DIR$/db/migrate/20170310113454_group_add_remove.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170310120500_create_aggr_ignores.rb" afterPath="$PROJECT_DIR$/db/migrate/20170310120500_create_aggr_ignores.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/user/edit.html.erb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -93,20 +49,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="topology_service.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="topology_service.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/services/topology_service.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6840">
-              <caret line="456" column="69" selection-start-line="456" selection-start-column="69" selection-end-line="456" selection-end-column="69" />
+            <state relative-caret-position="451">
+              <caret line="663" column="0" selection-start-line="663" selection-start-column="0" selection-end-line="663" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="telnet.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="telnet.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/telnet.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2759">
+            <state relative-caret-position="2939">
               <caret line="211" column="14" selection-start-line="211" selection-start-column="14" selection-end-line="211" selection-end-column="91" />
               <folding />
             </state>
@@ -200,8 +156,8 @@
         <option value="$PROJECT_DIR$/db/migrate/20170330071953_create_topology_infos.rb" />
         <option value="$PROJECT_DIR$/app/models/topology_info.rb" />
         <option value="$PROJECT_DIR$/app/models/ring.rb" />
-        <option value="$PROJECT_DIR$/app/services/topology_service.rb" />
         <option value="$PROJECT_DIR$/app/views/topology/menu.html.erb" />
+        <option value="$PROJECT_DIR$/app/services/topology_service.rb" />
       </list>
     </option>
   </component>
@@ -545,24 +501,24 @@
       <workItem from="1489995345855" duration="27325000" />
       <workItem from="1490098296073" duration="12507000" />
       <workItem from="1490768862111" duration="7177000" />
-      <workItem from="1490857771588" duration="9793000" />
+      <workItem from="1490857771588" duration="10241000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="585982000" />
+    <option name="totallyTimeSpent" value="586430000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1900" height="1053" extended-state="1" />
+    <frame x="0" y="0" width="1900" height="1053" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21359223" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.4978425" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37931034" sideWeight="0.15048544" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31138977" sideWeight="0.15048544" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27609682" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37931034" sideWeight="0.84951454" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31138977" sideWeight="0.84951454" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291536" sideWeight="0.48274" order="8" side_tool="false" content_ui="tabs" />
@@ -943,18 +899,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/services/topology_service.rb">
+    <entry file="file://$PROJECT_DIR$/app/models/telnet.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6840">
-          <caret line="456" column="69" selection-start-line="456" selection-start-column="69" selection-end-line="456" selection-end-column="69" />
+        <state relative-caret-position="2939">
+          <caret line="211" column="14" selection-start-line="211" selection-start-column="14" selection-end-line="211" selection-end-column="91" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/telnet.rb">
+    <entry file="file://$PROJECT_DIR$/app/services/topology_service.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2759">
-          <caret line="211" column="14" selection-start-line="211" selection-start-column="14" selection-end-line="211" selection-end-column="91" />
+        <state relative-caret-position="451">
+          <caret line="663" column="0" selection-start-line="663" selection-start-column="0" selection-end-line="663" selection-end-column="0" />
           <folding />
         </state>
       </provider>

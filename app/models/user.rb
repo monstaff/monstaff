@@ -8,8 +8,8 @@ class User < ApplicationRecord
   has_many :graphic, :dependent => :destroy
   attr_accessor :password, :password_confirmation, :reset_pass, :name, :secondname,:mail_recive
   before_update :check_what_need_to_reset, :mail_recent
-  before_create :user_default_option
-  before_save :createfullname
+  before_create :user_default_option, :createfullname
+  #before_save :createfullname
   #after_initialize :set_default_values
   validates :name, :presence => { :message => "Поле имя не может быть пустым"}, :on => :create
   validates :secondname, :presence => { :message => "Поле имя не может быть пустым"}, :on => :create
@@ -114,7 +114,7 @@ class User < ApplicationRecord
   def createfullname
     if name.present? and secondname.present?
       self.fullname = secondname + " " + name
-      self.save
+      #self.save
     end
   end
 end

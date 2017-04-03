@@ -143,7 +143,7 @@ class UserController < ApplicationController
 
 
   def destroy
-    if current_user.group.remove == true
+    if current_user.group.remove == "1"
     @user = userfind
     @user.destroy
     respond_to do |destr|

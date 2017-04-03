@@ -41,7 +41,7 @@
                       <% @graphics_by_date[date.to_s].each do |article| %>
                           <div id="workday"><li><%= link_to article.user.fullname,
                                                             user_path(User.select("id").where(id: article.user_id).map(&:id)) %>
-                            <%= link_to 'x', graphic_index_path(article) ,
+                            <%= link_to 'x', graphic_path(article) ,
                                         method: :delete,
                                         data: { confirm: 'Are you sure?' } %><br>
                             <span style="font-size: 7pt; padding-left: 25%;">(<%= article.worktime%>)</span>

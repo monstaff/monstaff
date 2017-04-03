@@ -70,11 +70,11 @@ class UserController < ApplicationController
 
   def edit
     if user_can_see
-      if current_user.group.remove == true or  userfind.id == current_user.id or current_user.group.group_type == "admin"
+      #if current_user.group.remove == true or  userfind.id == current_user.id or current_user.group.group_type == "admin"
       @user = userfind
-      else
-        render 'error/user_error'
-        end
+      #else
+        #render 'error/user_error'
+        #end
     else
       render 'error/user_error'
       end

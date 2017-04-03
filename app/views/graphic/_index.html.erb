@@ -23,7 +23,7 @@
 
 
 
-<% @hash.each do |reg, a| %>
+<% @hash.sort_by { |k,v| k.name }.each do |reg, a| %>
 
 
     <h3 style="width: 100%; text-align: center;"><%= reg.name %>:</h3>

@@ -114,7 +114,9 @@
         </td>
         <td class="status">
           <%= image_tag('loader.gif', :size => "30x30", :class => 'loading loader')  %>
-          <%= image_tag('Check.png', :size => "30x30", :class => 'loading succes') %>
+          <%= image_tag('Check.png', :size => "30x30", :class => 'loading succes') %> |
+         last log: <%= pool.topology_info.notification unless pool.topology_info.nil?%>
+
         </td>
         </tr>
     <% end %>

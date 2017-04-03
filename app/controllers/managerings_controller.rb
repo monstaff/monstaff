@@ -28,7 +28,11 @@ class ManageringsController < ApplicationController
         contents.gsub!(/#{switch[:ip]}/, switch[:newip])
         contents.gsub!(/#{oldgw}/, newgw)
         contents.gsub!(/System vlan #{oldvlan}/, newvlan)
+        if /Fast/.match(switch[:vers])
         contents.gsub!(/#{radiuskey}/, switch[:radius])
+        else
+          contents.gsub!(/#{radiuskey}/, '"#{switch[:radius]}"')
+          end
         File.open(full_path_to_write, "w+") { |f| f.write(contents) }
       }
 

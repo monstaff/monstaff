@@ -47,12 +47,19 @@ class AdminpanelController < ApplicationController
 group = Group.find(params[:id])
 arr = group.RegionPermission.map(&:region_id)
     val_add = params[:region_ids] - arr
+
     val_del = Region.all.map(&:id) - params[:region_ids]
     group.RegionPermission.where(region_id: val_del).destroy_all
     if val_add.empty?
 
     else
-      region_permission = Hash[ *val_add.collect { |val| ["region_id", val] }.flatten]
+      # region_permission = Hash[ *val_add.collect { |val| ["region_id", val] }.flatten]
+      region_permission = []
+      val_add.each do |val|
+        region_permission << {"region_id" => val}
+      end
+
+      puts region_permission
       group.RegionPermission.create(region_permission)
     end
   end

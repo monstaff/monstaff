@@ -36,9 +36,9 @@
 <%#= date.to_s %>
                   <%= link_to date.day, graphic_index_path({:date => date}) %>
 
-                  <% if @graphics_by_date[date] %>
+                  <% if @graphics_by_date[date.to_s] %>
 
-                      <% @graphics_by_date[date].each do |article| %>
+                      <% @graphics_by_date[date.to_s].each do |article| %>
                           <div id="workday"><li><%= link_to article.user.fullname,
                                                             user_path(User.select("id").where(id: article.user_id).map(&:id)) %>
                             <%= link_to 'x', graphic_index_path(article) ,

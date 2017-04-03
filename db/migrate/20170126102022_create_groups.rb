@@ -5,9 +5,10 @@ class CreateGroups < ActiveRecord::Migration[5.0]
       t.string :group_type
       t.timestamps
     end
+	Group.create(:name => "default", :group_type=> 0)
   end
 
   def create_defaut
-    Group.create(:name => "default")
+   
   end
 end

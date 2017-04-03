@@ -6,23 +6,23 @@ class TopologyService
     @agrr_result = []
 
 
+    begin
+      model = %x[snmpwalk -c kmWAa3GGKz -v 1  "#{ip.chomp}" iso.3.6.1.2.1.1.1 | awk '{print ($4)}' | grep -E "Cisco|ZXR10|Huawei"]
+      model = model.chomp
 
-    model = %x[snmpwalk -c kmWAa3GGKz -v 1  "#{ip.chomp}" iso.3.6.1.2.1.1.1 | awk '{print ($4)}' | grep -E "Cisco|ZXR10|Huawei"]
-    model = model.chomp
+      case model
+        when "Cisco"
+          begin
 
-    case model
-      when "Cisco"
-        begin
+            localhost = Net::Telnet::new("Host" => "#{ip.chomp}",
 
-          localhost = Net::Telnet::new("Host" => "#{ip.chomp}",
+                                         "Timeout" => 10,
+                                         #                               "Telnetmode" => false,
+                                         "Prompt" => /(" "|User Name:|Username:|>|#|password:|This|more|--More--|--More-----)/)
+            localhost.cmd("support") { |c| print c }
+            localhost.cmd("ytyfljkf[vfnbnm,f,eire") { |c| print c }
 
-                                       "Timeout" => 10,
-                                       #                               "Telnetmode" => false,
-                                       "Prompt" => /(" "|User Name:|Username:|>|#|password:|This|more|--More--|--More-----)/)
-          localhost.cmd("support") { |c| print c }
-          localhost.cmd("ytyfljkf[vfnbnm,f,eire") { |c| print c }
-
-          ring_list.each do |vl|
+            ring_list.each do |vl|
               @arp << localhost.cmd("sh arp | in Vlan#{vl.vlan}")
               @arp << localhost.cmd(" ") { |c| print c }
               @arp << localhost.cmd(" ") { |c| print c }
@@ -37,23 +37,23 @@ class TopologyService
               @arp.clear
               @geilist.clear
 
+            end
+          rescue => e
+            puts e
           end
-        rescue => e
-          puts e
-        end
-      when "ZXR10"
-        begin
-          # @arp= []
-          # @geilist =[]
-          localhost = Net::Telnet::new("Host" => "#{ip.chomp}",
+        when "ZXR10"
+          begin
+            # @arp= []
+            # @geilist =[]
+            localhost = Net::Telnet::new("Host" => "#{ip.chomp}",
 
-                                       "Timeout" => 10,
-                                       #                               "Telnetmode" => false,
-                                       "Prompt" => /(" "|User Name:|Username:|>|#|password:|This|more|--More--|--More-----)/)
-          localhost.cmd("duty") { |c| print c }
-          localhost.cmd("support") { |c| print c }
+                                         "Timeout" => 10,
+                                         #                               "Telnetmode" => false,
+                                         "Prompt" => /(" "|User Name:|Username:|>|#|password:|This|more|--More--|--More-----)/)
+            localhost.cmd("duty") { |c| print c }
+            localhost.cmd("support") { |c| print c }
 
-          ring_list.each do |vl|
+            ring_list.each do |vl|
 
               @arp << localhost.cmd("sh arp st | in vlan#{vl.vlan}") { |c| print c }
               @arp << localhost.cmd("sh arp dyn | in vlan#{vl.vlan}") { |c| print c }
@@ -71,27 +71,27 @@ class TopologyService
               @geilist.clear
 
 
+            end
+          rescue => e
+            puts e
           end
-        rescue => e
-          puts e
-        end
-      when "Huawei"
-        begin
-          # @arp= []
-          # @geilist =[]
-          localhost = Net::Telnet::new("Host" => "#{ip.chomp}",
+        when "Huawei"
+          begin
+            # @arp= []
+            # @geilist =[]
+            localhost = Net::Telnet::new("Host" => "#{ip.chomp}",
 
 
-                                       "Timeout" => 10,
-                                       #                               "Telnetmode" => false,
-                                       "Prompt" => /(" "|User Name:|Username:|>|#|----|More|password:|This|more|PassWord:)/)
+                                         "Timeout" => 10,
+                                         #                               "Telnetmode" => false,
+                                         "Prompt" => /(" "|User Name:|Username:|>|#|----|More|password:|This|more|PassWord:)/)
 
 
-          localhost.cmd("duty") { |c| print c }
-          sleep(0.5)
-          localhost.cmd("support1") { |c| print c }
+            localhost.cmd("duty") { |c| print c }
+            sleep(0.5)
+            localhost.cmd("support1") { |c| print c }
 
-          ring_list.each do |vl|
+            ring_list.each do |vl|
 
               sleep(2)
               @arp << localhost.cmd("display arp interface Vlanif#{vl.vlan}") { |c| print c }
@@ -107,14 +107,27 @@ class TopologyService
               @arp.clear
               @geilist.clear
 
+            end
+          rescue => e
+            puts e
           end
-        rescue => e
-          puts e
-        end
-    end
-
-    return @agrr_result
       end
+
+      return @agrr_result
+    rescue
+
+      ring_list.each do |ring|
+
+        if ring.topology_info.nil?
+          ring.create_topology_info(notification: "error on telnet to TP")
+        else
+          ring.topology_info.update(notification: "error on telnet to TP")
+        end
+
+      end
+      puts "error on telnet to TP"
+    end
+  end
 
 
 
@@ -131,304 +144,322 @@ class TopologyService
   def make_topology(rings_list, arp_info)
     @topology_info = []
     @status = ""
-    rings_list.each do |ring|
-      @hosts = fping(ring.pool)
-    @root_mac = arp_info.flatten.find {|sw| sw[:ip] == "#{ring.pool}.1"}[:mac]
-      @error_msg = []
-     @error_sw = []
-     @mac_cache = []
+    begin
+      rings_list.each do |ring|
+        @hosts = fping(ring.pool)
+        @root_mac = arp_info.flatten.find {|sw| sw[:ip] == "#{ring.pool}.1"}[:mac]
+        @error_msg = []
+        @error_sw = []
+        @mac_cache = []
 # ###start switch telnet thread
-     @telnet_result = []
+        @telnet_result = []
 #     puts "alert #{@hosts}"
-     @hosts.count.times do |id|
+        @hosts.count.times do |id|
 
-       @telnet_result[id] = Thread.new{
-         sleep(rand(0)/10.0)
-         model = %x[snmpwalk -c 74FRfR7ewJar -v 1  '#{@hosts[id]}' iso.3.6.1.2.1.1.1 | awk '{print ($4)}']
+          @telnet_result[id] = Thread.new{
+            sleep(rand(0)/10.0)
+            model = %x[snmpwalk -c 74FRfR7ewJar -v 1  '#{@hosts[id]}' iso.3.6.1.2.1.1.1 | awk '{print ($4)}']
 #
-         @mac_cache << switch_telnet(@hosts[id], ring.vlan, model)
-       }
-     end
-      @telnet_result.each {|t| t.join}
+            @mac_cache << switch_telnet(@hosts[id], ring.vlan, model)
+          }
+        end
+        @telnet_result.each {|t| t.join}
 # ###end switch telnet thread
 #
 #
 #
 #
 
-      @mac_cache.each do |sw_info|
-        begin
-        @swip = sw_info.to_s.scan(/#{ring.pool}[.][0-9]{1,4}/)[0]
-        model = %x[snmpwalk -c 74FRfR7ewJar -v 1  '#{@swip}' iso.3.6.1.2.1.1.1 | awk '{print ($4)}'].chomp
+        @mac_cache.each do |sw_info|
+          begin
+            @swip = sw_info.to_s.scan(/#{ring.pool}[.][0-9]{1,4}/)[0]
+            model = %x[snmpwalk -c 74FRfR7ewJar -v 1  '#{@swip}' iso.3.6.1.2.1.1.1 | awk '{print ($4)}'].chomp
 
-        if model == "ZTE"
-          vers = %x[snmpwalk -c V4s9b1tuanQH -v 1  "#{@swip}" iso.3.6.1.2.1.1.1 | awk '{print ($8)}'].gsub(/,\n/, "")
-          case vers
-            when "2928E"
-              mac_port = sw_info.to_s.scan(/((\h+\.){2}\h+\p{Blank}{1,2}\d+\w+\s+(port-[0-9]{1,2}))/).collect {|arr| arr[0]}.map {|a| a.split(" ")}.flatten
-              @mac_port = mac_port.reject {|r| r.length == 4}
-                          when "2918E"
-              @mac_port = sw_info.to_s.scan(/port-17|port-18|CPU|[0-9A-Fa-f]{4}[.][0-9A-Fa-f]{4}[.][0-9A-Fa-f]{4}/)
-            when "2928-SI"
-              @mac_port = sw_info.to_s.scan(/25|26|27|28|CPU|[0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f]|[0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f]/)
-            when "2920-SI"
-              @mac_port = sw_info.to_s.scan(/17[ ]|18[ ]|19[ ]|20[ ]|CPU|[0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f]|[0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f]/)
+            if model == "ZTE"
+              vers = %x[snmpwalk -c V4s9b1tuanQH -v 1  "#{@swip}" iso.3.6.1.2.1.1.1 | awk '{print ($8)}'].gsub(/,\n/, "")
+              case vers
+                when "2928E"
+                  mac_port = sw_info.to_s.scan(/((\h+\.){2}\h+\p{Blank}{1,2}\d+\w+\s+(port-[0-9]{1,2}))/).collect {|arr| arr[0]}.map {|a| a.split(" ")}.flatten
+                  @mac_port = mac_port.reject {|r| r.length == 4}
+                when "2918E"
+                  @mac_port = sw_info.to_s.scan(/port-17|port-18|CPU|[0-9A-Fa-f]{4}[.][0-9A-Fa-f]{4}[.][0-9A-Fa-f]{4}/)
+                when "2928-SI"
+                  @mac_port = sw_info.to_s.scan(/25|26|27|28|CPU|[0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f]|[0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f]/)
+                when "2920-SI"
+                  @mac_port = sw_info.to_s.scan(/17[ ]|18[ ]|19[ ]|20[ ]|CPU|[0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f]|[0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f]/)
+              end
+            elsif model == "24-port"
+              @mac_port = sw_info.to_s.scan(/((\h+\:){5}(\h+)\p{Blank}+[a-zA-Z][0-9])/).collect {|arr| arr[0]}.map {|a| a.split(" ")}.flatten
+            elsif /ROS/.match(model)
+              @mac_port = sw_info.to_s.scan(/((\h+\.){2}(\h+)\p{Blank}+[0-9]{1,2})/).collect {|arr| arr[0]}.map {|a| a.split(" ")}.flatten
+            elsif /DES-|D-Link/.match(model)
+              @mac_port = sw_info.to_s.scan(/((\h+\-){5}(\h+)\p{Blank}{1,2}[0-9]{1,2})/).collect {|arr| arr[0]}.map {|a| a.split(" ")}.flatten
+            elsif model == "FoxGate"
+              @mac_port = sw_info.to_s.scan(/0\/1\/4|0\/1\/1|0\/1\/3|0\/1\/2|cpu|[0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f]/)
+            elsif /BDCOM/.match(model)
+              @mac_port = sw_info.to_s.scan(/((\h+\.){2}(\h+))|(g[0-]\/[0-9])/).map {|arr| [arr[0], arr[3]]}.flatten.reject {|e| e.nil?}
+            elsif  /Layer2+|ECS3510-28T/.match (model)
+              mac_port = sw_info.to_s.scan(/((\h+\-){5}(\h+)\p{Blank}{1,2}\s+\w+\s+(1\/[1-9]{1,2}))/).collect {|arr| arr[0]}.map {|a| a.split(" ")}.flatten
+              @mac_port = mac_port.reject {|r| r == "Eth"}
+            end
+
+            @p25 = []
+            @p26 = []
+            @p27 = []
+            @p28 = []
+
+            @mac_port.each_slice(2) do |mac, port|
+              begin
+                if (14..17).include?(mac.length) and port.length == 1 or port.length == 2 or port.length == 7 or port.length == 5 or port.length == 4
+
+                  case port
+                    when "17","port-17","port-25", "25", "g1", "0/1/1", "1/25", "9" then
+                      @p25 << mac.gsub(/[-:.]/, '').downcase
+                    when "18","port-18","port-26", "26", "g2", "0/1/2", "1/26", "10" then
+                      @p26 << mac.gsub(/[-:.]/, '').downcase
+                    when "19","port-19","port-27", "27", "g3", "0/1/3", "1/27", "g0/5", "7" then
+                      @p27 << mac.gsub(/[-:.]/, '').downcase
+                    when "20","port-20","port-28", "28", "g4", "0/1/4", "1/28", 'g0/6', "8"then
+                      @p28 << mac.gsub(/[-:.]/, '').downcase
+                  end
+
+                else
+
+                end
+              rescue
+                @error_msg << "#{@swip} error mac or port not match #{mac}, #{port}"
+              end
+            end
+
+
+            @mac = []
+            if @p25.include?(@root_mac)
+              @mac << nil
+            elsif @p25.count >= 1
+              @mac << @p25
+            elsif @p25.count == 0
+              @mac << nil
+            end
+
+            if @p26.include?(@root_mac)
+              @mac << nil
+            elsif @p26.count >= 1
+              @mac << @p26
+            elsif @p26.count == 0
+              @mac << nil
+            end
+
+            if @p27.include?(@root_mac)
+              @mac << nil
+            elsif @p27.count >= 1
+              @mac << @p27
+            elsif @p27.count == 0
+              @mac << nil
+            end
+
+            if @p28.include?(@root_mac)
+              @mac << nil
+            elsif @p28.count >= 1
+              @mac << @p28
+            elsif @p28.count == 0
+              @mac << nil
+            end
+
+
+            @topology_info << {:ip => @swip, :port25 =>  @mac[0], :port26 => @mac[1], :port27 => @mac[2], :port28 => @mac[3] }
+          rescue
+            @error_msg << "#{@swip} error in sort block"
+
           end
-        elsif model == "24-port"
-          @mac_port = sw_info.to_s.scan(/((\h+\:){5}(\h+)\p{Blank}+[a-zA-Z][0-9])/).collect {|arr| arr[0]}.map {|a| a.split(" ")}.flatten
-        elsif /ROS/.match(model)
-          @mac_port = sw_info.to_s.scan(/((\h+\.){2}(\h+)\p{Blank}+[0-9]{1,2})/).collect {|arr| arr[0]}.map {|a| a.split(" ")}.flatten
-        elsif /DES-|D-Link/.match(model)
-          @mac_port = sw_info.to_s.scan(/((\h+\-){5}(\h+)\p{Blank}{1,2}[0-9]{1,2})/).collect {|arr| arr[0]}.map {|a| a.split(" ")}.flatten
-        elsif model == "FoxGate"
-          @mac_port = sw_info.to_s.scan(/0\/1\/4|0\/1\/1|0\/1\/3|0\/1\/2|cpu|[0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f][-:.][0-9A-Fa-f][0-9A-Fa-f]/)
-        elsif /BDCOM/.match(model)
-          @mac_port = sw_info.to_s.scan(/((\h+\.){2}(\h+))|(g[0-]\/[0-9])/).map {|arr| [arr[0], arr[3]]}.flatten.reject {|e| e.nil?}
-        elsif  /Layer2+|ECS3510-28T/.match (model)
-          mac_port = sw_info.to_s.scan(/((\h+\-){5}(\h+)\p{Blank}{1,2}\s+\w+\s+(1\/[1-9]{1,2}))/).collect {|arr| arr[0]}.map {|a| a.split(" ")}.flatten
-          @mac_port = mac_port.reject {|r| r == "Eth"}
         end
 
-        @p25 = []
-        @p26 = []
-        @p27 = []
-        @p28 = []
 
-        @mac_port.each_slice(2) do |mac, port|
+        @top = []
+        @topology_info.each do |res|
+          max25 = res[:port25].count unless res[:port25].nil?
+          max26 = res[:port26].count unless res[:port26].nil?
+          max27 = res[:port27].count unless res[:port27].nil?
+          max28 = res[:port28].count unless res[:port28].nil?
+          @top << {:ip => res[:ip], :max_value => (max25.to_i+max26.to_i+max27.to_i+max28.to_i)}
+        end
+
+        topology = @top.sort_by { |a| a[:max_value].to_i }.reverse
+
+
+        @swmax = topology.select {|father| father[:max_value].to_i >= (@hosts.count - 1) }
+
+
+        @out = []
+        @ex = []
+
+        topology.reverse.each do |w|
           begin
-            if (14..17).include?(mac.length) and port.length == 1 or port.length == 2 or port.length == 7 or port.length == 5 or port.length == 4
+            if w[:max_value] == 1
+              swip = @topology_info.find {|ip| ip[:ip] == w[:ip]}
 
-              case port
-                when "17","port-17","port-25", "25", "g1", "0/1/1", "1/25", "9" then
-                  @p25 << mac.gsub(/[-:.]/, '').downcase
-                when "18","port-18","port-26", "26", "g2", "0/1/2", "1/26", "10" then
-                  @p26 << mac.gsub(/[-:.]/, '').downcase
-                when "19","port-19","port-27", "27", "g3", "0/1/3", "1/27", "g0/5", "7" then
-                  @p27 << mac.gsub(/[-:.]/, '').downcase
-                when "20","port-20","port-28", "28", "g4", "0/1/4", "1/28", 'g0/6', "8"then
-                  @p28 << mac.gsub(/[-:.]/, '').downcase
+              if swip[:port25] == nil
+                port25 = nil
+              else
+                port25 =  arp_info.flatten.find {|arp| arp[:mac] == swip[:port25][0]}[:ip]
+                @ex << port25
               end
 
-            else
+
+              if swip[:port26] == nil
+                port26 = nil
+              else
+
+                port26 = arp_info.flatten.find {|arp| arp[:mac] == swip[:port26][0]}[:ip]
+                @ex << port26
+              end
+
+
+              if swip[:port27] == nil
+                port27 = nil
+              else
+                port27 = arp_info.flatten.find {|arp| arp[:mac] == swip[:port27][0]}[:ip]
+                @ex << port27
+              end
+
+
+              if swip[:port28] == nil
+                port28 = nil
+              else
+                port28 =  arp_info.flatten.find {|arp| arp[:mac] == swip[:port28][0]}[:ip]
+
+                @ex << port28
+              end
+
+
+
+              cur_sw =Topology.find_by_ip(w[:ip])
+
+              if cur_sw
+                puts "update topology"
+                cur_sw.update(w)
+              else
+                puts "insert topology"
+                ring.topology.create(w)
+              end
+#-----------------------------
+            elsif w[:max_value] == nil
+              puts "nil"
+            elsif w[:max_value] > 1 and w[:max] != @swmax
+              @ip = w[:ip]
+              swip = @topology_info.find {|ip| ip[:ip] == w[:ip]}
+              if swip[:port25] == nil
+                @port25 = nil
+              else
+                swip[:port25].each do |macs|
+                  begin
+                    nest = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
+                    if @ex.include? (nest)
+                    else
+                      @port25 = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
+                      @ex << nest
+                    end
+                  rescue
+                    @error_msg << "#{@ip}mac no valid #{macs}"
+                  end
+                end
+              end
+              if swip[:port26] == nil
+                @port26 = nil
+              else
+                swip[:port26].each do |macs|
+                  begin
+                    nest = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
+                    if @ex.include? (nest)
+                    else
+                      @port26 = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
+                      @ex << nest
+                    end
+                  rescue
+                    @error_msg << "#{@ip}mac not valid #{macs}"
+                  end
+                end
+              end
+
+              if swip[:port27] == nil
+                @port27 = nil
+              else
+                swip[:port27].each do |macs|
+                  begin
+                    nest = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
+                    if @ex.include? (nest)
+                    else
+                      @port27 = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
+                      @ex << nest
+                    end
+                  rescue
+                    @error_msg << "#{@ip}mac not valid #{macs}"
+                  end
+                end
+              end
+
+              if swip[:port28] == nil
+                @port28 = nil
+              else
+                swip[:port28].each do |macs|
+#puts @ip
+#puts macs
+                  begin
+                    nest = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
+                    if @ex.include? (nest)
+                    else
+                      @port28 = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
+                      @ex << nest
+                    end
+                  rescue
+                    @error_msg << "#{@ip} mac not valid #{macs}"
+
+                  end
+                end
+              end
+
+
+
+              cur_sw =Topology.find_by_ip(@ip)
+
+              if cur_sw
+                puts "update topology"
+                max = @top.find {|ip| ip[:ip] == @ip}[:max_value]
+                puts max
+
+                cur_sw.update(port25: @port25, port26: @port26, port27: @port27, port28: @port28, max_value: max)
+              else
+                puts "insert topology"
+                max = @top.find {|ip| ip[:ip] == @ip}[:max_value]
+                puts max
+                ring.topology.create(ip: @ip, port25: @port25, port26: @port26, port27: @port27, port28: @port28, max_value:max)
+              end
 
             end
           rescue
-            @error_msg << "#{@swip} error mac or port not match #{mac}, #{port}"
+            @error_msg << "error on #{@ip}"
           end
         end
 
-
-        @mac = []
-        if @p25.include?(@root_mac)
-          @mac << nil
-        elsif @p25.count >= 1
-          @mac << @p25
-        elsif @p25.count == 0
-          @mac << nil
-        end
-
-        if @p26.include?(@root_mac)
-          @mac << nil
-        elsif @p26.count >= 1
-          @mac << @p26
-        elsif @p26.count == 0
-          @mac << nil
-        end
-
-        if @p27.include?(@root_mac)
-          @mac << nil
-        elsif @p27.count >= 1
-          @mac << @p27
-        elsif @p27.count == 0
-          @mac << nil
-        end
-
-        if @p28.include?(@root_mac)
-          @mac << nil
-        elsif @p28.count >= 1
-          @mac << @p28
-        elsif @p28.count == 0
-          @mac << nil
-        end
-
-
-        @topology_info << {:ip => @swip, :port25 =>  @mac[0], :port26 => @mac[1], :port27 => @mac[2], :port28 => @mac[3] }
-        rescue
-        @error_msg << "#{@swip} error in sort block"
-
-      end
-      end
-
-
-      @top = []
-      @topology_info.each do |res|
-        max25 = res[:port25].count unless res[:port25].nil?
-        max26 = res[:port26].count unless res[:port26].nil?
-        max27 = res[:port27].count unless res[:port27].nil?
-        max28 = res[:port28].count unless res[:port28].nil?
-        @top << {:ip => res[:ip], :max_value => (max25.to_i+max26.to_i+max27.to_i+max28.to_i)}
-      end
-
-      topology = @top.sort_by { |a| a[:max_value].to_i }.reverse
-
-
-      @swmax = topology.select {|father| father[:max_value].to_i >= (@hosts.count - 1) }
-
-
-      @out = []
-      @ex = []
-
-      topology.reverse.each do |w|
-        begin
-          if w[:max_value] == 1
-            swip = @topology_info.find {|ip| ip[:ip] == w[:ip]}
-
-            if swip[:port25] == nil
-              port25 = nil
-            else
-              port25 =  arp_info.flatten.find {|arp| arp[:mac] == swip[:port25][0]}[:ip]
-              @ex << port25
-            end
-
-
-            if swip[:port26] == nil
-              port26 = nil
-            else
-
-              port26 = arp_info.flatten.find {|arp| arp[:mac] == swip[:port26][0]}[:ip]
-              @ex << port26
-            end
-
-
-            if swip[:port27] == nil
-              port27 = nil
-            else
-              port27 = arp_info.flatten.find {|arp| arp[:mac] == swip[:port27][0]}[:ip]
-              @ex << port27
-            end
-
-
-            if swip[:port28] == nil
-              port28 = nil
-            else
-              port28 =  arp_info.flatten.find {|arp| arp[:mac] == swip[:port28][0]}[:ip]
-
-              @ex << port28
-            end
-
-
-
-            cur_sw =Topology.find_by_ip(w[:ip])
-
-            if cur_sw
-              puts "update topology"
-              cur_sw.update(w)
-            else
-              puts "insert topology"
-              ring.topology.create(w)
-            end
-#-----------------------------
-          elsif w[:max_value] == nil
-            puts "nil"
-          elsif w[:max_value] > 1 and w[:max] != @swmax
-            @ip = w[:ip]
-            swip = @topology_info.find {|ip| ip[:ip] == w[:ip]}
-            if swip[:port25] == nil
-              @port25 = nil
-            else
-              swip[:port25].each do |macs|
-                begin
-                  nest = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
-                  if @ex.include? (nest)
-                  else
-                    @port25 = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
-                    @ex << nest
-                  end
-                rescue
-                  @error_msg << "#{@ip}mac no valid #{macs}"
-                end
-              end
-            end
-            if swip[:port26] == nil
-              @port26 = nil
-            else
-              swip[:port26].each do |macs|
-                begin
-                  nest = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
-                  if @ex.include? (nest)
-                  else
-                    @port26 = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
-                    @ex << nest
-                  end
-                rescue
-                  @error_msg << "#{@ip}mac not valid #{macs}"
-                end
-              end
-            end
-
-            if swip[:port27] == nil
-              @port27 = nil
-            else
-              swip[:port27].each do |macs|
-                begin
-                  nest = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
-                  if @ex.include? (nest)
-                  else
-                    @port27 = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
-                    @ex << nest
-                  end
-                rescue
-                  @error_msg << "#{@ip}mac not valid #{macs}"
-                end
-              end
-            end
-
-            if swip[:port28] == nil
-              @port28 = nil
-            else
-              swip[:port28].each do |macs|
-#puts @ip
-#puts macs
-                begin
-                  nest = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
-                  if @ex.include? (nest)
-                  else
-                    @port28 = arp_info.flatten.find {|arp| arp[:mac] == macs}[:ip]
-                    @ex << nest
-                  end
-                rescue
-                  @error_msg << "#{@ip} mac not valid #{macs}"
-
-                end
-              end
-            end
-
-
-
-            cur_sw =Topology.find_by_ip(@ip)
-
-            if cur_sw
-              puts "update topology"
-              max = @top.find {|ip| ip[:ip] == @ip}[:max_value]
-              puts max
-
-              cur_sw.update(port25: @port25, port26: @port26, port27: @port27, port28: @port28, max_value: max)
-            else
-              puts "insert topology"
-              max = @top.find {|ip| ip[:ip] == @ip}[:max_value]
-              puts max
-              ring.topology.create(ip: @ip, port25: @port25, port26: @port26, port27: @port27, port28: @port28, max_value:max)
-            end
-
-          end
-        rescue
-          @error_msg << "error on #{@ip}"
+        if ring.topology_info.nil?
+          ring.create_topology_info(notification: "Success")
+        else
+          ring.topology_info.update(notification: "Success")
         end
       end
+      return @top
+    rescue
 
+      rings_list.each do |ring|
 
+        if ring.topology_info.nil?
+          ring.create_topology_info(notification: "empty enter params")
+        else
+          ring.topology_info.update(notification: "empty enter params")
+        end
+
+      end
+      puts "empty enter params"
     end
-    return @top
   end
 
 
@@ -474,14 +505,14 @@ class TopologyService
     arp = arps.to_s.scan(/[0-9]{3}[.][0-9]{1,3}[.][0-9]{1,3}[.][0-9]{1,3}|Incomplete|[0-9A-Fa-f]{2}[.][0-9A-Fa-f]{2}[.][0-9A-Fa-f]{2}[.][0-9A-Fa-f]{2}[.][0-9A-Fa-f]{2}[.][0-9A-Fa-f]{2}|[0-9A-Fa-f]{4}[.][0-9A-Fa-f]{4}[.-][0-9A-Fa-f]{4}|[0-9A-Fa-f]{4}[.-][0-9A-Fa-f]{4}[.-][0-9A-Fa-f]{4}/)
 
     arp.each_slice(2) do |ip, mac|
-     if mac.nil? and ip.nil?
-     else
-      mac = mac.gsub(/[-:.]/, '').downcase
-      @arp << {ip: ip, mac: mac}
-    end
+      if mac.nil? and ip.nil?
+      else
+        mac = mac.gsub(/[-:.]/, '').downcase
+        @arp << {ip: ip, mac: mac}
+      end
     end
     ############arp_section
-       #####tp_port build
+    #####tp_port build
     @geilist = []
     geilists = geilist.to_s.scan /Te[1-9]\/[1,9]{1,2}|Gi1\/[0-9]{1,2}\/{0,1}[0-9]{1,2}|gei_1\/[0-9]{1,2}|GE0\/0\/[0-9]{1,2}|GigabitEthernet1\/[0-9]{1,2}|static|[0-9A-Fa-f]{4}[.][0-9A-Fa-f]{4}[.][0-9A-Fa-f]{4}/
     geilists.each_slice(2) do |mac, port|
@@ -490,11 +521,11 @@ class TopologyService
       if mac.length == 12
         @geilist << {mac: mac, tpport: port}
       else
-      #"error"
+        #"error"
       end
 
     end
-       ########tp_port end
+    ########tp_port end
 
     @result = (@arp+@geilist).group_by{|h| h[:mac]}.map{|k,v| v.reduce(:merge)}.reject { |sw| sw[:ip].nil? }
     @result.each do |ring_info|
@@ -554,10 +585,10 @@ class TopologyService
       localhost.cmd("fastman") { |c| print c }
       localhost.cmd("liveforreal") { |c| print c }
       mac_table << ip
-       mac_table << localhost.cmd("sh b a vlan #{vlan}") { |c| print c }
-       10.times do
-         mac_table << localhost.cmd(" ") { |c| print c }
-       end
+      mac_table << localhost.cmd("sh b a vlan #{vlan}") { |c| print c }
+      10.times do
+        mac_table << localhost.cmd(" ") { |c| print c }
+      end
       localhost.close
 
     elsif /DES-|D-Link/.match(model) != nil
@@ -597,7 +628,7 @@ class TopologyService
     else
       #return "false"
     end
-return  mac_table
+    return  mac_table
   end
 
   def aggr_telnet(ip)

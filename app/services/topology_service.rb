@@ -9,13 +9,6 @@ class TopologyService
     begin
 
       model = %x[snmpwalk -c kmWAa3GGKz -v 1  "#{ip.chomp}" iso.3.6.1.2.1.1.1 | awk '{print ($4)}' | grep -E "Cisco|ZXR10|Huawei"]
-      model = model.chomp
-
-      case model
-        when "Cisco"
-          begin
-
-    model = %x[snmpwalk -c kmWAa3GGKz -v 1  "#{ip.chomp}" iso.3.6.1.2.1.1.1 | awk '{print ($4)}' | grep -E "Cisco|ZXR10|Huawei"]
     model = model.chomp
 
     case model
@@ -139,8 +132,7 @@ class TopologyService
       puts "error on telnet to TP"
 
       end
-      puts "error on telnet to TP"
-    end
+          end
   end
 
 

@@ -29,7 +29,7 @@
               <div class="btn-group" style="float: left;">
               <% pool[1].sort_by { |a| a.split('.')[-1].to_i}.each do |ring| %>
                   <!--<button type="button" class="rings btn btn-default "><%#= link_to ring.split('.')[-1], topology_index_path(:ring => pool), remote: true%></button>-->
-                  <%= button_to ring.split('.')[-1], show_topology_path(:ring => ring), :class=>"rings btn btn-default", remote: true%>
+                  <%= button_to ring.split('.')[-1], show_topology_path(:ring => ring), :class=>"show_form rings btn btn-default", remote: true%>
 
               <% end %>
             </div>

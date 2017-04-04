@@ -10,7 +10,7 @@ class TopologyService
 
       model = %x[snmpwalk -c kmWAa3GGKz -v 1  "#{ip.chomp}" iso.3.6.1.2.1.1.1 | awk '{print ($4)}' | grep -E "Cisco|ZXR10|Huawei"]
     model = model.chomp
-
+    puts model
     case model
       when "Cisco"
         begin
@@ -447,22 +447,23 @@ class TopologyService
         if ring.topology_info.nil?
           ring.create_topology_info(notification: "Success")
         else
-          ring.topology_info.update(notification: "Success")
+          ring.topology_info.destroy
+          ring.create_topology_info(notification: "Success")
         end
       end
       return @top
     rescue
 
-      rings_list.each do |ring|
+      #rings_list.each do |ring|
 
-        if ring.topology_info.nil?
-          ring.create_topology_info(notification: "empty enter params")
-        else
-          ring.topology_info.update(notification: "empty enter params")
-        end
+       # if ring.topology_info.nil?
+        #  ring.create_topology_info(notification: "empty enter params")
+        #else
+         # ring.topology_info.update(notification: "empty enter params")
+        #end
 
-      end
-      puts "empty enter params"
+      #end
+      puts "error in #{@ip}"
     end
 
 

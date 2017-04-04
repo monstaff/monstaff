@@ -34,4 +34,11 @@ $(document).ready(function(){
 
     ///topology yandex map load screen
 
+    $('form.button_to').on({'ajax:error': function(event, xhr, status, error) {
+            alert("К сожалению произошла ошибка! Возможно в БД нет топологии данного кольца =(");
+            $("#map2").empty();
+            $("#map2").append('<div id="error"></div>');
+        }
+
+    });
 });

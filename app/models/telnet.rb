@@ -164,7 +164,7 @@ class Telnet
             @a << localhost.cmd("upload cfg_toTFTP #{ENV['TFTPD_ADDR']} #{switch[:ip]}.cfg") { |c| print c }
             sleep(10)
           elsif command == 'download'
-            #@a << localhost.cmd("download cfg_fromTFTP #{ENV['TFTPD_ADDR']}  #{switch[:ip]}_new.cfg") { |c| print c }
+            @a << localhost.cmd("download cfg_fromTFTP #{ENV['TFTPD_ADDR']}  #{switch[:ip]}_new.cfg") { |c| print c }
             sleep(10)
           else
 
@@ -190,7 +190,7 @@ class Telnet
             sleep(10)
           elsif command == "download"
 
-            #@a << localhost.cmd("download cfg_fromTFTP #{ENV['TFTPD_ADDR']} src_file #{switch[:ip]}_new.cfg") { |c| print c }
+            @a << localhost.cmd("download cfg_fromTFTP #{ENV['TFTPD_ADDR']} src_file #{switch[:ip]}_new.cfg") { |c| print c }
             sleep(15)
           else
 

@@ -10,7 +10,7 @@ scheduler = Rufus::Scheduler.new
 
 #s.every '2h' do
 
-scheduler.every '10m' do
+scheduler.every '6h' do
 
   has_graphic = Region.includes(:graphic)
                     .where(:graphics => {:date => DateTime

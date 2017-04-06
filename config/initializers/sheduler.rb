@@ -34,7 +34,9 @@ shedul.every '6h' do
 
 end
 
-shedul.cron '* 10 * * *' do
+shedul2 = Rufus::Scheduler.singleton
+
+shedul2.cron '30 10 * * *' do
 
   rings_list = Ring.all.group_by(&:aggraddress).flatten
 

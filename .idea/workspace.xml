@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3163ebe1-71fd-4a75-bd35-ba7b5bcd295e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/topology_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/topology_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/user_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/user_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/sheduler.rb" afterPath="$PROJECT_DIR$/config/initializers/sheduler.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
@@ -62,8 +60,8 @@
       <file leaf-file-name="sheduler.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/initializers/sheduler.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="36" column="14" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
+            <state relative-caret-position="345">
+              <caret line="38" column="7" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -563,12 +561,12 @@
       <workItem from="1489995345855" duration="27325000" />
       <workItem from="1490098296073" duration="12507000" />
       <workItem from="1490768862111" duration="7177000" />
-      <workItem from="1490857771588" duration="46457000" />
+      <workItem from="1490857771588" duration="47154000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="622646000" />
+    <option name="totallyTimeSpent" value="623343000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1900" height="1053" extended-state="0" />
@@ -1005,8 +1003,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/initializers/sheduler.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="36" column="14" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
+        <state relative-caret-position="345">
+          <caret line="38" column="7" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
           <folding />
         </state>
       </provider>

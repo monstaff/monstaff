@@ -2,7 +2,7 @@ require 'rufus-scheduler'
 
 # Let's use the rufus-scheduler singleton
 #
-shedul = Rufus::Scheduler.singleton
+scheduler = Rufus::Scheduler.new
 
 
 # Stupid recurrent task...
@@ -10,7 +10,7 @@ shedul = Rufus::Scheduler.singleton
 
 #s.every '2h' do
 
-shedul.every '6h' do
+scheduler.every '10m' do
 
   has_graphic = Region.includes(:graphic)
                     .where(:graphics => {:date => DateTime
@@ -34,9 +34,8 @@ shedul.every '6h' do
 
 end
 
-shedul2 = Rufus::Scheduler.singleton
 
-shedul2.cron '45 10 * * *' do
+scheduler.cron '59 23 * * *' do
 
   rings_list = Ring.all.group_by(&:aggraddress).flatten
 

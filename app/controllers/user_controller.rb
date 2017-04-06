@@ -32,6 +32,7 @@ class UserController < ApplicationController
       user.reset_password
 
       user.update(recover_url: nil, token_date: nil)
+      UserMailer.reset_password(user.email, "Ваш пароль был сброшен. Пароль по умолчанию: '123456'.").deliver_now
       redirect_to sessions_new_path
     else
       render "error"

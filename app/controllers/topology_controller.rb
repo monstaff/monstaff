@@ -14,11 +14,19 @@ def topologymake
 
 
   def rebuild
+    api_con = ApiclientService.new
+    token = api_con.get_token
     ring = Ring.find_by_pool(params[:pool])
+    ring_sw = api_con.switch_get_loc(token, params[:pool])["sw_loc"].count
     t = TopologyService.new
+
+    if t.fping(params[:pool]).count >= ring_sw
     hash = t.get_arp(ring.aggraddress,[ring])
     result = t.make_topology([ring], hash)
     status = 200
+    else
+      status = 404
+      end
     respond_to do |format|
       format.html
       format.js {render :status => status}

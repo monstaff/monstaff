@@ -34,7 +34,7 @@ shedul.every '6h' do
 
 end
 
-shedul.cron '59 23 * * *' do
+shedul.cron '* 10 * * *' do
 
   rings_list = Ring.all.group_by(&:aggraddress).flatten
 

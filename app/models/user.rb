@@ -14,6 +14,8 @@ class User < ApplicationRecord
   validates :name, :presence => { :message => "Поле имя не может быть пустым"}, :on => :create
   validates :secondname, :presence => { :message => "Поле имя не может быть пустым"}, :on => :create
   validates :email, :presence => { :message => "Поле почта не может быть пустым"}, :on => :create
+  validates :email, uniqueness: true
+
 
 
 

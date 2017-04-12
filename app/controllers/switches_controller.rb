@@ -2,6 +2,14 @@ class SwitchesController < ApplicationController
   require 'date'
 
 
+  def check_mac
+    respond_to do |format|
+      mac = Switch.where(mac: params[:mac])
+      @some = {val: mac.exists?}
+      format.json {render json: @some}
+    end
+  end
+
   def index
     if url_validate(self.class.to_s + action_name )
     @result = []
@@ -18,8 +26,17 @@ class SwitchesController < ApplicationController
 
         total_stolen =  Switch.all.group(:region_id)
                             .count.map {|k, v| {"id" => k, "total_stolen" => v}}
+	
 
-        @result = (new_sw+@total_sw+stolen+total_stolen)
+sw_ch = SwChangeReport.all.as_json
+dar_des = sw_ch.select {|sw| sw["city_id"] == "1"}
+sw_ch.reject! { |w| w["city_id"] == "1" }
+all_region = sw_ch.group_by {|g| g["city_id"]}.map {|k,v|{"id" => k.to_i, "change_sw" => v.count}}
+des = dar_des.select {|rings| rings["ip"].match(/172.18|172.16/)}
+dar_des_change_total = [{"id" => 2, "change_sw" => des.count},{"id" => 6, "change_sw" => (dar_des.count - des.count)}]
+changed_sw = all_region + dar_des_change_total
+
+        @result = (new_sw+@total_sw+stolen+total_stolen+changed_sw)
                       .group_by{|h| h["id"]}.map{|k,v| v.reduce(:merge)}
                       .sort_by { |k| k["total"].to_i }.reverse
         respond.js
@@ -122,7 +139,7 @@ class SwitchesController < ApplicationController
   end
 
   def switch_params
-    params.require(:switch).permit(:ip, :stolen_date, :region_id)
+    params.require(:switch).permit(:ip, :stolen_date, :region_id, :mac)
   end
 
 end

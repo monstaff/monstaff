@@ -1,0 +1,7 @@
+
+$("form").each(function(){
+  this.reset();
+});
+$(".success").empty();
+$(".modal-title").after('<p class="success" style="color: #4cae4c;"> данные внесены.</p>');
+$(".success").fadeOut(10000);

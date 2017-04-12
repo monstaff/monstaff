@@ -1,6 +1,6 @@
 development:
   adapter: mysql2
-  database: monstaff2
+  database: monstaff
   pool: 5
   username: <%= ENV['DB_User']%>
   password: <%= ENV['DB_Password'] %>

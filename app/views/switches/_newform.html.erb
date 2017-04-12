@@ -1,6 +1,5 @@
 
 
-
 <%= form_for :switch, url: switches_path , :html => {:class=>"form-horizontal"},  remote: true do |s| %>
           <fieldset>
 
@@ -13,12 +12,19 @@
               </div>
             </div>
 
+            <div class="form-group">
+              <%= s.label :mac, 'мак адрес коммутатора' ,  :class=> "col-md-4 control-label" %>
+              <div class="col-md-4">
+                <%= s.text_field :mac , :class=>" form-control input-md"%>
+              </div>
+            </div>
+
 
 
             <div class="form-group">
       <%= s.label :stolen_date, 'Дата кражи' ,  :class=> "col-md-4 control-label" %>
               <div class="col-md-4">
-      <%= s.text_field :stolen_date, :class=>"form-control input-md" %>
+      <%= s.text_field :stolen_date, :class=>" xlssclass form-control input-md" %>
               </div>
             </div>
 

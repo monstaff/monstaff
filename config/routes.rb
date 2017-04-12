@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post 'rebuild' => 'topology#rebuild'
   get 'rebuild' => 'topology#rebuild'
 get 'check_email', to: 'user#check_email'
+  get 'check_mac', to: 'switches#check_mac'
 get 'adminpanel' , to: 'adminpanel#index'
 post '/region', to: 'adminpanel#region_create', as: 'region_index'
 get '/region', to: 'adminpanel#region_create'

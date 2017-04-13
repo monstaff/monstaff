@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3163ebe1-71fd-4a75-bd35-ba7b5bcd295e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/switches_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/switches_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/switches/_result.html.erb" afterPath="$PROJECT_DIR$/app/views/switches/_result.html.erb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -26,7 +26,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="switches_controller.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="switches_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/switches_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="173">
@@ -86,11 +86,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_result.html.erb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="_result.html.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/switches/_result.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+            <state relative-caret-position="217">
+              <caret line="32" column="13" lean-forward="false" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
               <folding>
                 <element signature="n#style#0;n#th#0;n#table#0;n#!!top" expanded="true" />
               </folding>
@@ -165,8 +165,8 @@
         <option value="$PROJECT_DIR$/app/views/transport/_result.html.erb" />
         <option value="$PROJECT_DIR$/app/views/sessions/new.html.erb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
-        <option value="$PROJECT_DIR$/app/views/switches/_result.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/switches_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/switches/_result.html.erb" />
       </list>
     </option>
   </component>
@@ -530,12 +530,12 @@
       <workItem from="1490857771588" duration="54593000" />
       <workItem from="1491548617704" duration="14594000" />
       <workItem from="1491982169773" duration="684000" />
-      <workItem from="1492058256633" duration="7956000" />
+      <workItem from="1492058256633" duration="9037000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="654016000" />
+    <option name="totallyTimeSpent" value="655097000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -904,21 +904,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/switches/_result.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-          <folding>
-            <element signature="n#style#0;n#th#0;n#table#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/switches_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
           <caret line="38" column="38" lean-forward="false" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/switches/_result.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="32" column="13" lean-forward="false" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#th#0;n#table#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

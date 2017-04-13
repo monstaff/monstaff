@@ -8,7 +8,9 @@
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>mon</user-name>
+      <introspection-schemas>monstaff:public</introspection-schemas>
       <resolve-scope>monstaff:mon,public</resolve-scope>
+      <unqualified-resolve-schemas>monstaff:mon,public</unqualified-resolve-schemas>
     </data-source>
   </component>
 </project>

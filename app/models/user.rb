@@ -34,7 +34,8 @@ class User < ApplicationRecord
   end
 
   def pass_upd(password, password_confirmation)
-    reg = /\A\w+([A-Za-z])\w{6,}([A-Za-z])\w+\z/
+    #reg = /\A\w+([A-Za-z])\w{6,}([A-Za-z])\w+\z/
+    reg = /\A\w+([A-Za-z])\w+/
     if password.match(reg) and password_confirmation.match(reg) and password == password_confirmation
       self.password = password
       encrypt_password

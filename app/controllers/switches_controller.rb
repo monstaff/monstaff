@@ -28,7 +28,8 @@ class SwitchesController < ApplicationController
                             .count.map {|k, v| {"id" => k, "total_stolen" => v}}
 	
 
-sw_ch = SwChangeReport.all.as_json
+#sw_ch = SwChangeReport.where(reason: [3,4], city_id: ).as_json
+        sw_ch =  SwChangeReport.where(reason: [3,4]).where.not(city_id: nil).as_json
 dar_des = sw_ch.select {|sw| sw["city_id"] == "1"}
 sw_ch.reject! { |w| w["city_id"] == "1" }
 all_region = sw_ch.group_by {|g| g["city_id"]}.map {|k,v|{"id" => k.to_i, "change_sw" => v.count}}

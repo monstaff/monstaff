@@ -34,7 +34,7 @@ $(document).ready(function() {
             mac_format = obj.val().replace(/:|-/g, "");
             //alert(mac_format);
 
-            if (mac_format.match(/[0-9A-Fa-f]{12}/) && checkmac(obj) == false) {
+            if (mac_format.match(/[0-9A-Fa-fa]{12}/) && checkmac(obj) == false) {
                 obj.css("border", "1px solid green");
                 $('form #switch_mac').val(mac_format);
 

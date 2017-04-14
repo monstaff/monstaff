@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405075138) do
+ActiveRecord::Schema.define(version: 20170414093340) do
 
   create_table "aggr_ignores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "aggr_ip"
@@ -141,12 +141,12 @@ ActiveRecord::Schema.define(version: 20170405075138) do
   end
 
   create_table "sw_change_report", unsigned: true, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.datetime "date",                 default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.string   "ip",        limit: 20,                                      null: false
-    t.string   "mac",       limit: 20,                                      null: false
-    t.string   "model",     limit: 50,                                      null: false
-    t.string   "reason",    limit: 20,                                      null: false
-    t.string   "region_id", limit: 20,                                      null: false
+    t.datetime "date",               default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.string   "ip",      limit: 20,                                      null: false
+    t.string   "mac",     limit: 20,                                      null: false
+    t.string   "model",   limit: 50,                                      null: false
+    t.string   "reason",  limit: 20,                                      null: false
+    t.string   "city_id"
   end
 
   create_table "switches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -156,11 +156,7 @@ ActiveRecord::Schema.define(version: 20170405075138) do
     t.date     "stolen_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "telnets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "mac"
   end
 
   create_table "topologies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

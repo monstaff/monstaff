@@ -36,11 +36,7 @@ all_region = sw_ch.group_by {|g| g["city_id"]}.map {|k,v|{"id" => k.to_i, "chang
 des = dar_des.select {|rings| rings["ip"].match(/172.18|172.16/)}
 dar_des_change_total = [{"id" => 2, "change_sw" => des.count},{"id" => 6, "change_sw" => (dar_des.count - des.count)}]
 
-        changed_sw =  all_region + dar_des_change_total
-        changed_sw.reject! { |id| id if id["id"] == "" or id["id"].nil? or id["change_sw"] == 0 }
-
-
-        changed_sw.each {|h|
+         all_region.each {|h|
         case h["id"]
           when 6
             h["id"] = 8
@@ -75,7 +71,8 @@ dar_des_change_total = [{"id" => 2, "change_sw" => des.count},{"id" => 6, "chang
         end
 
         }
-
+        changed_sw =  all_region + dar_des_change_total
+        changed_sw.reject! { |id| id if id["id"] == "" or id["id"].nil? or id["change_sw"] == 0 }
         @result2 = changed_sw
         @result = (new_sw+@total_sw+stolen+total_stolen+changed_sw)
                       .group_by{|h| h["id"]}.map{|k,v| v.reduce(:merge)}

@@ -35,25 +35,48 @@ sw_ch.reject! { |w| w["city_id"] == "1" }
 all_region = sw_ch.group_by {|g| g["city_id"]}.map {|k,v|{"id" => k.to_i, "change_sw" => v.count}}
 des = dar_des.select {|rings| rings["ip"].match(/172.18|172.16/)}
 dar_des_change_total = [{"id" => 2, "change_sw" => des.count},{"id" => 6, "change_sw" => (dar_des.count - des.count)}]
-changed_sw = all_region + dar_des_change_total
-        changed_sw.reject! { |id| id if id["id"] == "" or id["id"].nil? }
 
-        changed_sw.map! {|h| h["id"] = 8 if h["id"] == 6 } ### Днепр
-        changed_sw.map! {|h| h["id"] = 3 if h["id"] == 9 } ### Житомир
-        changed_sw.map! {|h| h["id"] = 7 if h["id"] == 12 } ### И.Ф.
-        changed_sw.map! {|h| h["id"] = 13 if h["id"] == 20 } ### Коростышев
-        changed_sw.map! {|h| h["id"] = 12 if h["id"] == 22 } ### Бердычев
-        changed_sw.map! {|h| h["id"] = 24 if h["id"] == 8 } ### Мелитополь
-        changed_sw.map! {|h| h["id"] = 8 if h["id"] == 6 } ### Кривой Рог
-        changed_sw.map! {|h| h["id"] = 10 if h["id"] == 26 } ### Бровары
-        changed_sw.map! {|h| h["id"] = 11 if h["id"] == 27 } ### Черняхов
-        changed_sw.map! {|h| h["id"] = 14 if h["id"] == 28 } ### Акимовка
-        changed_sw.map! {|h| h["id"] = 15 if h["id"] == 29 } ### Бобровица
-        changed_sw.map! {|h| h["id"] = 16 if h["id"] == 30 } ### Кринички
-        changed_sw.map! {|h| h["id"] = 17 if h["id"] == 31 } ### Макаров
-        changed_sw.map! {|h| h["id"] = 18 if h["id"] == 33 } ### Шепетовка
-        changed_sw.map! {|h| h["id"] = 19 if h["id"] == 34 } ### Староконст
+        changed_sw =  all_region + dar_des_change_total
+        changed_sw.reject! { |id| id if id["id"] == "" or id["id"].nil? or id["change_sw"] == 0 }
 
+
+        changed_sw.each {|h|
+        case h["id"]
+          when 6
+            h["id"] = 8
+          when 3
+            h["id"] = 9
+          when 7
+            h["id"] = 12
+          when 13
+            h["id"] = 20
+          when 12
+            h["id"] = 22
+          when 8
+            h["id"] = 24
+          when 9
+            h["id"] = 25
+          when 10
+            h["id"] = 26
+          when 11
+            h["id"] = 27
+          when 14
+            h["id"] =28
+          when 15
+            h["id"]= 29
+          when 16
+            h["id"] = 30
+          when 17
+            h["id"] = 31
+          when 18
+            h["id"] = 33
+          when 19
+            h["id"] = 34
+        end
+
+        }
+
+        @result2 = changed_sw
         @result = (new_sw+@total_sw+stolen+total_stolen+changed_sw)
                       .group_by{|h| h["id"]}.map{|k,v| v.reduce(:merge)}
                       .sort_by { |k| k["total"].to_i }.reverse

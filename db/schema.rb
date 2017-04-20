@@ -159,6 +159,11 @@ ActiveRecord::Schema.define(version: 20170414093340) do
     t.string   "mac"
   end
 
+  create_table "telnets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "topologies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "ip"
     t.string   "port25"

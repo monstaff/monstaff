@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3163ebe1-71fd-4a75-bd35-ba7b5bcd295e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/switches_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/switches_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/switches/_result.html.erb" afterPath="$PROJECT_DIR$/app/views/switches/_result.html.erb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -27,7 +27,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="switches_controller.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="switches_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/switches_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="365">
@@ -57,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_result.html.erb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="_result.html.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/switches/_result.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+            <state relative-caret-position="450">
+              <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -124,8 +124,8 @@
         <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/switches.js" />
         <option value="$PROJECT_DIR$/db/migrate/20170414093340_add_mac_to_switches.rb" />
-        <option value="$PROJECT_DIR$/app/views/switches/_result.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/switches_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/switches/_result.html.erb" />
       </list>
     </option>
   </component>
@@ -522,12 +522,12 @@
       <workItem from="1491982169773" duration="684000" />
       <workItem from="1492058256633" duration="11326000" />
       <workItem from="1492162237869" duration="340000" />
-      <workItem from="1492668939671" duration="6756000" />
+      <workItem from="1492668939671" duration="6880000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="664482000" />
+    <option name="totallyTimeSpent" value="664606000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -894,18 +894,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/switches/_result.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/switches_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="365">
           <caret line="74" column="97" selection-start-line="74" selection-start-column="97" selection-end-line="74" selection-end-column="97" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/switches/_result.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
           <folding />
         </state>
       </provider>

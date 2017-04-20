@@ -37,6 +37,23 @@ des = dar_des.select {|rings| rings["ip"].match(/172.18|172.16/)}
 dar_des_change_total = [{"id" => 2, "change_sw" => des.count},{"id" => 6, "change_sw" => (dar_des.count - des.count)}]
 changed_sw = all_region + dar_des_change_total
         changed_sw.reject! { |id| id if id["id"] == "" or id["id"].nil? }
+
+        changed_sw.map! {|h| h["id"] = 8 if h["id"] == 6 } ### Днепр
+        changed_sw.map! {|h| h["id"] = 3 if h["id"] == 9 } ### Житомир
+        changed_sw.map! {|h| h["id"] = 7 if h["id"] == 12 } ### И.Ф.
+        changed_sw.map! {|h| h["id"] = 13 if h["id"] == 20 } ### Коростышев
+        changed_sw.map! {|h| h["id"] = 12 if h["id"] == 22 } ### Бердычев
+        changed_sw.map! {|h| h["id"] = 24 if h["id"] == 8 } ### Мелитополь
+        changed_sw.map! {|h| h["id"] = 8 if h["id"] == 6 } ### Кривой Рог
+        changed_sw.map! {|h| h["id"] = 10 if h["id"] == 26 } ### Бровары
+        changed_sw.map! {|h| h["id"] = 11 if h["id"] == 27 } ### Черняхов
+        changed_sw.map! {|h| h["id"] = 14 if h["id"] == 28 } ### Акимовка
+        changed_sw.map! {|h| h["id"] = 15 if h["id"] == 29 } ### Бобровица
+        changed_sw.map! {|h| h["id"] = 16 if h["id"] == 30 } ### Кринички
+        changed_sw.map! {|h| h["id"] = 17 if h["id"] == 31 } ### Макаров
+        changed_sw.map! {|h| h["id"] = 18 if h["id"] == 33 } ### Шепетовка
+        changed_sw.map! {|h| h["id"] = 19 if h["id"] == 34 } ### Староконст
+
         @result = (new_sw+@total_sw+stolen+total_stolen+changed_sw)
                       .group_by{|h| h["id"]}.map{|k,v| v.reduce(:merge)}
                       .sort_by { |k| k["total"].to_i }.reverse

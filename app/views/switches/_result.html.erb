@@ -11,7 +11,7 @@
       <tr>
         <td class="result_sw_td"><%= report["name"] %></td>
         <td class="result_sw_td"><%= report["total"] %></td>
-        <td class="result_sw_td "><%#= report["change_sw"] %></td>
+        <td class="result_sw_td "><%= report["change_sw"] %></td>
         <td class="result_sw_td"><%= report["amount"] %></td>
         <td class="result_sw_td"><%= report["count"] %></td>
         <td class="result_sw_td"><%= report["total_stolen"] %></td>
@@ -22,7 +22,7 @@
 
     <td class="result_sw_td" style="font-weight: bold;">Всего:</td>
     <td class="result_sw_td"><%= @result.collect{|el| el["total"].to_i}.sum %></td>
-    <td class="result_sw_td "><%#= @result.collect{|el| el["change_sw"].to_i}.sum %></td>
+    <td class="result_sw_td "><%= @result.collect{|el| el["change_sw"].to_i}.sum %></td>
     <td class="result_sw_td"><%= @result.collect{|el| el["amount"].to_i}.sum %></td>
     <td class="result_sw_td"><%= @result.collect{|el| el["count"].to_i}.sum %></td>
     <td class="result_sw_td"><%= @result.collect{|el| el["total_stolen"].to_i}.sum %></td>

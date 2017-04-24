@@ -31,7 +31,7 @@ class ManageringsController < ApplicationController
         if /Fast/.match(switch[:vers])
         contents.gsub!(/#{radiuskey}/, switch[:radius])
         else
-          contents.gsub!(/#{radiuskey}/, '"#{switch[:radius]}"')
+          contents.gsub!(/#{radiuskey}/, switch[:radius])
           end
         File.open(full_path_to_write, "w+") { |f| f.write(contents) }
       }

@@ -11,6 +11,7 @@ class SwitchesController < ApplicationController
   end
 
   def index
+    @stolen = Switch.search(params[:search])
     if url_validate(self.class.to_s + action_name )
     @result = []
     api_connect = ApiclientService.new
@@ -28,7 +29,7 @@ class SwitchesController < ApplicationController
                             .count.map {|k, v| {"id" => k, "total_stolen" => v}}
 	
 
-#sw_ch = SwChangeReport.where(reason: [3,4], city_id: ).as_json
+
         sw_ch =  SwChangeReport.where(reason: [3,4]).as_json.reject { |s| s["city_id"] == "" }
 dar_des = sw_ch.select {|sw| sw["city_id"] == "1"}
 sw_ch.reject! { |w| w["city_id"] == "1" }
@@ -73,7 +74,6 @@ dar_des_change_total = [{"id" => 2, "change_sw" => des.count},{"id" => 6, "chang
         }
         changed_sw =  all_region + dar_des_change_total
         changed_sw.reject! { |id| id if id["id"] == "" or id["id"].nil? or id["change_sw"] == 0 }
-        @result2 = changed_sw
         @result = (new_sw+@total_sw+stolen+total_stolen+changed_sw)
                       .group_by{|h| h["id"]}.map{|k,v| v.reduce(:merge)}
                       .sort_by { |k| k["total"].to_i }.reverse
@@ -139,6 +139,14 @@ dar_des_change_total = [{"id" => 2, "change_sw" => des.count},{"id" => 6, "chang
   end
 
   def destroy
+
+  end
+
+  def stolen_list
+    @stolen = Switch.search(params[:search])
+    respond_to do |respond|
+      respond.js
+    end
 
   end
 

@@ -43,6 +43,7 @@ delete '/region/:id(.:format)', to: 'adminpanel#region_destroy', as: 'region_des
   post 'show_topology' => 'topology#index'
   get 'topology_menu' => 'topology#menu'
   post 'synchronize' => 'switches#synchronize'
+  get 'stolen_list' => 'switches#stolen_list'
 
 
 resources :user

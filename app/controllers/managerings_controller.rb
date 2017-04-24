@@ -44,6 +44,7 @@ class ManageringsController < ApplicationController
 
       switchobj = Telnet.new
       @switchobj = switchobj.dowloadcfg(switch, "upload")
+      sleep(240)
       @switchobj = switchobj.dowloadcfg(switch, "download")
       return @switchobj
 

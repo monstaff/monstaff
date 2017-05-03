@@ -105,7 +105,7 @@ dar_des_change_total = [{"id" => 2, "change_sw" => des.count},{"id" => 6, "chang
         hash = new_inst.map {|k,v| {name: k, new_core: new_count(v, "core"), new_aggr: new_count(v, "aggregation")}}
 
         all = @all_mounts.group_by { |k| k["city_name"] }
-        total = all.map {|k,v| {name: k, all_core: total_count(@all_mounts, k, "core"), all_aggr: total_count(@all_mounts, k, "aggregation")}}
+        total = all.map {|k,v| {name: k, new_core: 0, new_aggr: 0, all_core: total_count(@all_mounts, k, "core"), all_aggr: total_count(@all_mounts, k, "aggregation")}}
 
 
 

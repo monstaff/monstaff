@@ -71,7 +71,7 @@
         <entry file="file://$PROJECT_DIR$/app/controllers/switches_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="380">
-              <caret line="107" column="40" selection-start-line="107" selection-start-column="40" selection-end-line="107" selection-end-column="40" />
+              <caret line="107" column="41" selection-start-line="107" selection-start-column="41" selection-end-line="107" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -563,12 +563,12 @@
       <workItem from="1492668939671" duration="12600000" />
       <workItem from="1493025543098" duration="4742000" />
       <workItem from="1493367892230" duration="1237000" />
-      <workItem from="1493806776593" duration="1424000" />
+      <workItem from="1493806776593" duration="1521000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="677729000" />
+    <option name="totallyTimeSpent" value="677826000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -950,7 +950,7 @@
     <entry file="file://$PROJECT_DIR$/app/controllers/switches_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
-          <caret line="107" column="40" selection-start-line="107" selection-start-column="40" selection-end-line="107" selection-end-column="40" />
+          <caret line="107" column="41" selection-start-line="107" selection-start-column="41" selection-end-line="107" selection-end-column="66" />
           <folding />
         </state>
       </provider>

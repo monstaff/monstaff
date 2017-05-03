@@ -109,7 +109,7 @@ dar_des_change_total = [{"id" => 2, "change_sw" => des.count},{"id" => 6, "chang
 
 
 
-        @aggr_report_list = (total+hash).group_by{|h| h[:name]}.map{|k,v| v.reduce(:merge)}
+        @aggr_report_list = (hash+total).group_by{|h| h[:name]}.map{|k,v| v.reduce(:merge)}
 
         respond.js
       end

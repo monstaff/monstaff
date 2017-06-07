@@ -23,4 +23,5 @@
 # Ignore application configuration
 /config/application.yml
 .env
+.idea/workspace.xml
 .to_do_list

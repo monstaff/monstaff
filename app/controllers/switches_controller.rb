@@ -98,7 +98,7 @@ dar_des_change_total = [{"id" => 2, "change_sw" => des.count},{"id" => 6, "chang
         range = start_date..end_date
         api_connect = ApiclientService.new
         token = api_connect.get_token
-         arr = api_connect.install_aggr(token).reject {|fucking_city| fucking_city if fucking_city["city_name"] == "Севастополь" or fucking_city["city_name"] == "Симферополь"}
+         arr = api_connect.install_aggr(token).reject {|fucking_city| fucking_city if fucking_city["city_name"] == "Зазеркалье" or fucking_city["city_name"] == "Заземелье"}
 
                @all_mounts = arr.reject {|not_add| not_add if not_add["needCheck"] == 0 and AggrIgnore.all.map(&:aggr_ip).include? (not_add["ip"])}
         new_inst = @all_mounts.select {|el|  range === Date.parse(el["dCreate"]["date"])}.group_by { |k| k["city_name"] }

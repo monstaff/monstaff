@@ -15,14 +15,15 @@ module GraphicHelper
     if event.nil?
       false
     else
-      #start_event = Date.parse(event.event_start).strftime("%Y-%m-%d 09:00")
-      start_event = event.event_start.strftime("%Y-%m-%d 09:00")
-      date_next = event.event_start.next.strftime("%Y-%m-%d 09:00")
+      #st_event = Date.parse(event.to_s)
+
+      start_event = Date.parse(event.event_start).strftime("%Y-%m-%d 09:00")
+      date_next = Date.parse(event.event_start).next.strftime("%Y-%m-%d 09:00")
       date = DateTime.now.to_date
       date_now = data.strftime("%Y-%m-%d 09:00")
       range = start_event..date_next
       time = DateTime.now.strftime("%Y-%m-%d %H:%M")
-      end_event = event.event_start.strftime("%Y-%m-%d #{event.end_time}")
+      end_event = Date.parse(event.event_start).strftime("%Y-%m-%d #{event.end_time}")
       #end_event = Time.parse("2017-02-22").strftime("%Y-%m-%d #{event.end_time}")
       if range === date_now #and time < end_event
         #true
@@ -40,7 +41,7 @@ module GraphicHelper
  <br>#{event.text} .</div>".html_safe
         end
       else
-        false
+        #false
       end
     end
   end

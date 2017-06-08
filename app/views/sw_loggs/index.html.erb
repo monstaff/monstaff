@@ -1,0 +1,93 @@
+<%= javascript_include_tag "sw_loggs" %>
+
+<style >
+  [scroll-glue-top],
+  [scroll-glue-bottom],
+  [scroll-glue]{
+    height: 500px;
+    overflow-y: scroll;
+    border: 1px solid gray;
+  }
+
+  [scroll-glue-left],
+  [scroll-glue-right]{
+    width: 100px;
+    overflow-x: scroll;
+    border: 1px solid gray;
+    padding: 10px;
+  }
+
+  [scroll-glue-left] span,
+  [scroll-glue-right] span{
+    border: 1px solid black;
+  }
+</style>
+
+
+<div class="container" ng-app="myApp" >
+  <%= render 'add_filter'%>
+
+  <div class="group" style="padding-bottom: 1%;">
+    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Список фильров</button>
+
+  </div>
+
+
+
+
+
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Список фильтров</h4>
+        </div>
+        <div class="modal-body">
+
+
+
+          <%= render 'filter_list' %>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div>
+    <div ng-controller="personCtrl" >
+      <div scroll-glue>
+        <ul >
+
+
+          <li ng-repeat="(key, value) in json | groupBy: 'date'">
+            <div class="alert alert-info">
+              <strong>
+                последний лог: {{ key | date : "dd.MM.y HH:mm" }}
+              </strong>
+              <ul>
+                <li ng-repeat="event in value">
+                  событие на коммутаторе {{event.ip}} : {{ event.msg }}
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<%# @newLogs.each do |event|%>
+<%#= event.ip%> : <%#= event.msg %><br>
+<%# end %>
+

@@ -4,7 +4,37 @@ require 'rufus-scheduler'
 #
 scheduler = Rufus::Scheduler.new
 
+scheduler.every '10m' do
+  puts "log event start"
+#mount -t nfs 94.76.107.5:/var/log/archive /home/fastman/log
+  time = Time.now.strftime("%Y-%m-%d  %H:%M")
+  date = Time.now.strftime("%Y/%m/%d")
+  path = ENV['MASTER_URL'].to_s + date.to_s
+  dir = Dir.new(path)
+  arr =  SwLoggsFilter.where(use: "1").map(&:name)
 
+
+  reg = Regexp.new(arr.join("|"))
+  dir.each do |fname|
+    begin
+      if fname.match(/([0-9]{1,3}[.]){4}log/) != nil
+        log = File.open("#{path}/#{fname}").grep(reg)
+
+        if log.to_s.match(reg)
+
+          SwLoggsAlert.create(ip: fname.gsub(/.log/, ''), msg: log.last, date: time)
+          # puts "the #{fname.gsub(/.log/, '')} has #{log[0]}"
+        end
+      else
+      end
+    rescue => e
+      puts "error in #{fname}"
+      puts e
+    end
+  end
+
+
+end
 # Stupid recurrent task...
 #
 

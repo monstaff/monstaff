@@ -1,6 +1,7 @@
+
 <%= javascript_include_tag "topology.js"%>
 <%= stylesheet_link_tag 'topology' %>
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
 <div class="panel-group" style="width: 90%; padding-left: 10%;">
   <div class="panel panel-primary" >
     <div class="panel-heading">
@@ -10,14 +11,14 @@
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></button>
           <ul class="dropdown-menu">
             <li><%= link_to "Меню топологии", topology_menu_path%></li>
-                   </ul>
+          </ul>
         </div>
-              </div>
+      </div>
       <div class="ring_heading" >
-<% @ring.each do |pool| %>
-          <button id="<%= pool[0].gsub(".", "") %>" class="rings btn btn-default"><%= pool[0].gsub(".", "")%></button>
+        <% @ring.each do |pool| %>
+            <button id="<%= pool[0].gsub(".", "") %>" class="rings btn btn-default"><%= pool[0].gsub(".", "")%></button>
 
-<% end %>
+        <% end %>
       </div>
 
     </div>
@@ -27,12 +28,12 @@
         <%@ring.each do |pool|%>
             <div id="r<%= pool[0].gsub(".", "") %>"style ="display: none;" class='tr'>
               <div class="btn-group" style="float: left;">
-              <% pool[1].sort_by { |a| a.split('.')[-1].to_i}.each do |ring| %>
-                  <!--<button type="button" class="rings btn btn-default "><%#= link_to ring.split('.')[-1], topology_index_path(:ring => pool), remote: true%></button>-->
-                  <%= button_to ring.split('.')[-1], show_topology_path(:ring => ring), :class=>"show_form rings btn btn-default", remote: true%>
+                <% pool[1].sort_by { |a| a.split('.')[-1].to_i}.each do |ring| %>
+                    <!--<button type="button" class="rings btn btn-default "><%#= link_to ring.split('.')[-1], topology_index_path(:ring => pool), remote: true%></button>-->
+                    <%= button_to ring.split('.')[-1], show_topology_path(:ring => ring), :class=>"show_form rings btn btn-default", remote: true%>
 
-              <% end %>
-            </div>
+                <% end %>
+              </div>
             </div>
         <% end %>
       </div>
@@ -53,8 +54,17 @@
 
 </div>
 
-
-<div class="well topology_well">
-  <div id="map2" style="width: 100%; height: 100%; z-index : -1;"></div>
+<div class="topology_well">
+  <div id="map3" style="width: 100%; height: 100%; border-color: #2E2F30; border: solid black; "></div>
 </div>
+
+<div id="map"></div>
+
+
 <div id="result"></div>
+<!--<script async defer-->
+<!--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhlDgVYvkzkEd_GLNlg0BVO728ZTzgEWI">-->
+<!--</script>-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhlDgVYvkzkEd_GLNlg0BVO728ZTzgEWI" type="text/javascript"></script>
+<script src="https://cdn.sobekrepository.org/includes/gmaps-markerwithlabel/1.9.1/gmaps-markerwithlabel-1.9.1.min.js"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>

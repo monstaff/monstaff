@@ -1,0 +1,2 @@
+class SwLoggsAlert < ApplicationRecord
+end

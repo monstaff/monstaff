@@ -1,0 +1,36 @@
+<%#= javascript_include_tag "sw_loggs" %>
+<div ng-controller="personCtrl">
+  <table class="table user-list">
+    <thead>
+    <tr>
+      <th style="width: 5%;"><span>Имя фильтра</span></th>
+      <th style="width: 5%;"><span>использовать</span></th>
+      <th style="width: 10%;" ><span></span></th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <% @filter_list.each do |obj| %>
+        <tr>
+          <%= form_for obj, html: {}, remote: true do  |f|%>
+              <br>
+              <td><%= f.text_field :name %></td>
+
+
+              <td>
+                <%= f.check_box :use, :checked => obj.use == "1" %>
+              </td>
+              <td>
+                <%= f.submit "Изменить", :class => "btn btn-warning" %>
+                <%= link_to "Удалить", sw_logg_path(obj.id) , method: :delete, data: { confirm: 'Вы уверены?' },:class => "btn btn-danger", remote: true %></td>
+
+
+          <% end %>
+        </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+</div>

@@ -9,11 +9,11 @@ class TopologyService
     begin
 
       model = %x[snmpwalk -c kmWAa3GGKz -v 1  "#{ip.chomp}" iso.3.6.1.2.1.1.1 | awk '{print ($4)}' | grep -E "Cisco|ZXR10|Huawei"]
-    model = model.chomp
-    puts model
-    case model
-      when "Cisco"
-        begin
+      model = model.chomp
+      puts model
+      case model
+        when "Cisco"
+          begin
 
 
             localhost = Net::Telnet::new("Host" => "#{ip.chomp}",
@@ -127,7 +127,7 @@ class TopologyService
         end
 
       end
-          end
+    end
   end
 
 
@@ -148,26 +148,28 @@ class TopologyService
     begin
 
 
-    rings_list.each do |ring|
-      @hosts = fping(ring.pool)
-    @root_mac = arp_info.flatten.find {|sw| sw[:ip] == "#{ring.pool}.1"}[:mac]
-      @error_msg = []
-     @error_sw = []
-     @mac_cache = []
+      rings_list.each do |ring|
+        @hosts = fping(ring.pool)
+        @root_mac = arp_info.flatten.find {|sw| sw[:ip] == "#{ring.pool}.1"}[:mac]
+        @error_msg = []
+        @error_sw = []
+        @mac_cache = []
 
 # ###start switch telnet thread
         @telnet_result = []
-#     puts "alert #{@hosts}"
+
         @hosts.count.times do |id|
 
           @telnet_result[id] = Thread.new{
             sleep(rand(0)/10.0)
+
             model = %x[snmpwalk -c 74FRfR7ewJar -v 1  '#{@hosts[id]}' iso.3.6.1.2.1.1.1 | awk '{print ($4)}']
-#
+
             @mac_cache << switch_telnet(@hosts[id], ring.vlan, model)
           }
         end
         @telnet_result.each {|t| t.join}
+
 # ###end switch telnet thread
 #
 #
@@ -180,7 +182,8 @@ class TopologyService
             model = %x[snmpwalk -c 74FRfR7ewJar -v 1  '#{@swip}' iso.3.6.1.2.1.1.1 | awk '{print ($4)}'].chomp
 
             if model == "ZTE"
-              vers = %x[snmpwalk -c V4s9b1tuanQH -v 1  "#{@swip}" iso.3.6.1.2.1.1.1 | awk '{print ($8)}'].gsub(/,\n/, "")
+
+              vers = %x[snmpwalk -c 74FRfR7ewJar -v 1  "#{@swip}" iso.3.6.1.2.1.1.1 | awk '{print ($8)}'].gsub(/,\n/, "")
               case vers
                 when "2928E"
                   mac_port = sw_info.to_s.scan(/((\h+\.){2}\h+\p{Blank}{1,2}\d+\w+\s+(port-[0-9]{1,2}))/).collect {|arr| arr[0]}.map {|a| a.split(" ")}.flatten
@@ -194,6 +197,7 @@ class TopologyService
               end
             elsif model == "24-port"
               @mac_port = sw_info.to_s.scan(/((\h+\:){5}(\h+)\p{Blank}+[a-zA-Z][0-9])/).collect {|arr| arr[0]}.map {|a| a.split(" ")}.flatten
+
             elsif /ROS/.match(model)
               @mac_port = sw_info.to_s.scan(/((\h+\.){2}(\h+)\p{Blank}+[0-9]{1,2})/).collect {|arr| arr[0]}.map {|a| a.split(" ")}.flatten
             elsif /DES-|D-Link/.match(model)
@@ -300,38 +304,41 @@ class TopologyService
           begin
             if w[:max_value] == 1
               swip = @topology_info.find {|ip| ip[:ip] == w[:ip]}
+              puts "---"
+
 
               if swip[:port25] == nil
-                port25 = nil
+                @port25 = nil
               else
-                port25 =  arp_info.flatten.find {|arp| arp[:mac] == swip[:port25][0]}[:ip]
-                @ex << port25
+                @port25 =  arp_info.flatten.find {|arp| arp[:mac] == swip[:port25][0]}[:ip]
+                @ex << @port25
               end
 
 
               if swip[:port26] == nil
-                port26 = nil
+                @port26 = nil
               else
 
-                port26 = arp_info.flatten.find {|arp| arp[:mac] == swip[:port26][0]}[:ip]
-                @ex << port26
+                @port26 = arp_info.flatten.find {|arp| arp[:mac] == swip[:port26][0]}[:ip]
+
+                @ex << @port26
               end
 
 
               if swip[:port27] == nil
-                port27 = nil
+                @port27 = nil
               else
-                port27 = arp_info.flatten.find {|arp| arp[:mac] == swip[:port27][0]}[:ip]
-                @ex << port27
+                @port27 = arp_info.flatten.find {|arp| arp[:mac] == swip[:port27][0]}[:ip]
+                @ex << @port27
               end
 
 
               if swip[:port28] == nil
-                port28 = nil
+                @port28 = nil
               else
-                port28 =  arp_info.flatten.find {|arp| arp[:mac] == swip[:port28][0]}[:ip]
+                @port28 =  arp_info.flatten.find {|arp| arp[:mac] == swip[:port28][0]}[:ip]
 
-                @ex << port28
+                @ex << @port28
               end
 
 
@@ -340,10 +347,10 @@ class TopologyService
 
               if cur_sw
                 puts "update topology"
-                cur_sw.update(w)
+                cur_sw.update(port25: @port25, port26: @port26, port27: @port27, port28: @port28, max_value: w[:max_value])
               else
                 puts "insert topology"
-                ring.topology.create(w)
+                ring.topology.create(ip: w[:ip], port25: @port25, port26: @port26, port27: @port27, port28: @port28, max_value: w[:max_value])
               end
 #-----------------------------
             elsif w[:max_value] == nil
@@ -456,11 +463,11 @@ class TopologyService
 
       #rings_list.each do |ring|
 
-       # if ring.topology_info.nil?
-        #  ring.create_topology_info(notification: "empty enter params")
-        #else
-         # ring.topology_info.update(notification: "empty enter params")
-        #end
+      # if ring.topology_info.nil?
+      #  ring.create_topology_info(notification: "empty enter params")
+      #else
+      # ring.topology_info.update(notification: "empty enter params")
+      #end
 
       #end
       puts "error in #{@ip}"
@@ -555,20 +562,20 @@ class TopologyService
 
 
 
-    if model == "FoxGate"
-    localhost = Net::Telnet::new("Host" => "#{ip}",
+    if /FoxGate/.match (model)
+      localhost = Net::Telnet::new("Host" => "#{ip}",
 
-                                 "Timeout" => 30,
-                                 "Telnetmode" => false,
-                                 "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|....press|admin#|Password:|PassWord:|password:|This|more|press)/)
-    localhost.cmd("fastman") { |c| print c }
-    localhost.cmd("liveforreal") { |c| print c }
-    mac_table << ip
-    mac_table << localhost.cmd("sh mac-address-table vlan #{vlan.chomp}") { |c| print c }
-    mac_table << localhost.cmd(" ") { |c| print c }
-    mac_table << localhost.cmd(" ") { |c| print c }
-    mac_table << localhost.cmd(" ") { |c| print c }
-    localhost.close
+                                   "Timeout" => 30,
+                                   "Telnetmode" => false,
+                                   "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|....press|admin#|Password:|PassWord:|password:|This|more|press)/)
+      localhost.cmd("fastman") { |c| print c }
+      localhost.cmd("liveforreal") { |c| print c }
+      mac_table << ip
+      mac_table << localhost.cmd("sh mac-address-table vlan #{vlan.chomp}") { |c| print c }
+      mac_table << localhost.cmd(" ") { |c| print c }
+      mac_table << localhost.cmd(" ") { |c| print c }
+      mac_table << localhost.cmd(" ") { |c| print c }
+      localhost.close
 
     elsif /Layer2+|ECS3510-28T/.match (model)
       localhost = Net::Telnet::new("Host" => "#{ip}",
@@ -669,6 +676,7 @@ class TopologyService
       10.times do
         mac_table << localhost.cmd(" ") { |c| print c }
       end
+
       localhost.close
 
     elsif /DES-|D-Link/.match(model) != nil

@@ -1,5 +1,5 @@
 <% @ring.topology.each do |switch| %>
-<%= form_for  switch, url: ring_path(id: switch.id) do |f|%>
+    <%= form_for  switch, url: topology_path(id: switch.id) do |f|%>
         <%= f.text_field :ip %>
         <%= f.text_field :port25 %>
         <%= f.text_field :port26 %>

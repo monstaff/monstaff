@@ -56,7 +56,7 @@
 
 
         <!-- Modal - update posts -->
-        <%= form_for(pool, :method => :put, remote: true) do |f| %>
+        <%= form_for pool, :url => ring_upd_path(id: pool.id), :method => :patch, remote: true do |f| %>
             <div class="modal fade" id="myupdatepost_<%= pool.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -115,7 +115,7 @@
         <td class="status">
           <%= image_tag('loader.gif', :size => "30x30", :class => 'loading loader')  %>
           <%= image_tag('Check.png', :size => "30x30", :class => 'loading succes') %> |
-         last log: <%= pool.topology_info.notification unless pool.topology_info.nil?%> |  last update: <%= pool.topology_info.updated_at.strftime("%Y-%m-%d %H:%M") unless pool.topology_info.nil?%>
+          last log: <%= pool.topology_info.notification unless pool.topology_info.nil?%> |  last update: <%= pool.topology_info.updated_at.strftime("%Y-%m-%d %H:%M") unless pool.topology_info.nil?%>
 
         </td>
         </tr>

@@ -4,12 +4,6 @@ class UserController < ApplicationController
   def xml_user
     @user = User.all
 
-
-
-    b = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
-
-    end
-
     respond_to do |ht|
       ht.xml #{ render :xml => b }
     end

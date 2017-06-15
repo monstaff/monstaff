@@ -41,47 +41,6 @@ end
 #s.every '2h' do
 
 
-def split_phone(str)
-  if str.match(/\//)
-
-    phone1, phone2 = str.split("/")
-
-    return [phone1.gsub(/-|\s/, ""), phone2.gsub(/-|\s/, "")]
-  else
-
-    return [str.gsub(/-|\s/, ""),""]
-  end
-
-end
-
-scheduler.every '1m' do
-
-  user = User.all
-
-
-
-  b = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
-    xml.PhoneBook {
-
-
-      user.each do |usr_info|
-        phone = split_phone(usr_info.phone)
-        xml.DirectoryEntry {
-          xml.Name usr_info.fullname
-          xml.Telephone phone[0]
-          xml.Mobile " "
-          xml.Other " "
-          xml.Ring "0"
-          xml.Group " "
-        }
-
-      end
-    }
-  end
-  File.open("/home/tftp/contact.xml", "wb") {|f| f.write(b.to_xml)}
-
-puts "xml created"
-end
 
 
 

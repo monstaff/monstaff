@@ -1,4 +1,18 @@
 module UserHelper
+
+  def split_phone(str)
+    if str.match(/\//)
+
+      phone1, phone2 = str.split("/")
+
+      return [phone1.gsub(/-|\s/, ""), phone2.gsub(/-|\s/, "")]
+    else
+
+      return [str.gsub(/-|\s/, ""),""]
+    end
+
+  end
+
   def user_can_manage(user, obj)
     if user.group.group_type == "admin"
       true

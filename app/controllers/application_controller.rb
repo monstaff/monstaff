@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :url_validate
- before_filter :require_login, :except=>[:login, :forgot_password, :reset_password]
+ before_filter :require_login, :except=>[:login, :forgot_password, :reset_password, :xml_user]
 
 
 

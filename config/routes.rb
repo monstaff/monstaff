@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   post 'synchronize' => 'switches#synchronize'
   get 'stolen_list' => 'switches#stolen_list'
   get 'sw_loggs_event' => 'sw_loggs#event_notice'
-
+  get 'xml_user' => 'user#xml_user'
   resources :user
   resources :switches
   resources :graphic

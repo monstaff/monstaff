@@ -1,12 +1,6 @@
 class UserController < ApplicationController
-  require 'nokogiri'
-
-  def xml_user
+   def xml_user
     @user = User.all
-
-    respond_to do |ht|
-      ht.xml #{ render :xml => b }
-    end
   end
 ######################## password section
   def change_password

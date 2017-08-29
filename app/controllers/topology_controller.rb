@@ -217,7 +217,7 @@ class TopologyController < ApplicationController
 
 
   def ring_params
-    params.require(:ring).permit(:pool, :vlan, :aggraddress, :build)
+    params.require(:topology).permit(:pool, :vlan, :aggraddress, :build)
   end
 
 end

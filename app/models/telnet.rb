@@ -37,7 +37,7 @@ class Telnet
         localhost.cmd("conf") { |c| print c }
         localhost.cmd("ip default-gateway #{gwip(switch[:newip])}") { |c| print c }
         localhost.close
-        return {:status => 200, :msg => "Done!"}
+        return {:status => 200, :msg => "Done!", :console_log => log}
 
 
       elsif /Layer2+|ECS3510-28T/.match (switch[:model])
@@ -63,7 +63,7 @@ class Telnet
           localhost.cmd("copy running-config startup-config") { |c| print c }
         end
         localhost.close
-        return {:status => 200, :msg => "Done!"}
+        return {:status => 200, :msg => "Done!", :console_log => log}
 
 
       elsif /ZTE/.match (switch[:model])
@@ -89,38 +89,38 @@ class Telnet
         localhost.cmd("radius isp freenet sharedsecret #{switch[:radius]}") { |c| print c }
         localhost.cmd("radius isp freenet client #{switch[:newip]}") { |c| print c }
         localhost.close
-        return {:status => 200, :msg => "Done!"}
+        return {:status => 200, :msg => "Done!", :console_log => log}
 
       elsif /FoxGate/.match(switch[:model])
-
-        localhost = Net::Telnet::new("Host" => "#{switch[:ip]}",
+        log = []
+        log << localhost = Net::Telnet::new("Host" => "#{switch[:ip]}",
 
                                      "Timeout" => 30,
                                      #                                       "Telnetmode" => false,
                                      "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|admin#|Password:|PassWord:|password:|This|more|press)/)
-        localhost.cmd("fastman") { |c| print c }
-        localhost.cmd("liveforreal") { |c| print c }
+        log << localhost.cmd("fastman") { |c| print c }
+        log << localhost.cmd("liveforreal") { |c| print c }
 
-        localhost.cmd("en") { |c| print c }
-        localhost.cmd("conf") { |c| print c }
-        localhost.cmd("vlan #{switch[:newvlan]}") { |c| print c }
-        localhost.cmd("interface ip #{switch[:newip]} 255.255.255.0 #{gwip(switch[:newip])}") { |c| print c }
-        localhost.cmd("ex") { |c| print c }
+        log << localhost.cmd("en") { |c| print c }
+        log << localhost.cmd("conf") { |c| print c }
+        log << localhost.cmd("vlan #{switch[:newvlan]}") { |c| print c }
+        log << localhost.cmd("interface ip #{switch[:newip]} 255.255.255.0 #{gwip(switch[:newip])}") { |c| print c }
+        log << localhost.cmd("ex") { |c| print c }
         sleep(0.5)
-        localhost.cmd("ipaddress vlan #{switch[:newvlan]}") { |c| print c }
-        localhost.cmd("aaa") { |c| print c }
-        localhost.cmd("radius host 94.76.107.5") { |c| print c }
-        localhost.cmd("primary-auth-ip 94.76.107.3 1812") { |c| print c }
-        localhost.cmd("nas-ipaddress #{switch[:newip]} ") { |c| print c }
-        localhost.cmd("auth-secret-key #{switch[:radius]} ") { |c| print c }
-        localhost.cmd("ex") { |c| print c }
+        log << localhost.cmd("ipaddress vlan #{switch[:newvlan]}") { |c| print c }
+        log << localhost.cmd("aaa") { |c| print c }
+        log << localhost.cmd("radius host 94.76.107.5") { |c| print c }
+        log << localhost.cmd("primary-auth-ip 94.76.107.3 1812") { |c| print c }
+        log << localhost.cmd("nas-ipaddress #{switch[:newip]} ") { |c| print c }
+        log << localhost.cmd("auth-secret-key #{switch[:radius]} ") { |c| print c }
+        log << localhost.cmd("ex") { |c| print c }
         sleep(0.5)
-        localhost.cmd("ex") { |c| print c }
+        log << localhost.cmd("ex") { |c| print c }
         sleep(0.5)
-        localhost.cmd("ipaddress #{switch[:newip]} 255.255.255.0 #{gwip(switch[:newip])}") { |c| print c }
+        log << localhost.cmd("ipaddress #{switch[:newip]} 255.255.255.0 #{gwip(switch[:newip])}") { |c| print c }
 
-        localhost.close
-        return {:status => 200, :msg => "Done!"}
+        log << localhost.close
+        return {:status => 200, :msg => "Done!", :console_log => log}
 
       elsif /24-port/.match(switch[:model])
         localhost = Net::Telnet::new("Host" => "#{switch[:ip]}",
@@ -144,7 +144,7 @@ class Telnet
         else
         end
         localhost.close
-        return {:status => 200, :msg => "Done!"}
+        return {:status => 200, :msg => "Done!", :console_log => log}
 
 
       elsif /DES-|D-Link/.match(switch[:model])
@@ -170,7 +170,7 @@ class Telnet
 
           end
           localhost.close
-          return {:status => 200, :msg => "Done!"}
+          return {:status => 200, :msg => "Done!", :console_log => log}
 
 
         elsif /Fast/.match(switch[:vers])
@@ -196,7 +196,7 @@ class Telnet
 
           end
           localhost.close
-          return {:status => 200, :msg => "Done!"}
+          return {:status => 200, :msg => "Done!", :console_log => log}
 
 
         end

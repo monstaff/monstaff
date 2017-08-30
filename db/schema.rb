@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517070911) do
+ActiveRecord::Schema.define(version: 20170830084517) do
 
   create_table "aggr_ignores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "aggr_ip"
@@ -155,6 +155,8 @@ ActiveRecord::Schema.define(version: 20170517070911) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.datetime "date"
+    t.index ["date"], name: "index_sw_loggs_alerts_on_date", using: :btree
+    t.index ["ip"], name: "index_sw_loggs_alerts_on_ip", using: :btree
   end
 
   create_table "sw_loggs_filters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

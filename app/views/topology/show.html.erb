@@ -1,17 +1,29 @@
+<div style="padding-left: 10%; padding-right: 15%; ">
 <% @ring.topology.each do |switch| %>
-    <%= form_for  switch, url: topology_path(id: switch.id) do |f|%>
-        <%= f.text_field :ip %>
-        <%= f.text_field :port25 %>
-        <%= f.text_field :port26 %>
-        <%= f.text_field :port27 %>
-        <%= f.text_field :port28 %>
-        <%= f.text_field :max_value %>
-        <%= f.submit "изменить" %>
+    <div class="well well-lg">
 
+    <%= form_for  switch, url: topology_path(id: switch.id) do |f|%>
+
+        <%= f.text_field :ip%>
+
+        <%= f.text_field :port25%>
+
+        <%= f.text_field :port26%>
+
+        <%= f.text_field :port27%>
+
+        <%= f.text_field :port28%>
+
+        <%= f.text_field :max_value %>
+
+
+        <%= f.submit "изменить", :class => "btn btn-primary", remote: true%>
+          <%= link_to "Удалить", ring_destroy_path(switch.id) , method: :delete, data: { confirm: 'Вы уверены?' },:class => "btn btn-danger", remote: true %>
     <% end %>
+    </div>
 <% end %>
 <br>
-
+<div class="well">
 <%= form_for  :topology, url: ring_add_path(id: @ring.id) do |f|%>
     <%= f.text_field :ip %>
     <%= f.text_field :port25 %>
@@ -19,6 +31,8 @@
     <%= f.text_field :port27 %>
     <%= f.text_field :port28 %>
     <%= f.text_field :max_value %>
-    <%= f.submit "Добавить" %>
+    <%= f.submit "Добавить", :class => "btn btn-primary", remote: true %>
 
 <% end %>
+</div>
+</div>

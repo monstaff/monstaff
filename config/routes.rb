@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   get 'managerings' => 'managerings#index'
   patch 'ring/:id(.:format)' => 'topology#ring_update', as: 'ring_upd'
   post 'ring_add' => 'topology#ring_add'
+  delete '/ring/:id(.:format)', to: 'topology#ring_top_del', as: 'ring_destroy'
   #get 'ring' => 'topology#ring_update'
   post 'show_topology' => 'topology#index'
   get 'topology_menu' => 'topology#menu'

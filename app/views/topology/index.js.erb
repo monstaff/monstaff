@@ -125,7 +125,7 @@ $(document).ready(function () {
 
 
 
-    '<% if status[:status] == '0' %>'
+    '<% if status != nil && status[:status] == '0' %>'
 
     var SWmarker = new MarkerWithLabel({
       map: map,
@@ -137,7 +137,7 @@ $(document).ready(function () {
       labelClass: "sw_down  ", // the CSS class for the label
       labelInBackground: false
     });
-    '<% elsif status[:status] == '1' %>'
+    '<% elsif status != nil && status[:status] == '1' %>'
 
     var SWmarker = new MarkerWithLabel({
       map: map,

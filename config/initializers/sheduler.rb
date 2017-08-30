@@ -70,7 +70,9 @@ end
 
 
 scheduler.cron '59 23 * * *' do
-
+  ###собираем топологию и за одно очищаем таблицу с лог евентами.
+  SwLoggsAlert.destroy_all
+  ###
   rings_list = Ring.all.group_by(&:aggraddress).flatten
 
   t = TopologyService.new

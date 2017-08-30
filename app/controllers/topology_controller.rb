@@ -110,8 +110,9 @@ class TopologyController < ApplicationController
             prewsw = {:ip => "tp"}
           end
           #####
-          main_status = @status.find{|ip|ip[:ip] == main[:ip]}[:status]
-          @rings << {ip: short_ips, lat: main_lat, lng: main_lng, nest: @nest, hash: @hash, ips: ips, main: prewsw.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}, next: @next - nest_ips, status: main_status ,all_status: @status, test: prewsw}
+          #main_status = @status.find{|ip|ip[:ip] == main[:ip]}[:status]  "0"
+          main_status = @status.find{|ip|ip[:ip] == main[:ip]} || {status: "0"}
+          @rings << {ip: short_ips, lat: main_lat, lng: main_lng, nest: @nest, hash: @hash, ips: ips, main: prewsw.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}, next: @next - nest_ips, status: main_status[:status] ,all_status: @status, test: prewsw}
         end
 
         @gontop = {:tp => @ring_loc["tp_loc"], :tp_link => tp_port, :ring => @rings, :all_ip =>  @all_ip}
@@ -159,6 +160,10 @@ class TopologyController < ApplicationController
     ring.topology.create(ring_params)
   end
 
+  def ring_top_del
+ring = Topology.find(params[:id])
+    ring.destroy
+  end
 
   def update
     @ring = Topology.find(params[:id])

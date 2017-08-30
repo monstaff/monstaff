@@ -156,7 +156,7 @@ class TopologyController < ApplicationController
 
   def ring_add
     ring = Ring.find(params[:id])
-    ring.topology.create(top_params)
+    ring.topology.create(ring_params)
   end
 
 
@@ -217,7 +217,7 @@ class TopologyController < ApplicationController
 
 
   def ring_params
-    params.require(:topology).permit(:pool, :vlan, :aggraddress, :build)
+    params.require(:ring).permit(:pool, :vlan, :aggraddress, :build)
   end
 
 end

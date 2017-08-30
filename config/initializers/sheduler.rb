@@ -77,7 +77,7 @@ scheduler.cron '59 23 * * *' do
   rings_list.each_slice(2) do |ip, val|
     hash = t.get_arp(ip,val)
     t.make_topology(val, hash)
-    sleep(120)
+    sleep(60)
   end
 end
 

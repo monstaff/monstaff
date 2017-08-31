@@ -21,8 +21,14 @@ scheduler.every '10m' do
         log = File.open("#{path}/#{fname}").grep(reg)
 
         if log.to_s.match(reg)
+          ip = fname.gsub(/.log/, '')
+          check = SwLoggsAlert.where(ip: ip)
+          if check.empty?
+          SwLoggsAlert.create(ip: ip, msg: log.last, date: time)
+          elsif check.msg != log.last
+            check.update(msg: log.last, date: time)
 
-          SwLoggsAlert.create(ip: fname.gsub(/.log/, ''), msg: log.last, date: time)
+          end
           # puts "the #{fname.gsub(/.log/, '')} has #{log[0]}"
         end
       else
@@ -69,7 +75,7 @@ scheduler.every '6h' do
 end
 
 
-scheduler.cron '59 23 * * *' do
+scheduler.cron '50 23 * * *' do
   ###собираем топологию и за одно очищаем таблицу с лог евентами.
   SwLoggsAlert.destroy_all
   ###

@@ -25,7 +25,7 @@ scheduler.every '10m' do
           check = SwLoggsAlert.where(ip: ip)
           if check.empty?
           SwLoggsAlert.create(ip: ip, msg: log.last, date: time)
-          elsif check.msg != log.last
+          elsif check[0].msg != log.last
             check.update(msg: log.last, date: time)
 
           end

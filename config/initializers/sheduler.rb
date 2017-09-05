@@ -5,7 +5,7 @@ require 'nokogiri'
 scheduler = Rufus::Scheduler.new
 
 
-scheduler.every '3m' do
+scheduler.every '60m' do
 
   rings = Ring.all.map {|arr| arr.pool}
 

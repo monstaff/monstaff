@@ -5,7 +5,7 @@ require 'nokogiri'
 scheduler = Rufus::Scheduler.new
 
 
-scheduler.every '1h' do
+scheduler.every '3m' do
 
   rings = Ring.all.map {|arr| arr.pool}
 
@@ -21,7 +21,7 @@ scheduler.every '1h' do
       max = switch.port_statistic.max { |a, b| a[:error_count] <=> b[:error_count] }
       #error_event =  PortError.create(ip: ip ) if PortError.where(ip: ip).empty?
       error_event = PortError.find_or_create_by(ip: ip)
-      if max[:error_count] > error_event.old_value
+      if max[:error_count].to_i > error_event.old_value.to_i
       error_event.update(old_value: error_event.current_value, current_value: max[:error_count] )
       switch.port_statistic.each do |event|
 

@@ -40,3 +40,6 @@
     height: 25px;
     background-image: url('warn1.gif'); }
 
+.port_saw {
+    float: right;
+}

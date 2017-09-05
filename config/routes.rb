@@ -47,6 +47,9 @@ Rails.application.routes.draw do
   get 'stolen_list' => 'switches#stolen_list'
   get 'sw_loggs_event' => 'sw_loggs#event_notice'
   get 'xml_user' => 'user#xml_user'
+  get 'ports_error_count' => 'port_errors#errors_count'
+
+
   resources :user
   resources :switches
   resources :graphic
@@ -54,5 +57,6 @@ Rails.application.routes.draw do
   resources :topology
   resources :sw_loggs
   resources :sw_loggs_filter, :controller => "sw_loggs"
+  resources :port_errors
 #resources :sessions
 end

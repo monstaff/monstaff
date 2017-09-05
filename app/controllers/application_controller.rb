@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_user, :url_validate
+  helper_method :current_user, :url_validate, :port_error_count
  before_filter :require_login, :except=>[:login, :forgot_password, :reset_password, :xml_user]
 
 
@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
    # redirect_to sessions_new_path
       render "sessions/new"
       end
+    end
+
+  def port_error_count
+    @port_error_count = ""
   end
 
   def current_user

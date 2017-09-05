@@ -1,0 +1,50 @@
+<%= javascript_include_tag 'port_errors' %>
+<div class="container">
+
+<% @port_error_list.each do |switch|%>
+
+
+
+
+      <% if switch.current_value <= switch.old_value %>
+          <div class="alert alert-warning">
+          <% else %>
+    <div class="alert alert-danger">
+      <% end %>
+      <strong><%= switch.ip %></strong><br>
+
+    <%= form_for switch, :method => 'PATCH', remote: true do |s|%>
+
+      <%#= s.submit %>
+
+          <ul class="list-group port_saw">
+
+
+              <%= button_tag( :class => "btn btn-warning ") do %>
+                  <span class="glyphicon glyphicon-eye-open"></span>
+              <% end %>
+
+
+              <%= link_to switch, confirm: 'Are you sure?', disable_with: 'deleting...', method: :delete, class: 'btn-mini btn-danger btn ', remote: true do %>
+                  <span class="glyphicon glyphicon-minus-sign"></span>
+              <% end %>
+
+          </ul>
+
+
+
+
+
+          <% end %>
+      <% switch.switch_ports.each do |port| %>
+
+         На порту: <%= port.port %> найдено: <%= port.error_count %> ошибок.<br>
+
+      <% end %>
+
+
+    </div>
+  <% end %>
+
+</div>
+

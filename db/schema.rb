@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830084517) do
+ActiveRecord::Schema.define(version: 20170905121016) do
 
   create_table "aggr_ignores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "aggr_ip"
@@ -108,6 +108,18 @@ ActiveRecord::Schema.define(version: 20170830084517) do
     t.datetime "updated_at"
   end
 
+  create_table "port_errors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "ip"
+    t.string   "old_value"
+    t.string   "current_value"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "watch"
+    t.string   "event_show"
+    t.index ["event_show"], name: "index_port_errors_on_event_show", using: :btree
+    t.index ["watch"], name: "index_port_errors_on_watch", using: :btree
+  end
+
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
     t.text     "content",    limit: 65535
@@ -164,6 +176,15 @@ ActiveRecord::Schema.define(version: 20170830084517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "use"
+  end
+
+  create_table "switch_ports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "port_error_id"
+    t.string   "port"
+    t.string   "error_count"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["port_error_id"], name: "index_switch_ports_on_port_error_id", using: :btree
   end
 
   create_table "switches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

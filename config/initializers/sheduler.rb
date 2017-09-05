@@ -4,6 +4,41 @@ require 'nokogiri'
 #
 scheduler = Rufus::Scheduler.new
 
+
+scheduler.every '1h' do
+
+  rings = Ring.all.map {|arr| arr.pool}
+
+  rings.each do |pool|
+
+    t = TopologyService.new
+    switches = t.fping(pool)
+
+
+    switches.each do |ip|
+      switch = ErrorportsService.new(ip)
+      switch.errorports
+      max = switch.port_statistic.max { |a, b| a[:error_count] <=> b[:error_count] }
+      #error_event =  PortError.create(ip: ip ) if PortError.where(ip: ip).empty?
+      error_event = PortError.find_or_create_by(ip: ip)
+      if max[:error_count] > error_event.old_value
+      error_event.update(old_value: error_event.current_value, current_value: max[:error_count] )
+      switch.port_statistic.each do |event|
+
+        if error_event.switch_ports.map(&:port).include? (event[:port])
+          error_event.switch_ports.where(port: event[:port]).update(event)
+          else
+        error_event.switch_ports.create(event)
+          end
+      end
+      end
+    end
+  end
+
+end
+
+
+
 scheduler.every '10m' do
   puts "log event start"
 #mount -t nfs 94.76.107.5:/var/log/archive /home/fastman/log

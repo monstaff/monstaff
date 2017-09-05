@@ -3,7 +3,7 @@
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( bootstrap.css adminpanel.js user.js graphic.js managerings.js topology.js topology.css
-switches.js transport.js sw_loggs.js markerwithlabel.js )
+switches.js transport.js sw_loggs.js markerwithlabel.js port_errors.js )
 # Rails.application.config.assets.precompile += %w( adminpanel.js )
 # Rails.application.config.assets.precompile += %w( rails.validations.js )
 # Rails.application.config.assets.precompile += %w( user.js )

@@ -3,8 +3,30 @@
 //= require jquery.validate
 //= require bootstrap
 //= require raphael-min.js
-//#= require jquery.js
+//= require jquery.js
 //*=  require bootstrap-datepicker.min.js
+
+
+
+    function test() {
+
+    $.ajax({
+        url: 'ports_error_count.json',             // указываем URL и
+        dataType : "json",                     // тип загружаемых данных
+        success: function (data, textStatus) { // вешаем свой обработчик на функцию success
+                  localStorage.setItem("PortErrorCount", data);
+            $('#PortErrorVal').html(data);
+        }
+    });
+
+
+}
+
+
+setInterval(function () {
+    test();
+}, 10000);
+
 
 
 
@@ -23,7 +45,7 @@ $(function($){
 }(jQuery));
 
 	$(document).ready(function(){
-
+        $('#PortErrorVal').html(localStorage.getItem("PortErrorCount"));
         $( ".xlssclass" ).datepicker({
 
                 format: 'yyyy-mm-dd',

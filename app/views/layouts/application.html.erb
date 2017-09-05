@@ -21,6 +21,11 @@
         <li><%= link_to "Добавитьграфик", new_graphic_path  %></li>
         <li><%= link_to "Список сотрудников", user_index_path %></li>
         <li><%= link_to "Регистрация", new_user_path %></li>
+
+        <li><%= link_to port_errors_path  do %>
+            Port Error <%= content_tag :span, port_error_count, id: 'PortErrorVal', class: 'badge' %>
+        <% end %>
+        </li>
         <li><%= link_to "Logg", sw_loggs_path %> </li>
 
         <li>

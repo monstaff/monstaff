@@ -10,7 +10,7 @@ class PortErrorsController < ApplicationController
 
   def errors_count
 
-    @count = PortError.where("current_value > 0 AND current_value >= old_value AND watch IS NULL").count
+    @count = PortError.where("current_value > 0 AND current_value >= old_value AND watch = 0").count
         respond_to do |resp|
       resp.json { render json: @count }
 

@@ -21,12 +21,12 @@
 
 
               <%= button_tag( :class => "btn btn-warning ") do %>
-                  <span class="glyphicon glyphicon-eye-open"></span>
+                  <span class="glyphicon glyphicon-eye-open" title="Отметить как просмотреное."></span>
               <% end %>
 
 
               <%= link_to switch, confirm: 'Are you sure?', disable_with: 'deleting...', method: :delete, class: 'btn-mini btn-danger btn ', remote: true do %>
-                  <span class="glyphicon glyphicon-minus-sign"></span>
+                  <span class="glyphicon glyphicon-minus-sign" title="Убрать из списка."></span>
               <% end %>
 
           </ul>

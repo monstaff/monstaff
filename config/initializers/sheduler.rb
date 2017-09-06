@@ -22,7 +22,7 @@ scheduler.every '60m' do
       #error_event =  PortError.create(ip: ip ) if PortError.where(ip: ip).empty?
       error_event = PortError.find_or_create_by(ip: ip)
       if max[:error_count].to_i > error_event.old_value.to_i
-      error_event.update(old_value: error_event.current_value, current_value: max[:error_count], watch: false, event_show: true )
+      error_event.update(old_value: error_event.current_value, current_value: max[:error_count], watch: 0, event_show: 1 )
       switch.port_statistic.each do |event|
 
         if error_event.switch_ports.map(&:port).include? (event[:port])
@@ -31,6 +31,8 @@ scheduler.every '60m' do
         error_event.switch_ports.create(event)
           end
       end
+      else
+        error_event.update(old_value: error_event.current_value, current_value: max[:error_count] )
       end
     end
   end

@@ -5,7 +5,7 @@ require 'nokogiri'
 scheduler = Rufus::Scheduler.new
 
 
-scheduler.every '60m' do
+scheduler.every '240m' do
 
   rings = Ring.all.map {|arr| arr.pool}
 
@@ -16,6 +16,7 @@ scheduler.every '60m' do
 
 
     switches.each do |ip|
+      begin
       switch = ErrorportsService.new(ip)
       switch.errorports
       max = switch.port_statistic.max { |a, b| a[:error_count] <=> b[:error_count] }
@@ -34,6 +35,9 @@ scheduler.every '60m' do
       else
         error_event.update(old_value: error_event.current_value, current_value: max[:error_count] )
       end
+      rescue
+        puts "error"
+        end
     end
   end
 
@@ -122,7 +126,7 @@ scheduler.cron '50 23 * * *' do
   rings_list.each_slice(2) do |ip, val|
     hash = t.get_arp(ip,val)
     t.make_topology(val, hash)
-    sleep(60)
+
   end
 end
 

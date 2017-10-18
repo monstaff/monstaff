@@ -9,7 +9,7 @@ class Switch < ApplicationRecord
   def self.search(search)
 
     if search
-      where('ip LIKE :search OR mac LIKE :search OR stolen_date LIKE :search',search: "%#{search}%")
+      where('ip LIKE :search OR serial LIKE :search OR mac LIKE :search OR stolen_date LIKE :search',search: "%#{search}%")
     else
       all
     end

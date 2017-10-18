@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170905121016) do
+ActiveRecord::Schema.define(version: 20171018081246) do
 
   create_table "aggr_ignores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "aggr_ip"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 20170905121016) do
     t.datetime "updated_at"
   end
 
-  create_table "port_errors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "port_errors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "ip"
     t.string   "old_value"
     t.string   "current_value"
@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(version: 20170905121016) do
     t.string   "city_id"
   end
 
-  create_table "sw_loggs_alerts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "sw_loggs_alerts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "ip"
     t.text     "msg",        limit: 65535
     t.datetime "created_at",               null: false
@@ -171,14 +171,14 @@ ActiveRecord::Schema.define(version: 20170905121016) do
     t.index ["ip"], name: "index_sw_loggs_alerts_on_ip", using: :btree
   end
 
-  create_table "sw_loggs_filters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "sw_loggs_filters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "use"
   end
 
-  create_table "switch_ports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "switch_ports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "port_error_id"
     t.string   "port"
     t.string   "error_count"
@@ -194,12 +194,8 @@ ActiveRecord::Schema.define(version: 20170905121016) do
     t.date     "stolen_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "mac"
-  end
-
-  create_table "telnets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "mac",         limit: 16
+    t.string   "serial"
   end
 
   create_table "topologies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

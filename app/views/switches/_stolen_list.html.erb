@@ -1,11 +1,13 @@
 <table class="result_sw" style="width: 100%;">
   <th class="result_sw_th">ip:</th>
+  <th class="result_sw_th">серийник:</th>
   <th class="result_sw_th">mac:</th>
   <th class="result_sw_th">дата кражи:</th>
 
 <% @stolen.each do |sw| %>
       <tr>
         <td class="result_sw_td"><%= sw.ip %></td>
+        <td class="result_sw_td"><%= sw.serial %></td>
         <td class="result_sw_td"><%= sw.mac %></td>
         <td class="result_sw_td "><%= sw.stolen_date %></td>
       </tr>

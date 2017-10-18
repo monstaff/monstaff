@@ -185,7 +185,7 @@ dar_des_change_total = [{"id" => 2, "change_sw" => des.count},{"id" => 6, "chang
   end
 
   def switch_params
-    params.require(:switch).permit(:ip, :stolen_date, :region_id, :mac)
+    params.require(:switch).permit(:ip, :stolen_date, :region_id, :mac, :serial)
   end
 
 end

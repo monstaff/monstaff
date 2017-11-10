@@ -4,12 +4,16 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
-
+gem 'net-ping'
 gem 'net-telnet'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'mechanize'
 #gem 'pg'
 gem 'mysql2'
+gem 'redis'
+gem 'redis-rails'
+# gem 'redis-namespace'
+gem 'redis-namespace', '~> 1.5', '>= 1.5.2'
 gem 'rails', '~> 5.0.1'
 gem 'puma', '~> 3.0'
 gem 'bootstrap', '~> 4.0.0.alpha5'

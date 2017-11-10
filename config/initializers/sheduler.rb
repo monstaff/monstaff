@@ -5,44 +5,77 @@ require 'nokogiri'
 scheduler = Rufus::Scheduler.new
 
 
+# scheduler.every '240m' do
+#
+#   rings = Ring.all.map {|arr| arr.pool}
+#
+#   rings.each do |pool|
+#
+#     t = TopologyService.new
+#     switches = t.fping(pool)
+#
+#
+#     switches.each do |ip|
+#       begin
+#       switch = ErrorportsService.new(ip)
+#       switch.errorports
+#       max = switch.port_statistic.max { |a, b| a[:error_count] <=> b[:error_count] }
+#       #error_event =  PortError.create(ip: ip ) if PortError.where(ip: ip).empty?
+#       error_event = PortError.find_or_create_by(ip: ip)
+#       if max[:error_count].to_i > error_event.old_value.to_i
+#       error_event.update(old_value: error_event.current_value, current_value: max[:error_count], watch: 0, event_show: 1 )
+#       switch.port_statistic.each do |event|
+#
+#         if error_event.switch_ports.map(&:port).include? (event[:port])
+#           error_event.switch_ports.where(port: event[:port]).update(event)
+#           else
+#         error_event.switch_ports.create(event)
+#           end
+#       end
+#       else
+#         error_event.update(old_value: error_event.current_value, current_value: max[:error_count] )
+#       end
+#       rescue
+#         puts "error"
+#         end
+#     end
+#   end
+#
+# end
+
+
+
 scheduler.every '240m' do
-
   rings = Ring.all.map {|arr| arr.pool}
-
+  error =  JSON.parse $port_errors.get("port_errors")
+  error ||= [{ip: 1}]
+  error_event = []
+index_count = 0
   rings.each do |pool|
-
     t = TopologyService.new
     switches = t.fping(pool)
 
-
     switches.each do |ip|
       begin
-      switch = ErrorportsService.new(ip)
-      switch.errorports
-      max = switch.port_statistic.max { |a, b| a[:error_count] <=> b[:error_count] }
-      #error_event =  PortError.create(ip: ip ) if PortError.where(ip: ip).empty?
-      error_event = PortError.find_or_create_by(ip: ip)
-      if max[:error_count].to_i > error_event.old_value.to_i
-      error_event.update(old_value: error_event.current_value, current_value: max[:error_count], watch: 0, event_show: 1 )
-      switch.port_statistic.each do |event|
+        old_value = error.find {|ip| ip["ip"] == ip}
+        old_value ||= {ip: ip, old_value: nil, current_value: nil, watch: 0, event_show: 1}
+        switch = ErrorportsService.new(ip)
+        switch.errorports
+        max = switch.port_statistic.max { |a, b| a[:error_count] <=> b[:error_count] }
+        error_event << {id: index_count +=1, ip: ip, old_value: old_value["current_value"], current_value: max[:error_count], watch: 0, event_show: 1, ports: switch.port_statistic}
 
-        if error_event.switch_ports.map(&:port).include? (event[:port])
-          error_event.switch_ports.where(port: event[:port]).update(event)
-          else
-        error_event.switch_ports.create(event)
-          end
+
+      rescue => e
+        puts "error #{e}"
       end
-      else
-        error_event.update(old_value: error_event.current_value, current_value: max[:error_count] )
-      end
-      rescue
-        puts "error"
-        end
+
     end
   end
-
+  $port_errors.del "port_errors"
+  $port_errors.set("port_errors", error_event.to_json)
+  # Expire the cache, every 3 hours
+  #$port_errors.expire("port_errors",4.hour.to_i)
 end
-
 
 
 scheduler.every '10m' do

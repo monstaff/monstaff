@@ -12,6 +12,7 @@ class SwitchesController < ApplicationController
 
   def index
     @stolen = Switch.search(params[:search])
+    @allsw  = SwChangeReport.search(params[:search])
     if url_validate(self.class.to_s + action_name )
     @result = []
     api_connect = ApiclientService.new
@@ -135,15 +136,23 @@ dar_des_change_total = [{"id" => 2, "change_sw" => des.count},{"id" => 6, "chang
   end
 
   def update
-
   end
 
   def destroy
-
   end
+
+
 
   def stolen_list
     @stolen = Switch.search(params[:search])
+    respond_to do |respond|
+      respond.js
+    end
+  end
+
+
+  def inst_change_list
+    @allsw  = SwChangeReport.search(params[:search])
     respond_to do |respond|
       respond.js
     end

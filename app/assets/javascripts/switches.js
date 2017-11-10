@@ -1,3 +1,8 @@
+function makemac(obj) {
+    mac_format = obj.val().replace(/:|-/g, "").toLocaleLowerCase();
+    $('form #switch_mac').val(mac_format);
+}
+
 $(document).ready(function() {
 
 

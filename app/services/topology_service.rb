@@ -1,3 +1,5 @@
+require 'net/ping'
+
 class TopologyService
 
   def get_arp(ip, ring_list)
@@ -493,9 +495,10 @@ class TopologyService
           ip = "#{pool}" + "." + i.to_s
 
 #Thread.current["mycount"] = " "
-          a = %x[ping -c1 "#{ip}" | grep "received" | awk '{print ($4)}'].chomp
+          #check = %x[ping -c1 "#{ip}" | grep "received" | awk '{print ($4)}'].chomp
+          check = Net::Ping::External.new(ip)
         end
-        if a == '1'
+        if  check != nil and check.ping? == true
 
           result << ip
           count += 1

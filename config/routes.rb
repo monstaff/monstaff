@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   get 'sw_loggs_event' => 'sw_loggs#event_notice'
   get 'xml_user' => 'user#xml_user'
   get 'ports_error_count' => 'port_errors#errors_count'
+  get 'sw_instaled_list_path' => 'switches#inst_change_list'
 
 
   resources :user

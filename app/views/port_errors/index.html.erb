@@ -1,31 +1,54 @@
 <%= javascript_include_tag 'port_errors' %>
 <div class="container">
 
+
+
+
+
+
+
 <% @port_error_list.each do |switch|%>
 
+      <div class="modal " id="ErrorModal<%= switch["id"]%>" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Данные о коммутаторе</h4>
+            </div>
+            <div class="modal-body">
+
+            <%= switch["ip"].to_s%>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
 
 
 
-      <% if switch.current_value <= switch.old_value %>
+      <% if switch["current_value"].to_i <= switch["old_value"].to_i %>
           <div class="alert alert-warning">
           <% else %>
     <div class="alert alert-danger">
       <% end %>
-      <strong><%= switch.ip %></strong><br>
+      <strong><%= switch["ip"] %></strong><br>
 
-    <%= form_for switch, :method => 'PATCH', remote: true do |s|%>
+    <%= form_for :sw, :url => port_error_path(id: switch["id"], ip: switch["ip"]), :method => 'PATCH', remote: true do |s|%>
 
-      <%#= s.submit %>
+
+
+
+
 
           <ul class="list-group port_saw">
-
-
-              <%= button_tag( :class => "btn btn-warning ") do %>
-                  <span class="glyphicon glyphicon-eye-open" title="Отметить как просмотреное."></span>
-              <% end %>
-
-
-              <%= link_to switch, confirm: 'Are you sure?', disable_with: 'deleting...', method: :delete, class: 'btn-mini btn-danger btn ', remote: true do %>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ErrorModal<%= switch["id"].to_s%>"><span class="glyphicon glyphicon-eye-open" title="Уведомить инженера."></span></button>
+            <%= link_to port_error_path(id: switch["id"], ip: switch["ip"]), confirm: 'Are you sure?', disable_with: 'deleting...', method: :delete, class: 'btn-mini btn-danger btn ', remote: true do %>
                   <span class="glyphicon glyphicon-minus-sign" title="Убрать из списка."></span>
               <% end %>
 
@@ -36,9 +59,9 @@
 
 
           <% end %>
-      <% switch.switch_ports.each do |port| %>
+      <% switch["ports"].each do |port| %>
 
-         На порту: <%= port.port %> найдено: <%= port.error_count %> ошибок.<br>
+         На порту: <%= port["port"] %> найдено: <%= port["error_count"] %> ошибок.<br>
 
       <% end %>
 

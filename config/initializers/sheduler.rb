@@ -47,7 +47,7 @@ scheduler = Rufus::Scheduler.new
 
 scheduler.every '240m' do
   rings = Ring.all.map {|arr| arr.pool}
-  error =  JSON.parse $port_errors.get("port_errors")
+  error =  JSON.parse $port_errors.get("port_errors") if $port_errors.get("port_errors") != nil
   error ||= [{ip: 1}]
   error_event = []
 index_count = 0

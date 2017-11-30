@@ -21,6 +21,20 @@
             <div class="modal-body">
 
             <%= switch["ip"].to_s%>
+
+              <%= form_for :notify_port, :url => notify_port_error_path do |f| %>
+
+                  <%= f.select :engname, (@user_list.collect{|u| [u.fullname + "(#{u.region.name})", u.id]}),{ :prompt => "Выберите инженера"}, :class=>"form-control"%>
+
+
+              <%= f.text_area :switch,
+               :value => "Добрый день. Найдены ошибки на коммутаторе #{switch["ip"]}, обратите внимание на следующее порты:
+#{switch['ports'].map {|v| 'На порту: ' + v['port'] + ' найдено: ' + v['error_count'] + ' ошибок.' }.map(&:inspect).join("\n")}
+
+"%>
+
+                  <%= f.submit %>
+              <% end %>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

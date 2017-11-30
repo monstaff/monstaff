@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   get 'xml_user' => 'user#xml_user'
   get 'ports_error_count' => 'port_errors#errors_count'
   get 'sw_instaled_list_path' => 'switches#inst_change_list'
-
+post 'notify_port_error' => 'port_errors#notify'
 
   resources :user
   resources :switches

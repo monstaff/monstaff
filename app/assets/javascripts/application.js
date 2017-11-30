@@ -25,7 +25,7 @@
 
 setInterval(function () {
     test();
-}, 10000);
+}, 1000000);
 
 
 

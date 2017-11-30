@@ -100,7 +100,7 @@ class ManageringsController < ApplicationController
 
       return @switchobj
     else
-      return {:status => 404, :msg => "No model match"}
+      return {:status => 500, :msg => "No model match"}
     end
 
   end

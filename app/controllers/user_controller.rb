@@ -106,7 +106,7 @@ class UserController < ApplicationController
       @user = UserService.(params)
     #@user = User.create(new_user)
       if @user.errors.empty?
-      redirect_to  switches_path#user_index_path
+      redirect_to  root_path
         return
       else
         #@user = @user.errors

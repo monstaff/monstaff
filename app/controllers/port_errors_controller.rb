@@ -1,6 +1,7 @@
 class PortErrorsController < ApplicationController
 
   def index
+    @user_list = User.where(group_id: 4)
     error_list =  JSON.parse $port_errors.get("port_errors")
     #PortError.where("current_value > 0")
     @port_error_list = error_list.select {|sw| sw["current_value"].to_i > 0 and sw["current_value"].to_i >= sw["old_value"].to_i and sw["event_show"] == 1}.sort_by {|sw| sw["current_value"].to_i > sw["old_value"].to_i}.reverse
@@ -31,6 +32,14 @@ class PortErrorsController < ApplicationController
 
     end
   end
+
+
+  def notify
+
+  #params[:notify_port]
+  UserMailer.port_error_notify(email: params[:notify_port][:mail], text: params[:notify_port][:text])
+  end
+
 
 
   def destroy

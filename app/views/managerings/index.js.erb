@@ -1,3 +1,7 @@
-$('.status').children('img.succes').attr('data-content','<%= @status[:msg] %> <%= @status[:console_log]%>')
+$('.status').children('img.succes').attr('data-content','<%= @status[:msg] %>')
 
-$('.status').children('img.error').attr('data-content','<%= @status[:msg] %> <%= @status[:console_log]%>')
+$('.status').children('img.error').attr('data-content','<%= @status[:msg] %>')
+
+
+
+$('#log').append('<%= @status[:console_log]%>');

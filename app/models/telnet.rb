@@ -10,44 +10,45 @@ class Telnet
       @a = []
 
       if /ROS/.match(switch[:model])
-
+        log =[]
         localhost = Net::Telnet::new("Host" => "#{switch[:ip]}",
 
                                      "Timeout" => 30,
                                      "Telnetmode" => false,
                                      "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|admin#|Password:|PassWord:|password:|This|more|press)/)
-        localhost.cmd("fastman") { |c| print c }
+        log << localhost.cmd("#{ENV['SW_login']}") { |c| print c }
         sleep(1)
-        localhost.cmd("liveforreal") { |c| print c }
+        log << localhost.cmd("#{ENV['SW_password']}") { |c| print c }
         sleep(2)
 
-        localhost.cmd("en") { |c| print c }
+        log << localhost.cmd("en") { |c| print c }
         #localhost.cmd("zxr10") { |c| print c }
-        localhost.cmd("raisecom") { |c| print c }
-        localhost.cmd("conf") { |c| print c }
-        localhost.cmd("interface ip 2") { |c| print c }
-        localhost.cmd("ip address #{switch[:newip]} 255.255.255.0 #{switch[:newvlan]}") { |c| print c }
-        localhost.cmd("exit") { |c| print c }
-        localhost.cmd("exit") { |c| print c }
-        localhost.cmd("radius-key #{switch[:radius]}") { |c| print c }
-        localhost.cmd("aaa accounting login enable ") { |c| print c }
-        localhost.cmd("radius accounting-server 94.76.107.3 ") { |c| print c }
-        localhost.cmd("radius accounting-server key #{switch[:radius]}") { |c| print c }
-        localhost.cmd("hostname #{switch[:newip]}") { |c| print c }
-        localhost.cmd("conf") { |c| print c }
-        localhost.cmd("ip default-gateway #{gwip(switch[:newip])}") { |c| print c }
+        log << localhost.cmd("raisecom") { |c| print c }
+        log << localhost.cmd("conf") { |c| print c }
+        log << localhost.cmd("interface ip 2") { |c| print c }
+        log << localhost.cmd("ip address #{switch[:newip]} 255.255.255.0 #{switch[:newvlan]}") { |c| print c }
+        log << localhost.cmd("exit") { |c| print c }
+        log << localhost.cmd("exit") { |c| print c }
+        log << localhost.cmd("radius-key #{switch[:radius]}") { |c| print c }
+        log << localhost.cmd("aaa accounting login enable ") { |c| print c }
+        log << localhost.cmd("radius accounting-server 94.76.107.3 ") { |c| print c }
+        log << localhost.cmd("radius accounting-server key #{switch[:radius]}") { |c| print c }
+        log << localhost.cmd("hostname #{switch[:newip]}") { |c| print c }
+        log << localhost.cmd("conf") { |c| print c }
+        log << localhost.cmd("ip default-gateway #{gwip(switch[:newip])}") { |c| print c }
         localhost.close
         return {:status => 200, :msg => "Done!", :console_log => log}
 
 
       elsif /Layer2+|ECS3510-28T/.match (switch[:model])
+        lg =[]
         localhost = Net::Telnet::new("Host" => "#{switch[:ip]}",
 
                                      "Timeout" => 30,
                                      #{}"Telnetmode" => false,
                                      "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|admin#|Password:|PassWord:|password:|This|more|press)/)
-        localhost.cmd("fastman") { |c| print c }
-        localhost.cmd("liveforreal") { |c| print c }
+        log << localhost.cmd("fastman") { |c| print c }
+        log << localhost.cmd("liveforreal") { |c| print c }
         if command == "upload"
           localhost.cmd("copy running-config startup-config") { |c| print c }
           localhost.cmd(" ") { |c| print c }
@@ -67,27 +68,28 @@ class Telnet
 
 
       elsif /ZTE/.match (switch[:model])
+        log =[]
         localhost = Net::Telnet::new("Host" => "#{switch[:ip]}",
 
                                      "Timeout" => 30,
                                      #{}"Telnetmode" => false,
                                      "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|admin#|Password:|PassWord:|password:|This|more|press)/)
-        localhost.login("fastman", "liveforreal") { |c| print c }
+        log << localhost.login("fastman", "liveforreal") { |c| print c }
 
-        localhost.cmd("en") { |c| print c }
-        localhost.cmd("rbnfqcrbqbynthyt") { |c| print c }
-        localhost.cmd("config router") { |c| print c }
-        localhost.cmd("set ipport 2 ipaddress #{switch[:newip]} 255.255.255.0") { |c| print c }
-        localhost.cmd("set ipport 2 vlan #{switch[:newvlan]}") { |c| print c }
-        localhost.cmd("set ipport 2 enable") { |c| print c }
-        localhost.cmd("clear iproute") { |c| print c }
-        localhost.cmd("iproute 0.0.0.0 0.0.0.0 #{gwip(switch[:newip])}") { |c| print c }
-        localhost.cmd("ex") { |c| print c }
-        localhost.cmd("hostname #{switch[:newip]}") { |c| print c }
-        localhost.cmd("set ntp source #{switch[:newip]}") { |c| print c }
-        localhost.cmd("config nas") { |c| print c }
-        localhost.cmd("radius isp freenet sharedsecret #{switch[:radius]}") { |c| print c }
-        localhost.cmd("radius isp freenet client #{switch[:newip]}") { |c| print c }
+        log << localhost.cmd("en") { |c| print c }
+        log << localhost.cmd("rbnfqcrbqbynthyt") { |c| print c }
+        log << localhost.cmd("config router") { |c| print c }
+        log << localhost.cmd("set ipport 2 ipaddress #{switch[:newip]} 255.255.255.0") { |c| print c }
+        log << localhost.cmd("set ipport 2 vlan #{switch[:newvlan]}") { |c| print c }
+        log << localhost.cmd("set ipport 2 enable") { |c| print c }
+        log << localhost.cmd("clear iproute") { |c| print c }
+        log << localhost.cmd("iproute 0.0.0.0 0.0.0.0 #{gwip(switch[:newip])}") { |c| print c }
+        log << localhost.cmd("ex") { |c| print c }
+        log << localhost.cmd("hostname #{switch[:newip]}") { |c| print c }
+        log << localhost.cmd("set ntp source #{switch[:newip]}") { |c| print c }
+        log << localhost.cmd("config nas") { |c| print c }
+        log << localhost.cmd("radius isp freenet sharedsecret #{switch[:radius]}") { |c| print c }
+        log << localhost.cmd("radius isp freenet client #{switch[:newip]}") { |c| print c }
         localhost.close
         return {:status => 200, :msg => "Done!", :console_log => log}
 
@@ -123,23 +125,26 @@ class Telnet
         return {:status => 200, :msg => "Done!", :console_log => log}
 
       elsif /24-port/.match(switch[:model])
+        log =[]
         localhost = Net::Telnet::new("Host" => "#{switch[:ip]}",
 
                                      "Timeout" => 30,
                                      #{}"Telnetmode" => false,
                                      "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|admin#|Password:|PassWord:|password:|This|more|press)/)
-        localhost.cmd("fastman") { |c| print c }
-        localhost.cmd("liveforreal") { |c| print c }
+        log << localhost.cmd("fastman") { |c| print c }
+        log << localhost.cmd("liveforreal") { |c| print c }
         if command == "upload"
 
-          @a << localhost.cmd("copy startup-config tftp://#{ENV['TFTPD_ADDR']}/#{switch[:ip]}_linksys") { |c| print c }
-#@a << localhost.cmd(" ") { |c| print c }
+          log << localhost.cmd("copy startup-config tftp://#{ENV['TFTPD_ADDR']}/#{switch[:ip]}_linksys") { |c| print c }
+          log << localhost.cmd(" ") { |c| print c }
           sleep(10)
         elsif command == "download"
-          localhost.cmd("copy tftp://#{ENV['TFTPD_ADDR']}/#{switch[:ip]}_new startup-config") { |c| print c }
-          sleep(10)
-          localhost.cmd("reload") { |c| print c }
-          localhost.cmd("yes") { |c| print c }
+           log << localhost.cmd("copy tftp://#{ENV['TFTPD_ADDR']}/#{switch[:ip]}_new startup-config") { |c| print c }
+           sleep(10)
+           log << localhost.cmd("reload") { |c| print c }
+           log << localhost.cmd("yes") { |c| print c }
+
+
 
         else
         end

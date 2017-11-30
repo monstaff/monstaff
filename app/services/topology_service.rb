@@ -571,8 +571,8 @@ class TopologyService
                                    "Timeout" => 30,
                                    "Telnetmode" => false,
                                    "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|....press|admin#|Password:|PassWord:|password:|This|more|press)/)
-      localhost.cmd("fastman") { |c| print c }
-      localhost.cmd("liveforreal") { |c| print c }
+      localhost.cmd("#{ENV['SW_login]'}") { |c| print c }
+      localhost.cmd("#{ENV['SW_password]'}") { |c| print c }
       mac_table << ip
       mac_table << localhost.cmd("sh mac-address-table vlan #{vlan.chomp}") { |c| print c }
       mac_table << localhost.cmd(" ") { |c| print c }
@@ -586,8 +586,8 @@ class TopologyService
                                    "Timeout" => 30,
                                    #{}"Telnetmode" => false,
                                    "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|admin#|Password:|PassWord:|password:|This|more|press)/)
-      localhost.cmd("fastman") { |c| print c }
-      localhost.cmd("liveforreal") { |c| print c }
+      localhost.cmd("#{ENV['SW_login]'}") { |c| print c }
+      localhost.cmd("#{ENV['SW_password]'}") { |c| print c }
       mac_table << ip
       mac_table << localhost.cmd("sh mac-address-table vlan #{vlan.chomp}") { |c| print c }
       4.times do
@@ -623,9 +623,10 @@ class TopologyService
                                    "Timeout" => 30,
                                    "Telnetmode" => false,
                                    "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|admin#|Password:|PassWord:|password:|This|more|press)/)
-      localhost.cmd("fastman") { |c| print c }
+
+      localhost.cmd("#{ENV['SW_login]'}") { |c| print c }
       sleep(1)
-      localhost.cmd("liveforreal") { |c| print c }
+      localhost.cmd("#{ENV['SW_password]'}") { |c| print c }
       sleep(2)
       mac_table << ip
 
@@ -641,7 +642,7 @@ class TopologyService
                                    "Timeout" => 30,
                                    "Telnetmode" => false,
                                    "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|admin#|Password:|PassWord:|password:|This|more|press)/)
-      localhost.login("fastman", "liveforreal") { |c| print c }
+      localhost.login("#{ENV['SW_login]'}", "#{ENV['SW_password]'}") { |c| print c }
       case vers
         when "2928E","2918E"
 
@@ -672,8 +673,8 @@ class TopologyService
                                    "Timeout" => 30,
                                    "Telnetmode" => false,
                                    "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|admin#|Password:|PassWord:|password:|This|more|press)/)
-      localhost.cmd("fastman") { |c| print c }
-      localhost.cmd("liveforreal") { |c| print c }
+      localhost.cmd("#{ENV['SW_login]'}") { |c| print c }
+      localhost.cmd("#{ENV['SW_password]'}") { |c| print c }
       mac_table << ip
       mac_table << localhost.cmd("sh b a vlan #{vlan}") { |c| print c }
       10.times do
@@ -690,9 +691,9 @@ class TopologyService
                                    "Prompt" => /(" "|User Name:|Username:|UserName:|>|#|----|admin#|Password:|PassWord:|password:|This|more|press)/)
 
       begin
-        localhost.cmd("fastman") { |c| print c }
+        localhost.cmd("#{ENV['SW_login]'}") { |c| print c }
         sleep(1)
-        localhost.cmd("liveforreal") { |c| print c }
+        localhost.cmd("#{ENV['SW_password]'}") { |c| print c }
         sleep(2)
         mac_table << ip
         mac_table << localhost.cmd("sh fdb vlan #{vlan.chomp}") { |c| print c }

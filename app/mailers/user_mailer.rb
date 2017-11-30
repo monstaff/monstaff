@@ -13,4 +13,9 @@ class UserMailer < ApplicationMailer
     mail to: email, subject: "Восстановление пароля."
   end
 
+  def port_error_notify(email, text)
+    @text = text
+    mail to: email, subject: "Ошибки на портах."
+  end
+
 end

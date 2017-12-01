@@ -37,13 +37,13 @@ class PortErrorsController < ApplicationController
   def notify
 
   #params[:notify_port]
-  UserMailer.port_error_notify(email: params[:notify_port][:mail], text: params[:notify_port][:text])
+  UserMailer.port_error_notify(params[:notify_port][:mail], params[:notify_port][:text]).deliver_now
   end
 
 
 
   def destroy
-
+@id = params["id"]
     error_list =  JSON.parse $port_errors.get("port_errors")
     port = error_list.each {|el| el["event_show"] = 0 and el["watch"] = 1 if el["ip"] == params["ip"].to_s}
     $port_errors.del "port_errors"

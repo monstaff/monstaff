@@ -16,24 +16,24 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Данные о коммутаторе</h4>
+              <h4 class="modal-title">События на коммутаторе  <%= switch["ip"].to_s%></h4>
             </div>
             <div class="modal-body">
 
-            <%= switch["ip"].to_s%>
+
 
               <%= form_for :notify_port, :url => notify_port_error_path do |f| %>
 
-                  <%= f.select :engname, (@user_list.collect{|u| [u.fullname + "(#{u.region.name})", u.id]}),{ :prompt => "Выберите инженера"}, :class=>"form-control"%>
+                  <%= f.select :mail, (@user_list.collect{|u| [u.fullname + "(#{u.region.name})", u.email]}),{ :prompt => "Выберите инженера"}, :class=>"form-control"%>
 
 
-              <%= f.text_area :switch,
+              <%= f.text_area :text,  size: "50x10",
                :value => "Добрый день. Найдены ошибки на коммутаторе #{switch["ip"]}, обратите внимание на следующее порты:
 #{switch['ports'].map {|v| 'На порту: ' + v['port'] + ' найдено: ' + v['error_count'] + ' ошибок.' }.map(&:inspect).join("\n")}
 
 "%>
 
-                  <%= f.submit %>
+                  <%= f.submit "Уведомить инженера"%>
               <% end %>
             </div>
             <div class="modal-footer">
@@ -47,9 +47,9 @@
 
 
       <% if switch["current_value"].to_i <= switch["old_value"].to_i %>
-          <div class="alert alert-warning">
+          <div class="alert alert-warning" id="<%= switch["id"] %>">
           <% else %>
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" id="<%= switch["id"] %>">
       <% end %>
       <strong><%= switch["ip"] %></strong><br>
 
